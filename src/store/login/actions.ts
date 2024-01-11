@@ -15,7 +15,7 @@ const registerAction = createAsyncThunk<undefined, LoginArgs, { rejectValue: str
       navigate('/')
       localStorage.setItem('token', response.data.token)
     } catch (e) {
-      return thunkAPI.rejectWithValue('Ошибка при авторизации!')
+      return thunkAPI.rejectWithValue('Ошибка при регистрации!')
     }
 }
 )
@@ -28,7 +28,7 @@ const loginAction = createAsyncThunk<undefined, LoginArgs, { rejectValue: string
       navigate('/')
       localStorage.setItem('token', response.data.token)
     } catch (e) {
-      return thunkAPI.rejectWithValue('Ошибка при регистрации!')
+      return thunkAPI.rejectWithValue('Ошибка при авторизации!')
     }
 }
 )

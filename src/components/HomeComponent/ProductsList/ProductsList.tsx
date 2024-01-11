@@ -1,11 +1,28 @@
+import { Alert, CircularProgress } from '@mui/material';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import { ProductsListProps, ProductType } from "../../../Types/types";
-import { Button, Container, DeleteButton, Product, ProductImage, Products, SaveButton, SaveButtonContainer, Text, Wrapper } from './ProductsListStyles';
+import { Button, Container, DeleteButton, Loading, Product, ProductImage, Products, SaveButton, SaveButtonContainer, Text, Wrapper } from './ProductsListStyles';
 
 const ProductsList: React.FC<ProductsListProps> = ({ products, addCart, onDelete , isLoad, error }) => {
   const navigate = useNavigate()
 
+  if (isLoad) {
+    return (
+      <Wrapper>
+        <Loading>
+          <CircularProgress/>
+        </Loading>
+      </Wrapper>
+    )
+  }
+  if (error) {
+    return (
+      <Wrapper>
+        <Alert severity="error">{error}</Alert>
+      </Wrapper>
+    )
+  }
   if (!products) {
     return (
       <Container>

@@ -8,12 +8,14 @@ import {
   BackButtonWrapper, 
   Button, 
   Container, 
+  Loading, 
   LoginForm, 
   LoginFormButtons, 
   LoginFormInput, 
   LoginFormLabel, 
   LoginTitle 
 } from '../LoginStyles'
+import { Alert, CircularProgress } from '@mui/material'
 
 const Registration: React.FC<RegisterProps> = ({ setIsRegister, onSubmit, isLoad, error }) => {
   const navigate = useNavigate()
@@ -25,7 +27,16 @@ const Registration: React.FC<RegisterProps> = ({ setIsRegister, onSubmit, isLoad
   } = useForm({
     resolver: yupResolver(registerScheme)
   })
-  
+
+  if (isLoad) {
+    return (
+      <Container>
+        <Loading>
+          <CircularProgress/>
+        </Loading>
+      </Container>
+    )
+  }
   return (
     <Container>
       <BackButtonWrapper>
@@ -45,6 +56,7 @@ const Registration: React.FC<RegisterProps> = ({ setIsRegister, onSubmit, isLoad
           <LoginFormInput type="password" placeholder="Подтвердите пароль" {...register('confirmPassword')}/>
           <span>{errors?.confirmPassword?.message}</span>
         </LoginFormLabel>
+        {error && <Container><Alert variant='outlined' severity='error'>{error}</Alert></Container>}
         <LoginFormButtons>
           <Button>Зарегистрироваться</Button>
           <div>Есть аккаунт? Войдите</div>

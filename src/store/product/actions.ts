@@ -9,7 +9,7 @@ const getProductAction = createAsyncThunk<ProductType[], undefined, { rejectValu
       const response = await axiosInstance.get('product/')
       return response.data as ProductType[]
     } catch (e) {
-      return thunkAPI.rejectWithValue('Произошла ошибка при загрузе товаров!')
+      return thunkAPI.rejectWithValue('Произошла ошибка при загрузке товаров!')
     }
   } 
 )
@@ -21,12 +21,12 @@ const getProductByIdAction = createAsyncThunk<ProductType, string, { rejectValue
       const response = await axiosInstance.get(`product/${id}/`)
       return response.data
     } catch (e) {
-      return thunkAPI.rejectWithValue('Произошла ошибка при загрузе товара!')
+      return thunkAPI.rejectWithValue('Произошла ошибка при загрузке товара!')
     }
   } 
 )
 
-const editProductdAction = createAsyncThunk<ProductType, editProductActionArgs, { rejectValue: string }>(
+const editProductAction = createAsyncThunk<ProductType, editProductActionArgs, { rejectValue: string }>(
   'product/editProductdAction',
   async ({navigate, ...data}, thunkAPI) => {
     try {
@@ -35,7 +35,7 @@ const editProductdAction = createAsyncThunk<ProductType, editProductActionArgs, 
       console.log(response.data)
       return response.data
     } catch (e) {
-      return thunkAPI.rejectWithValue('Произошла ошибка при загрузе товаров!')
+      return thunkAPI.rejectWithValue('Произошла ошибка при редактировании товаров!')
     }
   }
 )
@@ -63,4 +63,4 @@ const deleteProductAction = createAsyncThunk<undefined, number, { rejectValue: s
   }
 )
 
-export { getProductAction, getProductByIdAction, editProductdAction, createProductAction, deleteProductAction }
+export { getProductAction, getProductByIdAction, editProductAction, createProductAction, deleteProductAction }

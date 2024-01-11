@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { ProductFormValues } from "../../Types/types"
 import CreateProductComponent from "../../components/CreateProductComponent/CreateProductComponent"
 import { useAppDispatch, useAppSelector } from "../../hook"
-import { createProductAction, editProductdAction, getProductByIdAction } from "../../store/product/actions"
+import { createProductAction, editProductAction, getProductByIdAction } from "../../store/product/actions"
 
 const initialValues: {
   title: string;
@@ -44,7 +44,7 @@ const CreateProductContainer = () => {
           image: image,
           id: productId,
       }
-      dispatch(editProductdAction({navigate, ...obj}))
+      dispatch(editProductAction({navigate, ...obj}))
     } else {
       const obj = {
           ...data,

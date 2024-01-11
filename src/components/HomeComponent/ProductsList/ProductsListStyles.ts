@@ -76,3 +76,12 @@ export const Text = styled.div`
   font-size: 14px;
   font-weight: 500;
 `
+
+export const Loading = styled.div`
+  align-self: center;
+  span {
+    width: 70px !important;
+    height: 70px !important;
+    color: #595D41;
+  }
+`

@@ -8,12 +8,14 @@ import {
   BackButtonWrapper, 
   Button, 
   Container, 
+  Loading, 
   LoginForm, 
   LoginFormButtons, 
   LoginFormInput, 
   LoginFormLabel, 
   LoginTitle 
 } from '../LoginStyles'
+import { Alert, CircularProgress } from '@mui/material'
 
 const Authorization: React.FC<AuthProps> = ({ setIsRegister, onSubmit, isLoad, error }) => {
   const navigate = useNavigate()
@@ -25,6 +27,16 @@ const Authorization: React.FC<AuthProps> = ({ setIsRegister, onSubmit, isLoad, e
   } = useForm({
     resolver: yupResolver(authorizationScheme)
   })
+
+  if (isLoad) {
+    return (
+      <Container>
+        <Loading>
+          <CircularProgress/>
+        </Loading>
+      </Container>
+    )
+  }
   
   return (
     <Container>
@@ -41,6 +53,7 @@ const Authorization: React.FC<AuthProps> = ({ setIsRegister, onSubmit, isLoad, e
           <LoginFormInput type="password" placeholder="Введите пароль" {...register('password')} />
           <span>{errors?.password?.message}</span>
         </LoginFormLabel>
+        {error && <Container><Alert variant='outlined' severity='error'>{error}</Alert></Container>}
         <LoginFormButtons>
           <Button>Войти</Button>
           <div>Нет аккаунта? Зарегистрируйтесь</div>
