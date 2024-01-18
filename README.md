@@ -8,6 +8,15 @@ In the project directory, you can run:
 
 ### `npm start`
 
+
+<!-- install  -->
+<!-- https://www.youtube.com/results?search_query=husky+pre+commit+ -->
+Husky
+!!!precommit!!!
+Prettier
+remove all any type
+
+
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 

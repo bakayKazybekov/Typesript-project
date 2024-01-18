@@ -1,0 +1,104 @@
+$mainColor: #eef2d1;
+$secondColor: #595d41;
+
+$borderRadius10: 10px;
+$borderRadius20: 20px;
+
+$fontSize22: 22px;
+$fontSize24: 24px;
+
+$fontWeight400: 400;
+$fontWeight500: 500;
+
+$mainFont: Iowan Old Style;
+$border: 1px solid rgba(0, 0, 0, 0.3);
+
+@mixin displey-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin button-styles {
+  background-color: $mainColor;
+  border-radius: $borderRadius20;
+  border: none;
+  padding: 15px 30px;
+  font-size: $fontSize22;
+  font-weight: $fontWeight500;
+  cursor: pointer;
+}
+
+@mixin login-button-style {
+  font-family: Iowan Old Style;
+  font-size: 16px;
+  font-weight: 400;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 10px 30px;
+  cursor: pointer;
+  @media (max-width: 1440px) {
+    padding: 10px 25px;
+    font-size: 13px;
+  }
+  @media (max-width: 1040px) {
+    border-radius: 7px;
+    padding: 8px 20px;
+    font-size: 11px;
+  }
+  @media (max-width: 640px) {
+    border-radius: 5px;
+    padding: 5px 15px;
+    font-size: 9px;
+  }
+}
+
+@mixin search-style {
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid rgba(94, 93, 93, 0.2);
+  @media (max-width: 1040px) {
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  @media (max-width: 640px) {
+    border-radius: 8px;
+    font-size: 13px;
+  }
+  @media (max-width: 380px) {
+    font-size: 10px;
+  }
+}
+
+@mixin image-style {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@mixin action-button {
+  cursor: pointer;
+  font-size: 18px;
+  @media (max-width: 1440px) {
+    font-size: 13px;
+  }
+  @media (max-width: 1040px) {
+    font-size: 11px;
+  }
+  @media (max-width: 640px) {
+    font-size: 8px;
+  }
+}
+
+@mixin delete-button {
+  border: none;
+  border-radius: 10px;
+  padding: 20px 30px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@mixin large-image {
+  width: 600px;
+  height: 600px;
+}

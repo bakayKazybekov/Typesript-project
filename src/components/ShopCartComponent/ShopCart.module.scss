@@ -1,0 +1,66 @@
+@import '../../variables/variables.scss';
+
+.wrapper {
+  width: 93vw;
+  margin: 85px auto 50px;
+  @include displey-flex-column;
+  gap: 50px;
+  text-align: center;
+  font-size: 25px;
+}
+
+.header {
+  width: 100%;
+  @include displey-flex-column;
+  gap: 20px;
+}
+
+.shop_cart_title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.clear_button {
+  align-self: end;
+  background: inherit;
+  border: none;
+  color: #f41e1e;
+  cursor: pointer;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 85px 50px;
+}
+
+.product {
+  width: 220px;
+  @include displey-flex-column;
+  gap: 13px;
+  align-items: center;
+}
+
+.product_image {
+  width: 220px;
+  height: 220px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: $borderRadius20;
+  }
+}
+
+.product_text {
+  font-size: 14px;
+  font-weight: $fontWeight500;
+}
+
+.delete_button {
+  color: #f41e1e;
+  background: inherit;
+  border: none;
+  cursor: pointer;
+}

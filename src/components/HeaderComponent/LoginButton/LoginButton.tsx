@@ -1,28 +1,41 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
+import React, { useCallback } from 'react';
+import { Link } from 'react-router-dom';
+import { LOGIN } from '../../../consts/paths';
+import { useAppDispatch, useAppSelector } from '../../../hook';
 import { avatar } from '../../../images';
-import { AvatarImage, LoginBtn, LogOutWrapper } from './LoginButtonStyles';
+import { setInAccount } from '../../../store/login/slice';
+import styles from './LoginButton.module.scss';
 
 const LoginButton: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { inAccount } = useAppSelector((state) => state.loginReducer);
+
   const token = localStorage.getItem('token');
-  const logOut = () => {
-    if (token) {
-      localStorage.removeItem('token')
-      window.location.reload()
+  const onLogout = useCallback(() => {
+    if (inAccount) {
+      dispatch(setInAccount(false));
+      localStorage.removeItem('token');
     }
+    console.log('logout');
+  }, [dispatch, inAccount]);
+
+  if (token) {
+    return (
+      <div className={styles.logout_wrapper}>
+        <img className={styles.avatar_image} src={avatar} alt="avatar" />
+        <button className={styles.logout_button} onClick={onLogout}>
+          ВЫЙТИ
+        </button>
+      </div>
+    );
   }
-
-  if (token) return (
-    <LogOutWrapper>
-      <AvatarImage src={avatar} alt="avatar" /> 
-      <LoginBtn onClick={logOut}>ВЫЙТИ</LoginBtn>
-    </LogOutWrapper>
-  )
   return (
-    <LogOutWrapper>
-      <Link to='/login'><LoginBtn>ВОЙТИ</LoginBtn></Link>
-    </LogOutWrapper>
-  )
-}
+    <div className={styles.logout_wrapper}>
+      <Link className={styles.login_button} to={LOGIN}>
+        ВОЙТИ
+      </Link>
+    </div>
+  );
+};
 
-export default LoginButton
+export default LoginButton;

@@ -1,39 +1,47 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { loginAction, registerAction } from "./actions";
-import { initialState } from "./initialState";
-
+import { createSlice } from '@reduxjs/toolkit';
+import { loginAction, registerAction } from './actions';
+import { initialState } from './initialState';
 
 const loginSlice = createSlice({
   name: 'login',
   initialState,
-  reducers: {},
+  reducers: {
+    setInAccount: (state, action) => {
+      return {
+        ...state,
+        inAccount: action.payload,
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(registerAction.fulfilled, (state) => {
-        state.isLoad = false
-        state.error = ''
+        state.isLoad = false;
+        state.error = '';
       })
       .addCase(registerAction.pending, (state) => {
-        state.isLoad = true
+        state.isLoad = true;
       })
       .addCase(registerAction.rejected, (state, action) => {
         state.isLoad = false;
-        state.error = action.payload
-      })
-    
+        state.error = action.payload;
+      });
+
     builder
       .addCase(loginAction.fulfilled, (state) => {
-        state.isLoad = false
-        state.error = ''
+        state.isLoad = false;
+        state.error = '';
       })
       .addCase(loginAction.pending, (state) => {
-        state.isLoad = true
+        state.isLoad = true;
       })
       .addCase(loginAction.rejected, (state, action) => {
         state.isLoad = false;
-        state.error = action.payload
-      })
-  }
-}) 
+        state.error = action.payload;
+      });
+  },
+});
 
-export { loginSlice }
+export { loginSlice };
+
+export const { setInAccount } = loginSlice.actions;

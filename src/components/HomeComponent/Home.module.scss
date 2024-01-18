@@ -1,0 +1,8 @@
+@import '../../variables/variables.scss';
+
+.wrapper {
+  @include displey-flex-column;
+  display: flex;
+  width: 95vw;
+  margin: 0 auto 50px;
+}

@@ -1,0 +1,86 @@
+@import '../../variables/variables.scss';
+
+.wrapper {
+  @include displey-flex-column;
+  width: 95vw;
+  margin: 30px auto 30px;
+  height: 95vh;
+  gap: 200px;
+}
+
+.back_button {
+  @include button-styles;
+  align-self: start;
+}
+
+.container {
+  @include displey-flex-column;
+}
+
+.content {
+  display: flex;
+  padding-left: 30px;
+  flex-wrap: wrap;
+  gap: 200px;
+}
+
+.add_image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include large-image;
+  border-radius: $borderRadius20;
+  background-color: $mainColor;
+  font-size: $fontSize22;
+  font-weight: $fontWeight500;
+  cursor: pointer;
+  img {
+    @include image-style;
+    border-radius: $borderRadius20;
+  }
+}
+
+.create_product_form {
+  @include displey-flex-column;
+  justify-content: center;
+  gap: 30px;
+}
+
+.form_label {
+  @include displey-flex-column;
+  &_error {
+    text-align: center;
+    color: red;
+  }
+}
+
+.fields {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 60px;
+  &_input {
+    width: 600px;
+    border-radius: 10px;
+    border: 1px solid rgba(106, 93, 93, 0.2);
+    padding: 10px 20px;
+    color: rgba(0, 0, 0, 0.4);
+    font-size: $fontSize22;
+    font-weight: $fontWeight500;
+    outline: none;
+  }
+}
+
+.save_button {
+  @include button-styles;
+  align-self: end;
+}
+
+.loading {
+  align-self: center;
+  span {
+    width: 70px !important;
+    height: 70px !important;
+    color: $secondColor;
+  }
+}

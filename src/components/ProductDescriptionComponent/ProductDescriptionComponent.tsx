@@ -1,28 +1,56 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import { ProductDescriptionProps } from "../../Types/types"
-import { BackButton, BackButtonContainer, Container, Content, DescriptionImage, DescriptionText, DescriptionTitle, Wrapper } from "./ProductDescriptionStyles"
+import { Alert, CircularProgress } from '@mui/material';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { BASE_ROUTER } from '../../consts/paths';
+import { ProductType } from '../../Types/types';
+import styles from './ProductDescription.module.scss';
+
+type ProductDescriptionProps = {
+  product: ProductType;
+  isLoad: boolean;
+  error?: string;
+};
 
 const ProductDescriptionComponent: React.FC<ProductDescriptionProps> = ({ product, isLoad, error }) => {
-  return (
-        <Container>
-            <BackButtonContainer>
-                <Link to='/'><BackButton>Вернуться</BackButton></Link>
-            </BackButtonContainer>
-            <Wrapper>
-                <DescriptionTitle>{product.title}</DescriptionTitle>
-                <Content>
-                    <DescriptionImage>
-                        <img src={product.image} alt="" />
-                    </DescriptionImage>
-                    <DescriptionText>
-                        <div>Описание</div>
-                        <p>{product.description}</p>
-                    </DescriptionText>
-                </Content>
-            </Wrapper>
-        </Container>
-    )
-}
+  if (isLoad) {
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.loading}>
+          <CircularProgress />
+        </div>
+      </div>
+    );
+  }
+  if (error) {
+    return (
+      <div className={styles.wrapper}>
+        <Alert severity="error">{error}</Alert>
+      </div>
+    );
+  }
 
-export default ProductDescriptionComponent
+  const { title, image, description } = product;
+  return (
+    <div className={styles.container}>
+      <div className={styles.back_button_container}>
+        <Link className={styles.back_button} to={BASE_ROUTER}>
+          Вернуться
+        </Link>
+      </div>
+      <div className={styles.wrapper}>
+        <div className={styles.description_title}>{title}</div>
+        <div className={styles.content}>
+          <div className={styles.description_image}>
+            <img src={image} alt={title} />
+          </div>
+          <div className={styles.description_text}>
+            <div className={styles.description_text_title}>Описание:</div>
+            <p>{description}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProductDescriptionComponent;

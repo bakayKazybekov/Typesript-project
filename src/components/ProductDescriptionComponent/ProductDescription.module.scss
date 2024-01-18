@@ -1,0 +1,68 @@
+@import '../../variables/variables.scss';
+
+.container {
+  width: 95vw;
+  margin: 55px auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 105px;
+}
+
+.back_button_container {
+  align-self: end;
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+}
+
+.back_button {
+  font-size: $fontSize22;
+}
+
+.wrapper {
+  width: 91vw;
+  @include displey-flex-column;
+  align-items: center;
+  gap: 60px;
+}
+
+.description_title {
+  font-size: 30px;
+  text-align: center;
+}
+
+.content {
+  width: 70vw;
+}
+.description_image {
+  @include large-image;
+  float: left;
+  margin-right: 100px;
+  margin-bottom: 80px;
+  border: solid 1px #eef2d1;
+  border-radius: $borderRadius20;
+  text-align: center;
+  img {
+    @include image-style;
+    border-radius: $borderRadius20;
+  }
+}
+.description_text {
+  font-size: 20px;
+  &_title {
+    padding-bottom: 20px;
+    font-size: $fontSize22;
+    font-weight: 600;
+  }
+}
+
+.loading {
+  align-self: center;
+  span {
+    width: 70px !important;
+    height: 70px !important;
+    color: $secondColor;
+  }
+}

@@ -1,14 +1,14 @@
-import { Wrapper } from "./HeaderComponentStyles"
-import LoginButton from "./LoginButton/LoginButton"
-import Navigation from "./Naviagtion/Navigation"
+import LoginButton from './LoginButton/LoginButton';
+import Navigation from './Navigation/Navigation';
+import styles from './Header.module.scss';
 
-function HeaderComponent () {
+function HeaderComponent() {
   return (
-    <Wrapper>
-      <Navigation/>
-      <LoginButton/>
-    </Wrapper>
-  )
+    <div className={styles.wrapper}>
+      <Navigation />
+      <LoginButton />
+    </div>
+  );
 }
 
-export default HeaderComponent
+export default HeaderComponent;

@@ -1,0 +1,43 @@
+@import '../../../../variables/variables.scss';
+
+.delete_wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+}
+.delete_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  font-size: $fontSize22;
+  width: 100%;
+  max-width: 700px;
+  border-radius: $borderRadius20;
+  background-color: #fff;
+  padding: 40px 20px 20px 20px;
+  transform: translateY(-50px);
+  box-shadow: 0px 0px 15px -5px;
+}
+
+.delete_buttons {
+  display: flex;
+  gap: 80px;
+}
+
+.close_button {
+  @include delete-button;
+  background-color: $mainColor;
+  color: #000;
+}
+
+.confirm_button {
+  @include delete-button;
+  background-color: $secondColor;
+  color: #fff;
+}

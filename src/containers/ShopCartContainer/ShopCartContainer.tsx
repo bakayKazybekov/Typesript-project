@@ -3,6 +3,9 @@ import { useState } from "react"
 import ShopCartComponent from "../../components/ShopCartComponent/ShopCartComponent"
 import { ShopCartProductType } from "../../Types/types"
 
+// https://www.npmjs.com/package/redux-persist
+// functional programming -> lodash!!! 
+
 const ShopCartContainer = () => {
   const [products, setProducts] = useState<ShopCartProductType[]>([])
 
@@ -15,9 +18,10 @@ const ShopCartContainer = () => {
   }, [])
 
   const onDelete = (id: number) => {
-    const set = products.filter((product) => product.uniqueId !== id)
-    localStorage.setItem('products', JSON.stringify(set))
-    setProducts(set)
+    // _.filter https://lodash.com/docs/#filter
+    const filteredProducts = products.filter((product) => product.uniqueId !== id)
+    localStorage.setItem('products', JSON.stringify(filteredProducts));
+    setProducts(filteredProducts)
   }
   const onClear = () => {
     localStorage.removeItem('products')

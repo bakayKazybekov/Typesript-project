@@ -1,91 +1,103 @@
-import { deleteProductAction, getProductAction } from '../../store/product/actions'
-import { ChangeEvent, FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
-import HomeComponent from '../../components/HomeComponent/HomeComponent'
-import { ProductType, ShopCartProductType } from '../../Types/types'
-import { useAppDispatch, useAppSelector } from '../../hook'
+import { deleteProductAction, getProductAction } from '../../store/product/actions';
+import { ChangeEvent, FormEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import HomeComponent from '../../components/HomeComponent/HomeComponent';
+import { ProductType, ShopCartProductType } from '../../Types/types';
+import { useAppDispatch, useAppSelector } from '../../hook';
+import { setInAccount } from '../../store/login/slice';
 
-  function HomeContainer () {
-  const dispatch = useAppDispatch()
-  
-  const [ searchProducts, setSearchProducts ] = useState<string>('')
-  const [ sortingOpertator, setSortingOperator] = useState('')
-  const { products, isLoad, error } = useAppSelector((state) => state.productReducer)
-  
-  const token = localStorage.getItem('token')
+function HomeContainer() {
+  const dispatch = useAppDispatch();
+
+  const [searchProducts, setSearchProducts] = useState<string>('');
+  const [sortingOpertator, setSortingOperator] = useState('');
+  const [shopCartAlert, setShopCartAlert] = useState<boolean>(false);
+
+  const onClickShopCartButton = (product: ProductType) => {
+    setShopCartAlert(true);
+    setTimeout(() => {
+      setShopCartAlert(false);
+    }, 1000);
+    addCart(product);
+  };
+
+  const { products, isLoad, error } = useAppSelector((state) => state.productReducer);
+  const { inAccount } = useAppSelector((state) => state.loginReducer);
+  console.log('inAccount', inAccount);
+
+  const token = localStorage.getItem('token');
+
   useEffect(() => {
-    if (token) dispatch(getProductAction())
-  }, [dispatch, token])
-  
-  const onDelete = useCallback((id: number) => {
-    dispatch(deleteProductAction(id)).then(() => dispatch(getProductAction()))
-  }, [dispatch])
-  
+    if (token) {
+      dispatch(setInAccount(true));
+    }
+  }, [dispatch, token]);
+
+  useEffect(() => {
+    if (inAccount) dispatch(getProductAction());
+  }, [dispatch, inAccount]);
+
   const addCart = useCallback((product: ProductType) => {
-    const getLocalProducts: ShopCartProductType[] = JSON.parse(localStorage.getItem('products') ?? '[]')
+    const getLocalProducts: ShopCartProductType[] = JSON.parse(localStorage.getItem('products') ?? '[]');
     const obj = {
       ...product,
-      uniqueId: Math.random()
-    }
-    const arr = [...getLocalProducts, obj]
-    localStorage.setItem('products', JSON.stringify(arr))
-  }, [])
-  
+      uniqueId: Math.random(),
+    };
+    const arr = [...getLocalProducts, obj];
+    localStorage.setItem('products', JSON.stringify(arr));
+  }, []);
+
   const filteredProducts = useMemo(() => {
-    let filtered = [...products]
+    let filtered = [...products];
 
     if (searchProducts) {
-      return filtered.filter((product) => product.title.toLowerCase().startsWith(searchProducts.toLowerCase().trim()))
+      // lodash!!!
+      return filtered.filter((product) => product.title.toLowerCase().startsWith(searchProducts.toLowerCase().trim()));
     }
 
     return filtered.sort((a: ProductType, b: ProductType): number => {
       switch (sortingOpertator) {
-        case 'firstCheap': 
+        case 'firstCheap':
           return +a.price - +b.price;
         case 'firstExpensive':
           return +b.price - +a.price;
-        case 'firstNew': 
+        case 'firstNew':
           return +a.id - +b.id;
         case 'firstOld':
           return +b.id - +a.id;
-        case 'withoutFilter':
-          return 0
         default:
-          return 0
+          return 0;
       }
-    })
-  }, [products, searchProducts, sortingOpertator])
-  
+    });
+  }, [products, searchProducts, sortingOpertator]);
+
   const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length === 0) {
-      setSearchProducts(e.target.value)
+    if (!e.target.value.length) {
+      setSearchProducts(e.target.value);
     }
-  }
+  };
 
-  const onSubmitSearch = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const target = e.target as HTMLFormElement
-    const inputElement= target[0] as HTMLInputElement
-    setSearchProducts(inputElement.value)
-  }
+  const onSubmitSearch = (data: { search: string }) => {
+    setSearchProducts(data.search);
+  };
 
-  
   const filters = (operator: string) => {
-    setSortingOperator(operator)
-  }
-  
-  
+    setSortingOperator(operator);
+  };
+
   return (
     <HomeComponent
       onSubmitSearch={onSubmitSearch}
       onChangeSearch={onChangeSearch}
       filters={filters}
       products={filteredProducts}
-      onDelete={onDelete}
       addCart={addCart}
+      shopCartAlert={shopCartAlert}
+      onClickShopCartButton={onClickShopCartButton}
+      token={token}
       isLoad={isLoad}
       error={error}
     />
-  )
-  }
-  
-export default HomeContainer
+  );
+}
+
+export default HomeContainer;

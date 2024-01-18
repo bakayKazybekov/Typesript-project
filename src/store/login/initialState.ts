@@ -1,8 +1,9 @@
-import { LoginState } from "../../Types/types"
+import { LoginState } from '../../Types/types';
 
 const initialState: LoginState = {
-  isLoad: false, 
+  inAccount: false,
+  isLoad: false,
   error: '',
-}
+};
 
-export { initialState }
+export { initialState };
