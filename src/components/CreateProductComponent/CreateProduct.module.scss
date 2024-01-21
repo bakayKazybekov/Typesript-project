@@ -19,8 +19,8 @@
 
 .content {
   display: flex;
-  padding-left: 30px;
   flex-wrap: wrap;
+  align-items: center;
   gap: 200px;
 }
 
@@ -28,7 +28,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  @include large-image;
+  width: 600px;
+  height: 600px;
   border-radius: $borderRadius20;
   background-color: $mainColor;
   font-size: $fontSize22;
@@ -42,7 +43,7 @@
 
 .create_product_form {
   @include displey-flex-column;
-  justify-content: center;
+  align-items: center;
   gap: 30px;
 }
 
@@ -82,5 +83,96 @@
     width: 70px !important;
     height: 70px !important;
     color: $secondColor;
+  }
+}
+
+@media (max-width: 1510px) {
+  .fields {
+    gap: 40px;
+    &_input {
+      width: 500px;
+      padding: 10px 20px;
+      font-size: 20px;
+    }
+  }
+  .add_image {
+    width: 500px;
+    height: 500px;
+    font-size: 20px;
+  }
+  .content {
+    gap: 12vw;
+  }
+}
+
+@media (max-width: 1220px) {
+  .wrapper {
+    gap: 12vh;
+  }
+  .fields {
+    gap: 30px;
+    &_input {
+      width: 400px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  }
+  .add_image {
+    width: 400px;
+    height: 400px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 980px) {
+  .fields {
+    gap: 20px;
+    &_input {
+      width: 300px;
+      padding: 10px 20px;
+      font-size: 13px;
+    }
+  }
+  .add_image {
+    width: 300px;
+    height: 300px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 740px) {
+  .fields {
+    gap: 20px;
+    &_input {
+      width: 300px;
+      padding: 10px 20px;
+      font-size: 13px;
+    }
+  }
+  .add_image {
+    font-size: 13px;
+  }
+  .save_button {
+    align-self: center;
+  }
+  .content {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .fields {
+    gap: 15px;
+    &_input {
+      width: 200px;
+      padding: 8px 15px;
+      border-radius: 8px;
+      font-size: 10px;
+    }
+  }
+  .add_image {
+    width: 200px;
+    height: 200px;
+    font-size: 10px;
   }
 }
