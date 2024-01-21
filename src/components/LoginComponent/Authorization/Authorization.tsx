@@ -34,41 +34,43 @@ const Authorization: React.FC<AuthProps> = ({ setIsRegister, onSubmit, isLoad, e
           Вернуться на главную
         </button>
       </div>
-      <h3 className={styles.login_title}>Войти</h3>
-      <form className={styles.login_form} onSubmit={handleSubmit(onSubmit)}>
-        <label className={styles.login_form_label}>
-          <input
-            className={styles.login_form_input}
-            type="text"
-            placeholder="Введите логин/email"
-            {...register('username')}
-          />
-          <span>{errors?.username?.message}</span>
-        </label>
-        <label className={styles.login_form_label}>
-          <input
-            className={styles.login_form_input}
-            type="password"
-            placeholder="Введите пароль"
-            {...register('password')}
-          />
-          <span>{errors?.password?.message}</span>
-        </label>
-        {error && (
-          <div className={styles.container}>
-            <Alert variant="outlined" severity="error">
-              {error}
-            </Alert>
+      <div className={styles.login_wrapper}>
+        <h3 className={styles.login_title}>Авторизация</h3>
+        <form className={styles.login_form} onSubmit={handleSubmit(onSubmit)}>
+          <label className={styles.login_form_label}>
+            <input
+              className={styles.login_form_input}
+              type="text"
+              placeholder="Введите логин/email"
+              {...register('username')}
+            />
+            <span>{errors?.username?.message}</span>
+          </label>
+          <label className={styles.login_form_label}>
+            <input
+              className={styles.login_form_input}
+              type="password"
+              placeholder="Введите пароль"
+              {...register('password')}
+            />
+            <span>{errors?.password?.message}</span>
+          </label>
+          {error && (
+            <div className={styles.container}>
+              <Alert variant="outlined" severity="error">
+                {error}
+              </Alert>
+            </div>
+          )}
+          <div className={styles.login_form_buttons}>
+            <button className={styles.login_form_button}>Войти</button>
+            <div>Нет аккаунта? Зарегистрируйтесь</div>
+            <button className={styles.login_form_button} onClick={() => setIsRegister(true)}>
+              Зарегистрироваться
+            </button>
           </div>
-        )}
-        <div className={styles.login_form_buttons}>
-          <button className={styles.login_form_button}>Войти</button>
-          <div>Нет аккаунта? Зарегистрируйтесь</div>
-          <button className={styles.login_form_button} onClick={() => setIsRegister(true)}>
-            Зарегистрироваться
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

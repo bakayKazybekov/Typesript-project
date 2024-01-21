@@ -1,5 +1,5 @@
-import { deleteProductAction, getProductAction } from '../../store/product/actions';
-import { ChangeEvent, FormEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import { getProductAction } from '../../store/product/actions';
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import HomeComponent from '../../components/HomeComponent/HomeComponent';
 import { ProductType, ShopCartProductType } from '../../Types/types';
 import { useAppDispatch, useAppSelector } from '../../hook';

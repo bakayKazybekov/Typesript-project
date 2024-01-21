@@ -14,7 +14,6 @@ type RegisterFieldsType = {
 };
 
 const Registration: React.FC<RegisterProps> = ({ setIsRegister, onSubmit, isLoad, error }) => {
-
   const navigate = useNavigate();
 
   const registerFields: RegisterFieldsType[] = [
@@ -47,59 +46,61 @@ const Registration: React.FC<RegisterProps> = ({ setIsRegister, onSubmit, isLoad
           Вернуться на главную
         </button>
       </div>
-      <h3 className={styles.login_title}>Регистрация</h3>
-      <form className={styles.login_form} onSubmit={handleSubmit(onSubmit)}>
-        {registerFields.map(({ name, placeholder, type }) => {
-          console.log(name);
-          return (
-            <label className={styles.login_form_label}>
-              <input
-                type={type}
-                className={styles.login_form_input}
-                placeholder={placeholder}
-                {...register('username')}
-              />
-              <span>{errors?.username?.message}</span>
-            </label>
-          );
-        })}
-        {/* <label className={styles.login_form_label}>
-          <input className={styles.login_form_input} placeholder={'Введите логин/email'} {...register('username')} />
-          <span>{errors?.username?.message}</span>
-        </label>
-        <label className={styles.login_form_label}>
-          <input
-            className={styles.login_form_input}
-            type="password"
-            placeholder="Введите пароль"
-            {...register('password')}
-          />
-          <span>{errors?.password?.message}</span>
-        </label>
-        <label className={styles.login_form_label}>
-          <input
-            className={styles.login_form_input}
-            type="password"
-            placeholder="Подтвердите пароль"
-            {...register('confirmPassword')}
-          />
-          <span>{errors?.confirmPassword?.message}</span>
-        </label> */}
-        {error && (
-          <div className={styles.container}>
-            <Alert variant="outlined" severity="error">
-              {error}
-            </Alert>
+      <div className={styles.login_wrapper}>
+        <h3 className={styles.login_title}>Регистрация</h3>
+        <form className={styles.login_form} onSubmit={handleSubmit(onSubmit)}>
+          {registerFields.map(({ name, placeholder, type }) => {
+            console.log(name);
+            return (
+              <label className={styles.login_form_label}>
+                <input
+                  type={type}
+                  className={styles.login_form_input}
+                  placeholder={placeholder}
+                  {...register('username')}
+                />
+                <span>{errors?.username?.message}</span>
+              </label>
+            );
+          })}
+          {/* <label className={styles.login_form_label}>
+            <input className={styles.login_form_input} placeholder={'Введите логин/email'} {...register('username')} />
+            <span>{errors?.username?.message}</span>
+          </label>
+          <label className={styles.login_form_label}>
+            <input
+              className={styles.login_form_input}
+              type="password"
+              placeholder="Введите пароль"
+              {...register('password')}
+            />
+            <span>{errors?.password?.message}</span>
+          </label>
+          <label className={styles.login_form_label}>
+            <input
+              className={styles.login_form_input}
+              type="password"
+              placeholder="Подтвердите пароль"
+              {...register('confirmPassword')}
+            />
+            <span>{errors?.confirmPassword?.message}</span>
+          </label> */}
+          {error && (
+            <div className={styles.container}>
+              <Alert variant="outlined" severity="error">
+                {error}
+              </Alert>
+            </div>
+          )}
+          <div className={styles.login_form_buttons}>
+            <button className={styles.login_form_button}>Зарегистрироваться</button>
+            <div>Есть аккаунт? Войдите</div>
+            <button className={styles.login_form_button} onClick={() => setIsRegister(false)}>
+              Войти
+            </button>
           </div>
-        )}
-        <div className={styles.login_form_buttons}>
-          <button className={styles.login_form_button}>Зарегистрироваться</button>
-          <div>Есть аккаунт? Войдите</div>
-          <button className={styles.login_form_button} onClick={() => setIsRegister(false)}>
-            Войти
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

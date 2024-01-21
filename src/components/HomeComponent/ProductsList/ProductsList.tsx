@@ -37,7 +37,7 @@ const ProductsList: React.FC<ProductsListProps> = ({
     case !token:
       return (
         <div className={styles.wrapper}>
-          <div>Зайдите в аккаунт!</div>
+          <div>Авторизуйтесь!</div>
         </div>
       );
     case !products.length:

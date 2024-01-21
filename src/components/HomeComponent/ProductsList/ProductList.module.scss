@@ -9,7 +9,7 @@
 .products {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 30px;
+  gap: 40px;
 }
 
 .product {
@@ -118,6 +118,9 @@
 }
 
 @media (max-width: 1240px) {
+  .wrapper {
+    font-size: 22px;
+  }
   .products {
     grid-template-columns: repeat(5, 1fr);
   }
@@ -130,6 +133,9 @@
 }
 
 @media (max-width: 840px) {
+  .wrapper {
+    font-size: 20px;
+  }
   .products {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -139,9 +145,20 @@
   .products {
     grid-template-columns: repeat(2, 1fr);
   }
+  .delete_button {
+    width: 20px;
+    height: 20px;
+  }
+  .create_button {
+    padding: 8px 30px;
+    font-size: 18px;
+  }
 }
 
 @media (max-width: 480px) {
+  .wrapper {
+    font-size: 18px;
+  }
   .product {
     max-width: 180px;
     padding: 15px 10px;
@@ -165,12 +182,20 @@
     padding: 15px 10px;
     gap: 10px;
   }
+  .delete_button {
+    width: 15px;
+    height: 15px;
+  }
   .product_image {
     width: 100px;
     height: 100px;
   }
   .create_button {
     font-size: 15px;
+  }
+  .product {
+    padding: 10px;
+    gap: 5px;
   }
   .product_text {
     font-size: 9px;

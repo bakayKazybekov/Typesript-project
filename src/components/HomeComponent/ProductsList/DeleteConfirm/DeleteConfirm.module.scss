@@ -14,6 +14,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   gap: 40px;
   font-size: $fontSize22;
   width: 100%;
@@ -40,4 +41,38 @@
   @include delete-button;
   background-color: $secondColor;
   color: #fff;
+}
+
+@media (max-width: 980px) {
+  .delete_content {
+    gap: 30px;
+    font-size: 18px;
+    width: 100%;
+    max-width: 500px;
+  }
+  .delete_buttons {
+    gap: 50px;
+  }
+}
+@media (max-width: 720px) {
+  .delete_content {
+    gap: 20px;
+    font-size: 15px;
+    width: 100%;
+    max-width: 380px;
+  }
+  .delete_buttons {
+    gap: 40px;
+  }
+}
+@media (max-width: 480px) {
+  .delete_content {
+    gap: 20px;
+    font-size: 10px;
+    width: 100%;
+    max-width: 250px;
+  }
+  .delete_buttons {
+    gap: 30px;
+  }
 }

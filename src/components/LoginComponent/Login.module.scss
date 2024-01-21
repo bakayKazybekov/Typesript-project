@@ -6,7 +6,6 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 16px;
 }
 
@@ -27,7 +26,13 @@
   align-items: flex-end;
 }
 
+.login_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .login_title {
+  text-align: center;
   font-family: $mainFont;
   font-size: 36px;
   font-weight: $fontWeight400;
@@ -90,5 +95,93 @@
     width: 70px !important;
     height: 70px !important;
     color: $secondColor;
+  }
+}
+
+@media (max-width: 1240px) {
+  .login_wrapper {
+    height: 70vh;
+    justify-content: center;
+  }
+  .back_button {
+    font-size: 15px;
+  }
+  .login_title {
+    font-size: 30px;
+  }
+  .login_form {
+    margin-top: 60px;
+    &_input {
+      padding: 15px 20px;
+      font-size: 20px;
+      width: 500px;
+    }
+    &_buttons {
+      gap: 20px;
+      div {
+        font-size: 18px;
+      }
+    }
+    &_button {
+      font-size: 21px;
+    }
+  }
+}
+
+@media (max-width: 780px) {
+  .back_button {
+    font-size: 13px;
+  }
+  .login_title {
+    font-size: 26px;
+  }
+  .login_form {
+    margin-top: 40px;
+    gap: 10px;
+    &_input {
+      padding: 12px 18px;
+      font-size: 18px;
+      width: 400px;
+    }
+    &_buttons {
+      margin-top: 25px;
+      gap: 15px;
+      div {
+        font-size: 15px;
+      }
+    }
+    &_button {
+      font-size: 17px;
+    }
+  }
+}
+
+@media (max-width: 540px) {
+  .back_button {
+    font-size: 11px;
+  }
+  .login_title {
+    font-size: 22px;
+  }
+  .login_form {
+    margin-top: 40px;
+    gap: 10px;
+    &_input {
+      padding: 10px 15px;
+      font-size: 15px;
+      width: 250px;
+      border-radius: 8px;
+    }
+    &_buttons {
+      margin-top: 20px;
+      gap: 10px;
+      div {
+        font-size: 12px;
+      }
+    }
+    &_button {
+      padding: 8px 25px;
+      font-size: 14px;
+    }
   }
 }
