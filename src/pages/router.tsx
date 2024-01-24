@@ -14,7 +14,6 @@ import {
   PRODUCT_DESCRIPTION,
   SHOP_CART,
 } from '../consts/paths';
-import { GlobalStyles } from '../styles';
 import CreateProductPage from './CreateProductPage';
 import HomePage from './HomePage';
 import LoginPage from './LoginPage';
@@ -23,7 +22,6 @@ import ShopCartPage from './ShopCartPage';
 
 const Router: React.FC = () => (
   <BrowserRouter>
-    <GlobalStyles />
     <Routes>
       <Route
         path={BASE_ROUTER}

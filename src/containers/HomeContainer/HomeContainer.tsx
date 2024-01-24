@@ -4,6 +4,7 @@ import HomeComponent from '../../components/HomeComponent/HomeComponent';
 import { ProductType, ShopCartProductType } from '../../Types/types';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import { setInAccount } from '../../store/login/slice';
+import _ from 'lodash';
 
 function HomeContainer() {
   const dispatch = useAppDispatch();
@@ -22,7 +23,6 @@ function HomeContainer() {
 
   const { products, isLoad, error } = useAppSelector((state) => state.productReducer);
   const { inAccount } = useAppSelector((state) => state.loginReducer);
-  console.log('inAccount', inAccount);
 
   const token = localStorage.getItem('token');
 
@@ -50,8 +50,9 @@ function HomeContainer() {
     let filtered = [...products];
 
     if (searchProducts) {
-      // lodash!!!
-      return filtered.filter((product) => product.title.toLowerCase().startsWith(searchProducts.toLowerCase().trim()));
+      return _.filter(filtered, (product) =>
+        _.startsWith(product.title.toLowerCase(), searchProducts.toLowerCase().trim()),
+      );
     }
 
     return filtered.sort((a: ProductType, b: ProductType): number => {

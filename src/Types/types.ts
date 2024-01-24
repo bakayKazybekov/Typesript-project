@@ -1,5 +1,3 @@
-import { StringLiteral } from 'typescript';
-
 // Product
 export type ProductType = {
   title: string;
