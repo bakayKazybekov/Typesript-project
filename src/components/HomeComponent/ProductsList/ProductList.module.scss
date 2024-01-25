@@ -149,6 +149,7 @@
 @media (max-width: 480px) {
   .wrapper {
     font-size: 18px;
+    margin-top: 5px;
   }
   .product {
     max-width: 180px;
@@ -156,8 +157,8 @@
     gap: 8px;
   }
   .product_image {
-    width: 160px;
-    height: 160px;
+    width: 140px;
+    height: 140px;
   }
   .create_button {
     font-size: 18px;

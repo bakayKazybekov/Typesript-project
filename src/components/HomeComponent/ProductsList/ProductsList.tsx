@@ -9,6 +9,7 @@ import { ProductsListProps } from '../types';
 import DeleteConfirm from './DeleteConfirm/DeleteConfirm';
 import styles from './ProductList.module.scss';
 import ShopCartAlert from './ShopCartAlert/ShopCartAlert';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const ProductsList: React.FC<ProductsListProps> = ({
   products,
@@ -27,7 +28,7 @@ const ProductsList: React.FC<ProductsListProps> = ({
   return (
     <div className={styles.wrapper}>
       {isLoad ? (
-        <Spin />
+        <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
       ) : error ? (
         <Alert type="error" message={error} />
       ) : !token ? (
