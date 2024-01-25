@@ -1,4 +1,4 @@
-import { getProductAction } from '../../store/product/actions';
+import { deleteProductAction, getProductAction } from '../../store/product/actions';
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import HomeComponent from '../../components/HomeComponent/HomeComponent';
 import { ProductType, ShopCartProductType } from '../../Types/types';
@@ -11,7 +11,11 @@ function HomeContainer() {
 
   const [searchProducts, setSearchProducts] = useState<string>('');
   const [sortingOpertator, setSortingOperator] = useState('');
+
   const [shopCartAlert, setShopCartAlert] = useState<boolean>(false);
+
+  const [deleteId, setDeleteId] = useState<number>(0);
+  const [confirmModalIsOpen, setConfirmModalIsOpen] = useState<boolean>(false);
 
   const onClickShopCartButton = (product: ProductType) => {
     setShopCartAlert(true);
@@ -35,6 +39,14 @@ function HomeContainer() {
   useEffect(() => {
     if (inAccount) dispatch(getProductAction());
   }, [dispatch, inAccount]);
+
+  const onDelete = () => {
+    if (deleteId) {
+      dispatch(deleteProductAction(deleteId))
+        .then(() => dispatch(getProductAction()))
+        .catch(() => 'Произошла ошибка');
+    }
+  };
 
   const addCart = useCallback((product: ProductType) => {
     const getLocalProducts: ShopCartProductType[] = JSON.parse(localStorage.getItem('products') ?? '[]');
@@ -92,6 +104,10 @@ function HomeContainer() {
       filters={filters}
       products={filteredProducts}
       addCart={addCart}
+      onDelete={onDelete}
+      setDeleteId={setDeleteId}
+      confirmModalIsOpen={confirmModalIsOpen}
+      setConfirmModalIsOpen={setConfirmModalIsOpen}
       shopCartAlert={shopCartAlert}
       onClickShopCartButton={onClickShopCartButton}
       token={token}

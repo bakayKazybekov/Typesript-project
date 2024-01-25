@@ -20,8 +20,6 @@ export type editProductActionArgs = Omit<ProductType, 'id'> & {
   id: string;
 };
 
-export type deleteProductActionArgs = Pick<editProductActionArgs, 'navigate' | 'id'>;
-
 // FormValues
 export type ProductFormValues = Omit<ProductType, 'image' | 'id'>;
 

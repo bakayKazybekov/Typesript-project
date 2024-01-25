@@ -11,6 +11,10 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
   filters,
   products,
   addCart,
+  setDeleteId,
+  onDelete,
+  confirmModalIsOpen,
+  setConfirmModalIsOpen,
   shopCartAlert,
   onClickShopCartButton,
   token,
@@ -23,6 +27,10 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
       <ProductsList
         products={products}
         addCart={addCart}
+        setDeleteId={setDeleteId}
+        onDelete={onDelete}
+        confirmModalIsOpen={confirmModalIsOpen}
+        setConfirmModalIsOpen={setConfirmModalIsOpen}
         shopCartAlert={shopCartAlert}
         onClickShopCartButton={onClickShopCartButton}
         token={token}

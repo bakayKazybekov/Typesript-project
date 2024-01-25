@@ -1,16 +1,21 @@
 import { Alert, CircularProgress } from '@mui/material';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { DELETE_CONFIRM, EDIT_PRODUCT, PRODUCT_DESCRIPTION } from '../../../consts/paths';
+import { EDIT_PRODUCT, PRODUCT_DESCRIPTION } from '../../../consts/paths';
 import { deleteIcon } from '../../../images';
 import { ProductType } from '../../../Types/types';
 import { ProductsListProps } from '../types';
+import DeleteConfirm from './DeleteConfirm/DeleteConfirm';
 import styles from './ProductList.module.scss';
 import ShopCartAlert from './ShopCartAlert/ShopCartAlert';
 
 const ProductsList: React.FC<ProductsListProps> = ({
   products,
   addCart,
+  onDelete,
+  setDeleteId,
+  confirmModalIsOpen,
+  setConfirmModalIsOpen,
   shopCartAlert,
   onClickShopCartButton,
   token,
@@ -83,8 +88,20 @@ const ProductsList: React.FC<ProductsListProps> = ({
                 <img src={image} alt={title} />
               </div>
               <div className={styles.delete_button}>
-                <img src={deleteIcon} alt="Кнопка удаления" onClick={() => navigate(DELETE_CONFIRM + `/${id}`)} />
+                <img
+                  src={deleteIcon}
+                  alt="Кнопка удаления"
+                  onClick={() => {
+                    setConfirmModalIsOpen(true);
+                    setDeleteId(id);
+                  }}
+                />
               </div>
+              <DeleteConfirm
+                onDeleteConfirm={onDelete}
+                onClose={() => setConfirmModalIsOpen(false)}
+                isOpen={confirmModalIsOpen}
+              />
               <div className={styles.product_text}>{title}</div>
               <div className={styles.product_text}>{+price - 0} тыс.</div>
               <div className={styles.edit_button} onClick={() => navigate(`${EDIT_PRODUCT}/${id}`)}>
