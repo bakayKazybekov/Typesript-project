@@ -17,14 +17,6 @@ function HomeContainer() {
   const [deleteId, setDeleteId] = useState<number>(0);
   const [confirmModalIsOpen, setConfirmModalIsOpen] = useState<boolean>(false);
 
-  const onClickShopCartButton = (product: ProductType) => {
-    setShopCartAlert(true);
-    setTimeout(() => {
-      setShopCartAlert(false);
-    }, 1000);
-    addCart(product);
-  };
-
   const { products, isLoad, error } = useAppSelector((state) => state.productReducer);
   const { inAccount } = useAppSelector((state) => state.loginReducer);
 
@@ -48,7 +40,7 @@ function HomeContainer() {
     }
   };
 
-  const addCart = useCallback((product: ProductType) => {
+  const addCart = (product: ProductType) => {
     const getLocalProducts: ShopCartProductType[] = JSON.parse(localStorage.getItem('products') ?? '[]');
     const obj = {
       ...product,
@@ -56,7 +48,15 @@ function HomeContainer() {
     };
     const arr = [...getLocalProducts, obj];
     localStorage.setItem('products', JSON.stringify(arr));
-  }, []);
+  };
+
+  const onClickShopCartButton = (product: ProductType) => {
+    addCart(product);
+    setShopCartAlert(true);
+    setTimeout(() => {
+      setShopCartAlert(false);
+    }, 1000);
+  };
 
   const filteredProducts = useMemo(() => {
     let filtered = [...products];
@@ -103,7 +103,6 @@ function HomeContainer() {
       onChangeSearch={onChangeSearch}
       filters={filters}
       products={filteredProducts}
-      addCart={addCart}
       onDelete={onDelete}
       setDeleteId={setDeleteId}
       confirmModalIsOpen={confirmModalIsOpen}

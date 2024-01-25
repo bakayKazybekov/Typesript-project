@@ -132,6 +132,7 @@
 @media (max-width: 750px) {
   .wrapper {
     font-size: 16px;
+    gap: 30px;
   }
   .products {
     grid-template-columns: repeat(3, 1fr);
@@ -148,6 +149,7 @@
   .wrapper {
     margin-top: 35px;
     font-size: 14px;
+    gap: 20px;
   }
   .products {
     grid-template-columns: repeat(2, 1fr);
@@ -161,6 +163,7 @@
 @media (max-width: 380px) {
   .wrapper {
     font-size: 11px;
+    gap: 0;
   }
   .product {
     border-radius: 10px;

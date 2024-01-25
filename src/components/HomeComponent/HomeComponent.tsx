@@ -10,7 +10,6 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
   onChangeSearch,
   filters,
   products,
-  addCart,
   setDeleteId,
   onDelete,
   confirmModalIsOpen,
@@ -26,7 +25,6 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
       <Interaction onSubmitSearch={onSubmitSearch} onChangeSearch={onChangeSearch} filters={filters} />
       <ProductsList
         products={products}
-        addCart={addCart}
         setDeleteId={setDeleteId}
         onDelete={onDelete}
         confirmModalIsOpen={confirmModalIsOpen}

@@ -45,7 +45,7 @@ $border: 1px solid rgba(0, 0, 0, 0.3);
   font-family: Iowan Old Style;
   font-size: 16px;
   font-weight: 400;
-  background: #fff;
+  background: inherit;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   padding: 10px 30px;
@@ -63,6 +63,11 @@ $border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     padding: 5px 15px;
     font-size: 9px;
+  }
+  @media (max-width: 430px) {
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 7px;
   }
 }
 

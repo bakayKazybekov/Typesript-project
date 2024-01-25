@@ -77,15 +77,6 @@
   align-self: end;
 }
 
-.loading {
-  align-self: center;
-  span {
-    width: 70px !important;
-    height: 70px !important;
-    color: $secondColor;
-  }
-}
-
 @media (max-width: 1510px) {
   .fields {
     gap: 40px;

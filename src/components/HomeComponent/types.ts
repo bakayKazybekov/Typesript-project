@@ -5,7 +5,6 @@ export type HomeComponentProps = ProductsListProps & InteractionProps;
 
 export type ProductsListProps = {
   products: ProductType[];
-  addCart: (product: ProductType) => void;
   onDelete: () => void;
   setDeleteId: (id: number) => void;
   confirmModalIsOpen: boolean;

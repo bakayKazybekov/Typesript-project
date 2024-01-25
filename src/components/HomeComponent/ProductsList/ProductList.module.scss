@@ -76,15 +76,6 @@
   font-weight: $fontWeight500;
 }
 
-.loading {
-  align-self: center;
-  span {
-    width: 70px !important;
-    height: 70px !important;
-    color: #595d41;
-  }
-}
-
 @media (max-width: 1540px) {
   .products {
     grid-template-columns: repeat(5, 1fr);

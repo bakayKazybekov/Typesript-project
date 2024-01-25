@@ -3,9 +3,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { authorizationScheme } from '../../../utils/scheme';
 import { AuthProps } from '../types';
-import { Alert, CircularProgress } from '@mui/material';
 import { BASE_ROUTER } from '../../../consts/paths';
 import styles from '../Login.module.scss';
+import { Alert, Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 const Authorization: React.FC<AuthProps> = ({ setIsRegister, onSubmit, isLoad, error }) => {
   const navigate = useNavigate();
 
@@ -20,9 +21,7 @@ const Authorization: React.FC<AuthProps> = ({ setIsRegister, onSubmit, isLoad, e
   if (isLoad) {
     return (
       <div className={styles.container}>
-        <div className={styles.loading}>
-          <CircularProgress />
-        </div>
+        <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
       </div>
     );
   }
@@ -57,9 +56,7 @@ const Authorization: React.FC<AuthProps> = ({ setIsRegister, onSubmit, isLoad, e
           </label>
           {error && (
             <div className={styles.container}>
-              <Alert variant="outlined" severity="error">
-                {error}
-              </Alert>
+              <Alert type="error" message={error} />
             </div>
           )}
           <div className={styles.login_form_buttons}>

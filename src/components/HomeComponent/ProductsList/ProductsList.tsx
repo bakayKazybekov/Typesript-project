@@ -1,4 +1,5 @@
-import { Alert, CircularProgress } from '@mui/material';
+import 'react-loading-skeleton/dist/skeleton.css';
+import { Alert, Spin } from 'antd';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { EDIT_PRODUCT, PRODUCT_DESCRIPTION } from '../../../consts/paths';
@@ -11,7 +12,6 @@ import ShopCartAlert from './ShopCartAlert/ShopCartAlert';
 
 const ProductsList: React.FC<ProductsListProps> = ({
   products,
-  addCart,
   onDelete,
   setDeleteId,
   confirmModalIsOpen,
@@ -24,97 +24,54 @@ const ProductsList: React.FC<ProductsListProps> = ({
 }) => {
   const navigate = useNavigate();
 
-  switch (true) {
-    case isLoad:
-      return (
-        <div className={styles.wrapper}>
-          <div className={styles.loading}>
-            <CircularProgress />
-          </div>
-        </div>
-      );
-    case !!error:
-      return (
-        <div className={styles.wrapper}>
-          <Alert severity="error">{error}</Alert>
-        </div>
-      );
-    case !token:
-      return (
-        <div className={styles.wrapper}>
-          <div>Авторизуйтесь!</div>
-        </div>
-      );
-    case !products.length:
-      return (
-        <div className={styles.wrapper}>
-          <div>Ничего не найдено!</div>
-        </div>
-      );
-  }
-
-  // if (isLoad) {
-  //   return (
-  //     <div className={styles.wrapper}>
-  //       <div className={styles.loading}>
-  //         <CircularProgress />
-  //       </div>
-  //     </div>
-  //   );
-  // }
-  // if (error) {
-  //   return (
-  //     <div className={styles.wrapper}>
-  //       <Alert severity="error">{error}</Alert>
-  //     </div>
-  //   );
-  // }
-  // if (!products.length) {
-  //   return (
-  //     <div className={styles.wrapper}>
-  //       <div>Ничего не найдено!</div>
-  //     </div>
-  //   );
-  // }
-
   return (
     <div className={styles.wrapper}>
-      <div className={styles.products}>
-        {products.map((product: ProductType) => {
-          const { title, price, image, id } = product;
-          return (
-            <li className={styles.product} key={id}>
-              <div className={styles.product_image} onClick={() => navigate(`${PRODUCT_DESCRIPTION}/${id}`)}>
-                <img src={image} alt={title} />
-              </div>
-              <div className={styles.delete_button}>
-                <img
-                  src={deleteIcon}
-                  alt="Кнопка удаления"
-                  onClick={() => {
-                    setConfirmModalIsOpen(true);
-                    setDeleteId(id);
-                  }}
+      {isLoad ? (
+        <Spin />
+      ) : error ? (
+        <Alert type="error" message={error} />
+      ) : !token ? (
+        <div>Авторизуйтесь!</div>
+      ) : !products.length ? (
+        <div>Ничего не найдено!</div>
+      ) : (
+        <div className={styles.products}>
+          {products.map((product: ProductType) => {
+            const { title, price, image, id } = product;
+            return (
+              <li className={styles.product} key={id}>
+                <div className={styles.product_image} onClick={() => navigate(`${PRODUCT_DESCRIPTION}/${id}`)}>
+                  <img src={image} alt={title} />
+                </div>
+                <div className={styles.delete_button}>
+                  <img
+                    src={deleteIcon}
+                    alt="Кнопка удаления"
+                    onClick={() => {
+                      setConfirmModalIsOpen(true);
+                      setDeleteId(id);
+                    }}
+                  />
+                </div>
+                <DeleteConfirm
+                  onDeleteConfirm={onDelete}
+                  onClose={() => setConfirmModalIsOpen(false)}
+                  isOpen={confirmModalIsOpen}
                 />
-              </div>
-              <DeleteConfirm
-                onDeleteConfirm={onDelete}
-                onClose={() => setConfirmModalIsOpen(false)}
-                isOpen={confirmModalIsOpen}
-              />
-              <div className={styles.product_text}>{title}</div>
-              <div className={styles.product_text}>{+price - 0} тыс.</div>
-              <div className={styles.edit_button} onClick={() => navigate(`${EDIT_PRODUCT}/${id}`)}>
-                Редактировать
-              </div>
-              <div className={styles.add_cart_button} onClick={() => onClickShopCartButton(product)}>
-                Добавить в корзину
-              </div>
-              <ShopCartAlert shopCartAlert={shopCartAlert} />
-            </li>
-          );
-        })}
-      </div>
+                <div className={styles.product_text}>{title}</div>
+                <div className={styles.product_text}>{+price - 0} тыс.</div>
+                <div className={styles.edit_button} onClick={() => navigate(`${EDIT_PRODUCT}/${id}`)}>
+                  Редактировать
+                </div>
+                <div className={styles.add_cart_button} onClick={() => onClickShopCartButton(product)}>
+                  Добавить в корзину
+                </div>
+                <ShopCartAlert shopCartAlert={shopCartAlert} />
+              </li>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

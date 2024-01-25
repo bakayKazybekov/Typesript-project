@@ -1,5 +1,6 @@
+import { LoadingOutlined } from '@ant-design/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Alert, CircularProgress } from '@mui/material';
+import { Alert, Spin } from 'antd';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -32,16 +33,14 @@ const CreateProductComponent: React.FC<CreateProductProps> = ({ onSubmit, onImag
   if (isLoad) {
     return (
       <div className={styles.wrapper}>
-        <div className="loading">
-          <CircularProgress />
-        </div>
+        <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
       </div>
     );
   }
   if (error) {
     return (
       <div className={styles.wrapper}>
-        <Alert severity="error">{error}</Alert>
+        <Alert type="error" message={error} />
       </div>
     );
   }

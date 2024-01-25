@@ -3,3 +3,4 @@ export const avatar =
 export const deleteIcon = 'https://www.svgrepo.com/download/73995/delete.svg';
 export const upArrowIcon = 'https://cdn-icons-png.flaticon.com/128/626/626075.png';
 export const downArrowIcon = 'https://cdn-icons-png.flaticon.com/128/608/608258.png';
+export const menuButton = 'https://cdn.icon-icons.com/icons2/2582/PNG/512/menu_icon_153999.png';

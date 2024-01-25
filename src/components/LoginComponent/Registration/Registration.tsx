@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { registerScheme } from '../../../utils/scheme';
 import { RegisterData, RegisterProps } from '../types';
 import styles from '../Login.module.scss';
-import { Alert, CircularProgress } from '@mui/material';
 import { BASE_ROUTER } from '../../../consts/paths';
+import { Alert, Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 type RegisterFieldsType = {
   name: string;
@@ -33,9 +34,7 @@ const Registration: React.FC<RegisterProps> = ({ setIsRegister, onSubmit, isLoad
   if (isLoad) {
     return (
       <div className={styles.container}>
-        <div className={styles.loading}>
-          <CircularProgress />
-        </div>
+        <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
       </div>
     );
   }
@@ -87,9 +86,7 @@ const Registration: React.FC<RegisterProps> = ({ setIsRegister, onSubmit, isLoad
           </label> */}
           {error && (
             <div className={styles.container}>
-              <Alert variant="outlined" severity="error">
-                {error}
-              </Alert>
+              <Alert type="error" message={error} />
             </div>
           )}
           <div className={styles.login_form_buttons}>

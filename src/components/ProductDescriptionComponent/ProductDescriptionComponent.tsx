@@ -1,4 +1,5 @@
-import { Alert, CircularProgress } from '@mui/material';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Alert, Spin } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { BASE_ROUTER } from '../../consts/paths';
@@ -15,16 +16,14 @@ const ProductDescriptionComponent: React.FC<ProductDescriptionProps> = ({ produc
   if (isLoad) {
     return (
       <div className={styles.wrapper}>
-        <div className={styles.loading}>
-          <CircularProgress />
-        </div>
+        <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
       </div>
     );
   }
   if (error) {
     return (
       <div className={styles.wrapper}>
-        <Alert severity="error">{error}</Alert>
+        <Alert type="error" message={error} />
       </div>
     );
   }

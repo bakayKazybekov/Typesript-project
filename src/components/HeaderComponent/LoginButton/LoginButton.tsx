@@ -4,7 +4,7 @@ import { LOGIN } from '../../../consts/paths';
 import { useAppDispatch, useAppSelector } from '../../../hook';
 import { avatar } from '../../../images';
 import { setInAccount } from '../../../store/login/slice';
-import styles from './LoginButton.module.scss';
+import styles from '../Header.module.scss';
 
 const LoginButton: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -16,7 +16,6 @@ const LoginButton: React.FC = () => {
       dispatch(setInAccount(false));
       localStorage.removeItem('token');
     }
-    console.log('logout');
   }, [dispatch, inAccount]);
 
   if (token) {
