@@ -86,7 +86,7 @@ const ProductsList: React.FC<ProductsListProps> = ({
                 <img src={deleteIcon} alt="Кнопка удаления" onClick={() => navigate(DELETE_CONFIRM + `/${id}`)} />
               </div>
               <div className={styles.product_text}>{title}</div>
-              <div className={styles.product_text}>{price} тыс.</div>
+              <div className={styles.product_text}>{+price - 0} тыс.</div>
               <div className={styles.edit_button} onClick={() => navigate(`${EDIT_PRODUCT}/${id}`)}>
                 Редактировать
               </div>

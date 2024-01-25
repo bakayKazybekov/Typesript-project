@@ -3,11 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ProductFormValues } from '../../Types/types';
 import CreateProductComponent from '../../components/CreateProductComponent/CreateProductComponent';
 import { useAppDispatch, useAppSelector } from '../../hook';
-import {
-  createProductAction,
-  editProductAction,
-  getProductByIdAction,
-} from '../../store/product/actions';
+import { createProductAction, editProductAction, getProductByIdAction } from '../../store/product/actions';
 
 const initialValues: ProductFormValues = {
   title: '',
@@ -18,9 +14,7 @@ const initialValues: ProductFormValues = {
 const CreateProductContainer = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { product, isLoad, error } = useAppSelector(
-    (state) => state.productReducer,
-  );
+  const { product, isLoad, error } = useAppSelector((state) => state.productReducer);
   const { productId } = useParams();
   const [values, setValues] = useState(initialValues);
   const [image, setImage] = useState<string>();
@@ -33,7 +27,10 @@ const CreateProductContainer = () => {
 
   useEffect(() => {
     if (productId && product) {
-      setValues(product);
+      setValues({
+        ...product,
+        price: `${+product.price - 0}`,
+      });
       setImage(product.image);
     }
   }, [product, productId]);
