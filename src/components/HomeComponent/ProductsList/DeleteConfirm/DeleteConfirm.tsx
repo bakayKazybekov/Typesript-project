@@ -1,38 +1,39 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { BASE_ROUTER } from '../../../../consts/paths';
-import { useAppDispatch } from '../../../../hook';
-import { deleteProductAction, getProductAction } from '../../../../store/product/actions';
+import React from 'react';
 import styles from './DeleteConfirm.module.scss';
 
-const DeleteConfirm = () => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const { deleteId } = useParams();
+type DeleteConfirmProps = {
+  onDeleteConfirm: () => void;
+  onClose: () => void;
+  isOpen: boolean;
+};
 
-  const onDelete = (id?: string) => {
-    if (id) {
-      dispatch(deleteProductAction({ navigate, id }))
-        .then(() => dispatch(getProductAction()))
-        .catch(() => 'Произошла ошибка');
-    }
-  };
-
+const DeleteConfirm: React.FC<DeleteConfirmProps> = ({ onDeleteConfirm, onClose, isOpen }) => {
   return (
-    <div>
-      <div className={styles.delete_wrapper}>
-        <div className={styles.delete_content}>
-          <p>Вы уверены что хотите удалить этот товар?</p>
-          <div className={styles.delete_buttons}>
-            <button className={styles.close_button} onClick={() => navigate(BASE_ROUTER)}>
-              Отмена
-            </button>
-            <button className={styles.confirm_button} onClick={() => onDelete(deleteId)}>
-              Удалить
-            </button>
+    <>
+      {isOpen && (
+        <div>
+          <div className={styles.delete_wrapper}>
+            <div className={styles.delete_content}>
+              <p>Вы уверены что хотите удалить этот товар?</p>
+              <div className={styles.delete_buttons}>
+                <button className={styles.close_button} onClick={onClose}>
+                  Отмена
+                </button>
+                <button
+                  className={styles.confirm_button}
+                  onClick={() => {
+                    onDeleteConfirm();
+                    onClose();
+                  }}
+                >
+                  Удалить
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

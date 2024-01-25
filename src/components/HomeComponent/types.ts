@@ -6,6 +6,10 @@ export type HomeComponentProps = ProductsListProps & InteractionProps;
 export type ProductsListProps = {
   products: ProductType[];
   addCart: (product: ProductType) => void;
+  onDelete: () => void;
+  setDeleteId: (id: number) => void;
+  confirmModalIsOpen: boolean;
+  setConfirmModalIsOpen: (state: boolean) => void;
   shopCartAlert: boolean;
   onClickShopCartButton: (product: ProductType) => void;
   token: string | null;

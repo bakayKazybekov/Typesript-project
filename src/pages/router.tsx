@@ -2,13 +2,11 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HeaderComponent from '../components/HeaderComponent/HeaderComponent';
 import Navigation from '../components/HeaderComponent/Navigation/Navigation';
-import DeleteConfirm from '../components/HomeComponent/ProductsList/DeleteConfirm/DeleteConfirm';
 import {
   ABOUT,
   BASE_ROUTER,
   CONTACTS,
   CREATE_PRODUCT,
-  DELETE_CONFIRM,
   EDIT_PRODUCT,
   LOGIN,
   PRODUCT_DESCRIPTION,
@@ -63,7 +61,6 @@ const Router: React.FC = () => (
       <Route path={EDIT_PRODUCT + '/:productId'} element={<CreateProductPage />} />
       <Route path={PRODUCT_DESCRIPTION + '/:productDescId'} element={<ProductDescriptionPage />} />
       <Route path={LOGIN} element={<LoginPage />} />
-      <Route path={DELETE_CONFIRM + '/:deleteId'} element={<DeleteConfirm />} />
     </Routes>
   </BrowserRouter>
 );

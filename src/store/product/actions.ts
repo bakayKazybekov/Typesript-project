@@ -1,12 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosInstance } from '../../api';
 import { BASE_ROUTER } from '../../consts/paths';
-import {
-  ProductType,
-  editProductActionArgs,
-  createProductActionArgs,
-  deleteProductActionArgs,
-} from '../../Types/types';
+import { ProductType, editProductActionArgs, createProductActionArgs } from '../../Types/types';
 
 const getProductAction = createAsyncThunk<ProductType[], undefined, { rejectValue: string }>(
   'product/getProductAction',
@@ -57,12 +52,11 @@ const createProductAction = createAsyncThunk<undefined, createProductActionArgs,
   },
 );
 
-const deleteProductAction = createAsyncThunk<undefined, deleteProductActionArgs, { rejectValue: string }>(
+const deleteProductAction = createAsyncThunk<undefined, number, { rejectValue: string }>(
   'product/deleteProductAction',
-  async ({ navigate, id }, thunkAPI) => {
+  async (id, thunkAPI) => {
     try {
       await axiosInstance.delete(`product/${id}/`);
-      navigate(BASE_ROUTER);
     } catch (e) {
       return thunkAPI.rejectWithValue('Произошла ошибка при удалении товара!');
     }
