@@ -14,7 +14,6 @@ enum AlertState {
 
 const Navigation: React.FC = () => {
   const [navIsOpen, setNavIsOpen] = useState<boolean>(false);
-  console.log('navIsOpen', navIsOpen);
 
   const links = [
     { link: BASE_ROUTER, name: 'Главная' },
@@ -42,7 +41,7 @@ const Navigation: React.FC = () => {
             <img src={menuButton} alt="menu-button" />
           </div>
         </div>
-        <Transition in={navIsOpen} timeout={200}>
+        <Transition in={navIsOpen} timeout={300}>
           {(state: AlertState) => (
             <header className={`${styles.adaptive_nav_wrapper} ${styles[`menu_wrapper_${state}`]}`}>
               <nav className={`${styles.adaptive_navigate} ${styles[`menu_${state}`]}`}>

@@ -87,6 +87,9 @@
     color: $mainColor;
     background: $secondColor;
   }
+  &_error {
+    color: rgb(212, 51, 51);
+  }
 }
 
 

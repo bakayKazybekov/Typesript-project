@@ -32,13 +32,13 @@ function HomeContainer() {
     if (inAccount) dispatch(getProductAction());
   }, [dispatch, inAccount]);
 
-  const onDelete = () => {
+  const onDelete = useCallback(() => {
     if (deleteId) {
       dispatch(deleteProductAction(deleteId))
         .then(() => dispatch(getProductAction()))
         .catch(() => 'Произошла ошибка');
     }
-  };
+  }, [dispatch, deleteId]);
 
   const addCart = (product: ProductType) => {
     const getLocalProducts: ShopCartProductType[] = JSON.parse(localStorage.getItem('products') ?? '[]');

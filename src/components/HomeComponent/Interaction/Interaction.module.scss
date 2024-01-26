@@ -146,7 +146,6 @@
   }
   .sorting {
     gap: 20px;
-    font-size: 10px;
   }
   .sorting_title {
     font-size: 10px;
@@ -178,7 +177,6 @@
   }
   .sorting {
     gap: 20px;
-    font-size: 8px;
   }
   .sorting_title {
     font-size: 8px;
@@ -197,5 +195,31 @@
   .wtihout_filters_button {
     color: #1e9245;
     font-size: 8px;
+  }
+}
+
+@media (max-width: 279px) {
+  .search_input {
+    width: 180px;
+  }
+  .sorting {
+    gap: 10px;
+  }
+  .sorting_title {
+    font-size: 6px;
+  }
+  .sorting_buttons {
+    gap: 20px;
+    font-size: 6px;
+  }
+  .sorting_section {
+    gap: 1px;
+  }
+  .icon_wrapper {
+    width: 5px;
+    height: 5px;
+  }
+  .wtihout_filters_button {
+    font-size: 6px;
   }
 }

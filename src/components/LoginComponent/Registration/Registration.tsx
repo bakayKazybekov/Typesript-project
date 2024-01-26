@@ -58,7 +58,7 @@ const Registration: React.FC<RegisterProps> = ({ setIsRegister, onSubmit, isLoad
                   placeholder={placeholder}
                   {...register('username')}
                 />
-                <span>{errors?.username?.message}</span>
+                <span className={styles.login_form_error}>{errors?.username?.message}</span>
               </label>
             );
           })}
