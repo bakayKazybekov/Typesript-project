@@ -44,6 +44,4 @@ export type ProductState = {
   error?: string;
 };
 
-export type LoginState = Pick<ProductState, 'isLoad' | 'error'> & {
-  inAccount: boolean;
-};
+export type LoginState = Pick<ProductState, 'isLoad' | 'error'>;

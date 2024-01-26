@@ -10,6 +10,7 @@ import DeleteConfirm from './DeleteConfirm/DeleteConfirm';
 import styles from './ProductList.module.scss';
 import ShopCartAlert from './ShopCartAlert/ShopCartAlert';
 import ProductSkeleton from './ProductSkeleton/ProductSkeleton';
+import { useAppSelector } from '../../../hook';
 
 const ProductsList: React.FC<ProductsListProps> = ({
   products,
@@ -20,23 +21,22 @@ const ProductsList: React.FC<ProductsListProps> = ({
   shopCartAlert,
   onClickShopCartButton,
   token,
-  isLoad,
-  error,
 }) => {
-  console.log('productsList Render');
+  // console.log('productsList Render');
 
   const navigate = useNavigate();
+  const { isLoad, error } = useAppSelector((state) => state.productReducer);
 
   return (
     <div className={styles.wrapper}>
-      {isLoad ? (
-        <ProductSkeleton productsLength={products.length} />
-      ) : error ? (
+      {error ? (
         <Alert type="error" message={error} />
       ) : !token ? (
         <div>Авторизуйтесь!</div>
       ) : !products.length ? (
         <div>Ничего не найдено!</div>
+      ) : isLoad ? (
+        <ProductSkeleton productsLength={products.length} />
       ) : (
         <div className={styles.products}>
           {products.map((product: ProductType) => {

@@ -12,8 +12,6 @@ export type ProductsListProps = {
   shopCartAlert: boolean;
   onClickShopCartButton: (product: ProductType) => void;
   token: string | null;
-  isLoad: boolean;
-  error?: string;
 };
 
 export type InteractionProps = {

@@ -1,22 +1,19 @@
 import React, { useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LOGIN } from '../../../consts/paths';
-import { useAppDispatch, useAppSelector } from '../../../hook';
 import { avatar } from '../../../images';
-import { setInAccount } from '../../../store/login/slice';
 import styles from '../Header.module.scss';
 
 const LoginButton: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const { inAccount } = useAppSelector((state) => state.loginReducer);
+  const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
-  const onLogout = useCallback(() => {
-    if (inAccount) {
-      dispatch(setInAccount(false));
+  const onLogout = () => {
+    if (token) {
       localStorage.removeItem('token');
+      navigate(LOGIN);
     }
-  }, [dispatch, inAccount]);
+  };
 
   if (token) {
     return (
