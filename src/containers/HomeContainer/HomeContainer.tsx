@@ -5,6 +5,7 @@ import { ProductType, ShopCartProductType } from '../../Types/types';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import { setInAccount } from '../../store/login/slice';
 import _ from 'lodash';
+import { addShopCartProductsAction } from '../../store/shopCart/actions';
 
 function HomeContainer() {
   const dispatch = useAppDispatch();
@@ -32,30 +33,20 @@ function HomeContainer() {
     if (inAccount) dispatch(getProductAction());
   }, [dispatch, inAccount]);
 
-  const onDelete = () => {
+  const onDelete = useCallback(() => {
     if (deleteId) {
       dispatch(deleteProductAction(deleteId))
         .then(() => dispatch(getProductAction()))
-        .catch(() => 'Произошла ошибка');
+        .catch(() => dispatch(getProductAction()));
     }
-  };
+  }, [dispatch, deleteId]);
 
   const addCart = (product: ProductType) => {
-    const getLocalProducts: ShopCartProductType[] = JSON.parse(localStorage.getItem('products') ?? '[]');
-    const obj = {
-      ...product,
-      uniqueId: Math.random(),
-    };
-    const arr = [...getLocalProducts, obj];
-    localStorage.setItem('products', JSON.stringify(arr));
-  };
-
-  const onClickShopCartButton = (product: ProductType) => {
-    addCart(product);
+    dispatch(addShopCartProductsAction({ product: product.id, quantity: 1 }));
     setShopCartAlert(true);
     setTimeout(() => {
       setShopCartAlert(false);
-    }, 1000);
+    }, 500);
   };
 
   const filteredProducts = useMemo(() => {
@@ -108,7 +99,7 @@ function HomeContainer() {
       confirmModalIsOpen={confirmModalIsOpen}
       setConfirmModalIsOpen={setConfirmModalIsOpen}
       shopCartAlert={shopCartAlert}
-      onClickShopCartButton={onClickShopCartButton}
+      addCart={addCart}
       token={token}
       isLoad={isLoad}
       error={error}

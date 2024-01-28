@@ -1,5 +1,5 @@
 import 'react-loading-skeleton/dist/skeleton.css';
-import { Alert, Spin } from 'antd';
+import { Alert } from 'antd';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { EDIT_PRODUCT, PRODUCT_DESCRIPTION } from '../../../consts/paths';
@@ -9,7 +9,7 @@ import { ProductsListProps } from '../types';
 import DeleteConfirm from './DeleteConfirm/DeleteConfirm';
 import styles from './ProductList.module.scss';
 import ShopCartAlert from './ShopCartAlert/ShopCartAlert';
-import { LoadingOutlined } from '@ant-design/icons';
+import ProductSkeleton from './ProductSkeleton/ProductSkeleton';
 
 const ProductsList: React.FC<ProductsListProps> = ({
   products,
@@ -18,17 +18,19 @@ const ProductsList: React.FC<ProductsListProps> = ({
   confirmModalIsOpen,
   setConfirmModalIsOpen,
   shopCartAlert,
-  onClickShopCartButton,
+  addCart,
   token,
   isLoad,
   error,
 }) => {
+  console.log('productsList Render');
+
   const navigate = useNavigate();
 
   return (
     <div className={styles.wrapper}>
       {isLoad ? (
-        <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
+        <ProductSkeleton productsLength={products.length} />
       ) : error ? (
         <Alert type="error" message={error} />
       ) : !token ? (
@@ -64,7 +66,7 @@ const ProductsList: React.FC<ProductsListProps> = ({
                 <div className={styles.edit_button} onClick={() => navigate(`${EDIT_PRODUCT}/${id}`)}>
                   Редактировать
                 </div>
-                <div className={styles.add_cart_button} onClick={() => onClickShopCartButton(product)}>
+                <div className={styles.add_cart_button} onClick={() => addCart(product)}>
                   Добавить в корзину
                 </div>
                 <ShopCartAlert shopCartAlert={shopCartAlert} />

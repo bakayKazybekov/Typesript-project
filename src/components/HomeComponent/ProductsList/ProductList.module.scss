@@ -1,6 +1,7 @@
 @import '../../../variables/variables.scss';
 
 .wrapper {
+  width: 95vw;
   margin: 110px auto 40px;
   text-align: center;
   font-size: 25px;
@@ -76,7 +77,7 @@
   font-weight: $fontWeight500;
 }
 
-@media (max-width: 1540px) {
+@media (max-width: 1740px) {
   .products {
     grid-template-columns: repeat(5, 1fr);
   }
@@ -142,7 +143,7 @@
   }
   .create_button {
     padding: 8px 30px;
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 
@@ -161,7 +162,7 @@
     height: 140px;
   }
   .create_button {
-    font-size: 18px;
+    font-size: 14px;
   }
   .product_text {
     font-size: 11px;
@@ -183,13 +184,35 @@
     height: 100px;
   }
   .create_button {
-    font-size: 15px;
+    font-size: 12px;
+  }
+  .product_text {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 279px) {
+  .product {
+    max-width: 100px;
+    padding: 15px 10px;
+    gap: 10px;
+  }
+  .delete_button {
+    width: 12px;
+    height: 12px;
+  }
+  .product_image {
+    width: 80px;
+    height: 80px;
+  }
+  .create_button {
+    font-size: 10px;
   }
   .product {
     padding: 10px;
     gap: 5px;
   }
   .product_text {
-    font-size: 9px;
+    font-size: 6px;
   }
 }
