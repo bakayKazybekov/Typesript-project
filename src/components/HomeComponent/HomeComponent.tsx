@@ -17,8 +17,6 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
   shopCartAlert,
   addCart,
   token,
-  isLoad,
-  error,
 }) => {
   return (
     <div className={styles.wrapper}>
@@ -32,8 +30,6 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
         shopCartAlert={shopCartAlert}
         addCart={addCart}
         token={token}
-        isLoad={isLoad}
-        error={error}
       />
       <CreateButton token={token} />
     </div>

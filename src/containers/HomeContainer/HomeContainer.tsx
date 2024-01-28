@@ -3,7 +3,6 @@ import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import HomeComponent from '../../components/HomeComponent/HomeComponent';
 import { ProductType, ShopCartProductType } from '../../Types/types';
 import { useAppDispatch, useAppSelector } from '../../hook';
-import { setInAccount } from '../../store/login/slice';
 import _ from 'lodash';
 import { addShopCartProductsAction } from '../../store/shopCart/actions';
 
@@ -19,19 +18,13 @@ function HomeContainer() {
   const [confirmModalIsOpen, setConfirmModalIsOpen] = useState<boolean>(false);
 
   const { products, isLoad, error } = useAppSelector((state) => state.productReducer);
-  const { inAccount } = useAppSelector((state) => state.loginReducer);
+  // console.log('products', products);
 
   const token = localStorage.getItem('token');
 
   useEffect(() => {
-    if (token) {
-      dispatch(setInAccount(true));
-    }
+    if (token) dispatch(getProductAction());
   }, [dispatch, token]);
-
-  useEffect(() => {
-    if (inAccount) dispatch(getProductAction());
-  }, [dispatch, inAccount]);
 
   const onDelete = useCallback(() => {
     if (deleteId) {
@@ -42,6 +35,7 @@ function HomeContainer() {
   }, [dispatch, deleteId]);
 
   const addCart = (product: ProductType) => {
+
     dispatch(addShopCartProductsAction({ product: product.id, quantity: 1 }));
     setShopCartAlert(true);
     setTimeout(() => {
@@ -101,8 +95,6 @@ function HomeContainer() {
       shopCartAlert={shopCartAlert}
       addCart={addCart}
       token={token}
-      isLoad={isLoad}
-      error={error}
     />
   );
 }

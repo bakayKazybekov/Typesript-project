@@ -17,6 +17,7 @@
   border: $border;
   background-color: #fff;
   font-size: 20px;
+  cursor: pointer;
 }
 
 .back_button_wrapper {
@@ -51,7 +52,6 @@
     align-items: center;
     gap: 5px;
     &_error {
-      cursor: pointer;
       color: red;
     }
   }
@@ -86,12 +86,12 @@
     font-size: $fontSize24;
     color: $mainColor;
     background: $secondColor;
+    cursor: pointer;
   }
   &_error {
     color: rgb(212, 51, 51);
   }
 }
-
 
 @media (max-width: 1240px) {
   .login_wrapper {

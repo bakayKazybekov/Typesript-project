@@ -38,6 +38,12 @@ const Registration: React.FC<RegisterProps> = ({ setIsRegister, onSubmit, isLoad
       </div>
     );
   }
+
+  const authFields = [
+    { key: 'username', placeholder: 'Введите логин/email', type: 'text' },
+    { key: 'password', placeholder: 'Введите пароль', type: 'password' },
+  ];
+
   return (
     <div className={styles.container}>
       <div className={styles.back_button_wrapper}>
@@ -48,21 +54,7 @@ const Registration: React.FC<RegisterProps> = ({ setIsRegister, onSubmit, isLoad
       <div className={styles.login_wrapper}>
         <h3 className={styles.login_title}>Регистрация</h3>
         <form className={styles.login_form} onSubmit={handleSubmit(onSubmit)}>
-          {registerFields.map(({ name, placeholder, type }) => {
-            console.log(name);
-            return (
-              <label className={styles.login_form_label}>
-                <input
-                  type={type}
-                  className={styles.login_form_input}
-                  placeholder={placeholder}
-                  {...register('username')}
-                />
-                <span className={styles.login_form_error}>{errors?.username?.message}</span>
-              </label>
-            );
-          })}
-          {/* <label className={styles.login_form_label}>
+          <label className={styles.login_form_label}>
             <input className={styles.login_form_input} placeholder={'Введите логин/email'} {...register('username')} />
             <span>{errors?.username?.message}</span>
           </label>
@@ -83,7 +75,7 @@ const Registration: React.FC<RegisterProps> = ({ setIsRegister, onSubmit, isLoad
               {...register('confirmPassword')}
             />
             <span>{errors?.confirmPassword?.message}</span>
-          </label> */}
+          </label>
           {error && (
             <div className={styles.container}>
               <Alert type="error" message={error} />

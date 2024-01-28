@@ -5,14 +5,7 @@ import { initialState } from './initialState';
 const loginSlice = createSlice({
   name: 'login',
   initialState,
-  reducers: {
-    setInAccount: (state, action) => {
-      return {
-        ...state,
-        inAccount: action.payload,
-      };
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(registerAction.fulfilled, (state) => {
@@ -43,5 +36,3 @@ const loginSlice = createSlice({
 });
 
 export { loginSlice };
-
-export const { setInAccount } = loginSlice.actions;
