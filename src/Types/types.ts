@@ -7,8 +7,14 @@ export type ProductType = {
   id: number;
 };
 
-export type ShopCartProductType = ProductType & {
-  uniqueId: number;
+export type ShopCartProductType = {
+  product: ProductType;
+  quantity: number;
+};
+
+export type addShopCartProductType = {
+  product: number;
+  quantity: number;
 };
 
 export type createProductActionArgs = Omit<ProductType, 'id'> & {

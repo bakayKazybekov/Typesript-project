@@ -15,7 +15,7 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
   confirmModalIsOpen,
   setConfirmModalIsOpen,
   shopCartAlert,
-  onClickShopCartButton,
+  addCart,
   token,
   isLoad,
   error,
@@ -30,7 +30,7 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
         confirmModalIsOpen={confirmModalIsOpen}
         setConfirmModalIsOpen={setConfirmModalIsOpen}
         shopCartAlert={shopCartAlert}
-        onClickShopCartButton={onClickShopCartButton}
+        addCart={addCart}
         token={token}
         isLoad={isLoad}
         error={error}

@@ -39,7 +39,7 @@
 .product {
   width: 220px;
   @include displey-flex-column;
-  gap: 13px;
+  gap: 20px;
   align-items: center;
   border-radius: 20px;
   padding: 10px;
@@ -62,14 +62,29 @@
 }
 
 .product_text {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: $fontWeight500;
+}
+
+.quantity_action {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.quantity_button {
+  color: #fff;
+  font-size: 25px;
+  cursor: pointer;
+  padding: 3px 10px;
+  background-color: $secondColor;
+  border: none;
+  border-radius: 10px;
 }
 
 .delete_button {
   color: #f41e1e;
-  background: inherit;
-  border: none;
+  font-size: 16px;
   cursor: pointer;
 }
 
