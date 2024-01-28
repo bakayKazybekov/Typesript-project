@@ -10,7 +10,7 @@ export type ProductsListProps = {
   confirmModalIsOpen: boolean;
   setConfirmModalIsOpen: (state: boolean) => void;
   shopCartAlert: boolean;
-  onClickShopCartButton: (product: ProductType) => void;
+  addCart: (product: ProductType) => void;
   token: string | null;
 };
 

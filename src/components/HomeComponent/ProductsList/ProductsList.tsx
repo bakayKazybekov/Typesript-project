@@ -19,7 +19,7 @@ const ProductsList: React.FC<ProductsListProps> = ({
   confirmModalIsOpen,
   setConfirmModalIsOpen,
   shopCartAlert,
-  onClickShopCartButton,
+  addCart,
   token,
 }) => {
   // console.log('productsList Render');
@@ -66,7 +66,7 @@ const ProductsList: React.FC<ProductsListProps> = ({
                 <div className={styles.edit_button} onClick={() => navigate(`${EDIT_PRODUCT}/${id}`)}>
                   Редактировать
                 </div>
-                <div className={styles.add_cart_button} onClick={() => onClickShopCartButton(product)}>
+                <div className={styles.add_cart_button} onClick={() => addCart(product)}>
                   Добавить в корзину
                 </div>
                 <ShopCartAlert shopCartAlert={shopCartAlert} />
