@@ -3,9 +3,10 @@ import { Transition } from 'react-transition-group';
 import styles from './DeleteConfirm.module.scss';
 
 type DeleteConfirmProps = {
-  onDeleteConfirm: () => void;
+  confirmFunction: () => void;
   onClose: () => void;
   isOpen: boolean;
+  text: string;
 };
 
 enum AlertState {
@@ -15,7 +16,7 @@ enum AlertState {
   Exited = 'exited',
 }
 
-const DeleteConfirm: React.FC<DeleteConfirmProps> = ({ onDeleteConfirm, onClose, isOpen }) => {
+const DeleteConfirm: React.FC<DeleteConfirmProps> = ({ confirmFunction, onClose, isOpen, text }) => {
   return (
     <>
       <Transition in={isOpen} timeout={350} unmountOnExit={true}>
@@ -23,7 +24,7 @@ const DeleteConfirm: React.FC<DeleteConfirmProps> = ({ onDeleteConfirm, onClose,
           <div className={`${styles.delete} ${styles[`delete_${state}`]}`}>
             <div className={styles.delete_wrapper}>
               <div className={styles.delete_content}>
-                <p>Вы уверены что хотите удалить этот товар?</p>
+                <p>{text}</p>
                 <div className={styles.delete_buttons}>
                   <button className={styles.close_button} onClick={onClose}>
                     Отмена
@@ -31,7 +32,7 @@ const DeleteConfirm: React.FC<DeleteConfirmProps> = ({ onDeleteConfirm, onClose,
                   <button
                     className={styles.confirm_button}
                     onClick={() => {
-                      onDeleteConfirm();
+                      confirmFunction();
                       onClose();
                     }}
                   >

@@ -6,10 +6,10 @@ import { EDIT_PRODUCT, PRODUCT_DESCRIPTION } from '../../../consts/paths';
 import { deleteIcon } from '../../../images';
 import { ProductType } from '../../../Types/types';
 import { ProductsListProps } from '../types';
-import DeleteConfirm from './DeleteConfirm/DeleteConfirm';
+import DeleteConfirm from '../../Alerts/DeleteConfirm/DeleteConfirm';
 import styles from './ProductList.module.scss';
-import ShopCartAlert from './ShopCartAlert/ShopCartAlert';
-import ProductSkeleton from './ProductSkeleton/ProductSkeleton';
+import ShopCartAlert from '../../Alerts/ShopCartAlert/ShopCartAlert';
+import ProductSkeleton from '../../Alerts/ProductSkeleton/ProductSkeleton';
 import { useAppSelector } from '../../../hook';
 
 const ProductsList: React.FC<ProductsListProps> = ({
@@ -29,14 +29,14 @@ const ProductsList: React.FC<ProductsListProps> = ({
 
   return (
     <div className={styles.wrapper}>
-      {error ? (
+      {isLoad ? (
+        <ProductSkeleton productsLength={products.length} />
+      ) : error ? (
         <Alert type="error" message={error} />
       ) : !token ? (
         <div>Авторизуйтесь!</div>
       ) : !products.length ? (
         <div>Ничего не найдено!</div>
-      ) : isLoad ? (
-        <ProductSkeleton productsLength={products.length} />
       ) : (
         <div className={styles.products}>
           {products.map((product: ProductType) => {
@@ -57,12 +57,13 @@ const ProductsList: React.FC<ProductsListProps> = ({
                   />
                 </div>
                 <DeleteConfirm
-                  onDeleteConfirm={onDelete}
+                  confirmFunction={onDelete}
                   onClose={() => setConfirmModalIsOpen(false)}
                   isOpen={confirmModalIsOpen}
+                  text="Вы уверены что хотите удалить данный товар?"
                 />
                 <div className={styles.product_text}>{title}</div>
-                <div className={styles.product_text}>{+price - 0} тыс.</div>
+                <div className={styles.product_text}>{+price - 0} k</div>
                 <div className={styles.edit_button} onClick={() => navigate(`${EDIT_PRODUCT}/${id}`)}>
                   Редактировать
                 </div>

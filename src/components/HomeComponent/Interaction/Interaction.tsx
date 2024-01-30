@@ -4,8 +4,18 @@ import { downArrowIcon, upArrowIcon } from '../../../images';
 import { InteractionProps } from '../types';
 import styles from './Interaction.module.scss';
 
-const Interaction: React.FC<InteractionProps> = ({ onSubmitSearch, onChangeSearch, filters }) => {
-  const { register, handleSubmit } = useForm<{ search: string }>();
+const Interaction: React.FC<InteractionProps> = ({
+  onSubmitSearch,
+  onChangeSearch,
+  filters,
+  onResetSearch,
+  showResetButton,
+  priceSortingState,
+  dateSortingState,
+}) => {
+  console.log('showResetButton', showResetButton);
+
+  const { register, handleSubmit, resetField } = useForm<{ search: string }>();
 
   return (
     <div className={styles.wrapper}>
@@ -16,6 +26,18 @@ const Interaction: React.FC<InteractionProps> = ({ onSubmitSearch, onChangeSearc
           placeholder="Введите поисковик"
           {...register('search', { onChange: onChangeSearch })}
         />
+        {showResetButton && (
+          <button
+            className={styles.reset_button}
+            type="reset"
+            onClick={() => {
+              onResetSearch();
+              resetField('search');
+            }}
+          >
+            Очистить
+          </button>
+        )}
         <button className={styles.search_button}>Поиск</button>
       </form>
       <div className={styles.sorting}>
@@ -24,22 +46,23 @@ const Interaction: React.FC<InteractionProps> = ({ onSubmitSearch, onChangeSearc
           <section className={styles.sorting_section}>
             <p>Ценам</p>
             <div className={styles.icon_wrapper}>
-              <img alt="Up Arrow" onClick={() => filters('firstCheap')} src={upArrowIcon} />
-            </div>
-            <div className={styles.icon_wrapper}>
-              <img alt="Down Arrow" onClick={() => filters('firstExpensive')} src={downArrowIcon} />
+              {priceSortingState ? (
+                <img alt="Up Arrow" onClick={() => filters('firstCheap')} src={upArrowIcon} />
+              ) : (
+                <img alt="Down Arrow" onClick={() => filters('firstExpensive')} src={downArrowIcon} />
+              )}
             </div>
           </section>
           <section className={styles.sorting_section}>
             <p>Дате</p>
             <div className={styles.icon_wrapper}>
-              <img alt="Up Arrow" onClick={() => filters('firstNew')} src={upArrowIcon} />
-            </div>
-            <div className={styles.icon_wrapper}>
-              <img alt="Down Arrow" onClick={() => filters('firstOld')} src={downArrowIcon} />
+              {dateSortingState ? (
+                <img alt="Up Arrow" onClick={() => filters('firstNew')} src={upArrowIcon} />
+              ) : (
+                <img alt="Down Arrow" onClick={() => filters('firstOld')} src={downArrowIcon} />
+              )}
             </div>
           </section>
-          {/* DRY */}
           <button className={styles.wtihout_filters_button} onClick={() => filters('withoutFilter')}>
             Без фильтров
           </button>

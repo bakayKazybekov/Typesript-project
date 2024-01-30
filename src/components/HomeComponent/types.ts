@@ -18,6 +18,10 @@ export type InteractionProps = {
   onSubmitSearch: (data: { search: string }) => void;
   onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
   filters: (operator: string) => void;
+  onResetSearch: () => void;
+  showResetButton: boolean;
+  priceSortingState: boolean;
+  dateSortingState: boolean;
 };
 
 export type CreateButtonProps = Pick<ProductsListProps, 'token'>;

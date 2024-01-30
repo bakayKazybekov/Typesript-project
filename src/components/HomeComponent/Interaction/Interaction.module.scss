@@ -22,6 +22,12 @@
   outline: none;
 }
 
+.reset_button {
+  @include search-style;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
 .search_button {
   @include search-style;
   padding: 10px 30px;

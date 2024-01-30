@@ -15,31 +15,28 @@ import { ProductType, ShopCartProductType } from '../../Types/types';
 
 const ShopCartContainer = () => {
   const dispatch = useAppDispatch();
-  const [action, setAction] = useState<boolean>(false);
+  const [deleteId, setDeleteId] = useState<number>(0);
+  const [confirmModalIsOpen, setConfirmModalIsOpen] = useState<boolean>(false);
+  const [clearConfirmModalIsOpen, setClearConfirmModalIsOpen] = useState<boolean>(false);
+
   const { shopCart, isLoad, error } = useAppSelector((state) => state.shopCartReducer);
-  console.log('shopCartProducts', shopCart);
 
   useEffect(() => {
     dispatch(getShopCartProductsAction());
-  }, [dispatch, getShopCartProductsAction, action]);
+  }, [dispatch, getShopCartProductsAction]);
 
   const addCart = (product: ProductType) => {
     dispatch(addShopCartProductsAction({ product: product.id, quantity: 1 }))
       .then(() => dispatch(getShopCartProductsAction()))
       .catch(() => dispatch(getShopCartProductsAction()));
   };
-  // useEffect(() => {
-  //   const getProductsFromLocal = localStorage.getItem('products');
-  //   if (getProductsFromLocal) {
-  //     const products = JSON.parse(getProductsFromLocal);
-  //     setProducts(products);
-  //   }
-  // }, []);
 
-  const deleteFromCart = (id: number) => {
-    dispatch(deleteShopCartProductsAction(id))
-      .then(() => dispatch(getShopCartProductsAction()))
-      .catch(() => dispatch(getShopCartProductsAction()));
+  const deleteFromCart = () => {
+    if (deleteId) {
+      dispatch(deleteShopCartProductsAction(deleteId))
+        .then(() => dispatch(getShopCartProductsAction()))
+        .catch(() => dispatch(getShopCartProductsAction()));
+    }
   };
 
   const clearShopCart = () => {
@@ -55,7 +52,12 @@ const ShopCartContainer = () => {
       error={error}
       addCart={addCart}
       deleteFromCart={deleteFromCart}
+      setDeleteId={setDeleteId}
+      confirmModalIsOpen={confirmModalIsOpen}
+      setConfirmModalIsOpen={setConfirmModalIsOpen}
       clearShopCart={clearShopCart}
+      clearConfirmModalIsOpen={clearConfirmModalIsOpen}
+      setClearConfirmModalIsOpen={setClearConfirmModalIsOpen}
     />
   );
 };

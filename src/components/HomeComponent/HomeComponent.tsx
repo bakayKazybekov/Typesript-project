@@ -9,6 +9,10 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
   onSubmitSearch,
   onChangeSearch,
   filters,
+  onResetSearch,
+  showResetButton,
+  priceSortingState,
+  dateSortingState,
   products,
   setDeleteId,
   onDelete,
@@ -20,7 +24,15 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
 }) => {
   return (
     <div className={styles.wrapper}>
-      <Interaction onSubmitSearch={onSubmitSearch} onChangeSearch={onChangeSearch} filters={filters} />
+      <Interaction
+        onSubmitSearch={onSubmitSearch}
+        onChangeSearch={onChangeSearch}
+        filters={filters}
+        onResetSearch={onResetSearch}
+        showResetButton={showResetButton}
+        priceSortingState={priceSortingState}
+        dateSortingState={dateSortingState}
+      />
       <ProductsList
         products={products}
         setDeleteId={setDeleteId}

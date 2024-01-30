@@ -10,7 +10,10 @@ function HomeContainer() {
   const dispatch = useAppDispatch();
 
   const [searchProducts, setSearchProducts] = useState<string>('');
+  const [showResetButton, setShowResetButton] = useState<boolean>(false);
   const [sortingOpertator, setSortingOperator] = useState('');
+  const [priceSortingState, setPriceSortingState] = useState<boolean>(false);
+  const [dateSortingState, setDateSortingState] = useState<boolean>(false);
 
   const [shopCartAlert, setShopCartAlert] = useState<boolean>(false);
 
@@ -18,10 +21,8 @@ function HomeContainer() {
   const [confirmModalIsOpen, setConfirmModalIsOpen] = useState<boolean>(false);
 
   const { products, isLoad, error } = useAppSelector((state) => state.productReducer);
-  // console.log('products', products);
 
   const token = localStorage.getItem('token');
-
   useEffect(() => {
     if (token) dispatch(getProductAction());
   }, [dispatch, token]);
@@ -35,8 +36,7 @@ function HomeContainer() {
   }, [dispatch, deleteId]);
 
   const addCart = (product: ProductType) => {
-
-    dispatch(addShopCartProductsAction({ product: product.id, quantity: 1 }));
+    dispatch(addShopCartProductsAction({ product: product.id, quantity: 0 }));
     setShopCartAlert(true);
     setTimeout(() => {
       setShopCartAlert(false);
@@ -48,7 +48,7 @@ function HomeContainer() {
 
     if (searchProducts) {
       return _.filter(filtered, (product) =>
-        _.startsWith(product.title.toLowerCase(), searchProducts.toLowerCase().trim()),
+        _.includes(product.title.toLowerCase(), searchProducts.toLowerCase().trim()),
       );
     }
 
@@ -69,17 +69,36 @@ function HomeContainer() {
   }, [products, searchProducts, sortingOpertator]);
 
   const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.value.length) {
+    if (e.target.value.length) {
+      setShowResetButton(true);
+    } else {
       setSearchProducts(e.target.value);
+      setShowResetButton(false);
     }
   };
 
   const onSubmitSearch = (data: { search: string }) => {
     setSearchProducts(data.search);
+    if (!data.search) setShowResetButton(false);
+  };
+
+  const onResetSearch = () => {
+    setSearchProducts('');
+    setShowResetButton(false);
   };
 
   const filters = (operator: string) => {
     setSortingOperator(operator);
+    if (operator === 'firstCheap' || operator === 'firstExpensive') {
+      setPriceSortingState(!priceSortingState);
+      setDateSortingState(false);
+    } else if (operator === 'firstNew' || operator === 'firstOld') {
+      setDateSortingState(!dateSortingState);
+      setPriceSortingState(false);
+    } else if (operator === 'withoutFilter') {
+      setPriceSortingState(false);
+      setDateSortingState(false);
+    }
   };
 
   return (
@@ -87,6 +106,10 @@ function HomeContainer() {
       onSubmitSearch={onSubmitSearch}
       onChangeSearch={onChangeSearch}
       filters={filters}
+      onResetSearch={onResetSearch}
+      showResetButton={showResetButton}
+      priceSortingState={priceSortingState}
+      dateSortingState={dateSortingState}
       products={filteredProducts}
       onDelete={onDelete}
       setDeleteId={setDeleteId}
