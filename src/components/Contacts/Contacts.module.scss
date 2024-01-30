@@ -8,7 +8,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
 }
 
 .links {
@@ -24,5 +23,35 @@
   cursor: pointer;
   img {
     @include image-style;
+  }
+}
+
+@media (max-width: 1180px) {
+  .links {
+    gap: 80px;
+  }
+  .link_wrapper {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 920px) {
+  .links {
+    gap: 60px;
+  }
+  .link_wrapper {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .links {
+    gap: 40px;
+  }
+  .link_wrapper {
+    width: 40px;
+    height: 40px;
   }
 }

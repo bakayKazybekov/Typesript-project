@@ -19,3 +19,30 @@
   font-family: $mainFont;
   font-size: 20px;
 }
+
+@media (max-width: 1180px) {
+  .title {
+    font-size: 38px;
+  }
+  .info {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 920px) {
+  .title {
+    font-size: 30px;
+  }
+  .info {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 24px;
+  }
+  .info {
+    font-size: 10px;
+  }
+}
