@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AboutUs from '../components/AboutUs/AboutUs';
+import Contacts from '../components/Contacts/Contacts';
 import HeaderComponent from '../components/HeaderComponent/HeaderComponent';
 import Navigation from '../components/HeaderComponent/Navigation/Navigation';
 import {
@@ -35,7 +37,7 @@ const Router: React.FC = () => (
         element={
           <>
             <HeaderComponent />
-            <div>О нас</div>
+            <AboutUs />
           </>
         }
       />
@@ -44,7 +46,7 @@ const Router: React.FC = () => (
         element={
           <>
             <HeaderComponent />
-            <div>Контакты</div>
+            <Contacts />
           </>
         }
       />

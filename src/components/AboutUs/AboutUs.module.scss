@@ -1,0 +1,21 @@
+@import '../../variables/variables.scss';
+
+.wrapper {
+  width: 90vw;
+  height: 80vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.title {
+  font-size: 48px;
+}
+
+.info {
+  font-family: $mainFont;
+  font-size: 20px;
+}

@@ -1,0 +1,28 @@
+@import '../../variables/variables.scss';
+
+.wrapper {
+  width: 90vw;
+  height: 80vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.links {
+  width: 90vw;
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+}
+
+.link_wrapper {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  img {
+    @include image-style;
+  }
+}
