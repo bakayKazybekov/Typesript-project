@@ -1,6 +1,6 @@
-@import '../../variables/variables.scss';
+@import '../../common';
 
-.wrapper {
+.shop-cart__wrapper {
   width: 93vw;
   margin: 85px auto 50px;
   @include displey-flex-column;
@@ -10,19 +10,19 @@
   font-size: 25px;
 }
 
-.header {
+.shop-cart__header {
   width: 100%;
   @include displey-flex-column;
   gap: 20px;
 }
 
-.shop_cart_title {
+.shop__cart__title {
   text-align: center;
   font-size: 32px;
   font-weight: 600;
 }
 
-.clear_button {
+.shop-cart__clear-button {
   align-self: end;
   background: inherit;
   border: none;
@@ -30,13 +30,13 @@
   cursor: pointer;
 }
 
-.products {
+.shop-cart__product-list {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 85px 50px;
 }
 
-.product {
+.shop-cart__product {
   width: 220px;
   @include displey-flex-column;
   gap: 20px;
@@ -44,11 +44,11 @@
   border-radius: 20px;
   padding: 10px;
 }
-.product:hover {
+.shop-cart__product:hover {
   box-shadow: 0px 0px 10px -5px;
 }
 
-.product_image {
+.product__image {
   width: 200px;
   height: 200px;
   border: solid 1px #eef2d1;
@@ -61,18 +61,18 @@
   }
 }
 
-.product_text {
+.product__text {
   font-size: 16px;
   font-weight: $fontWeight500;
 }
 
-.quantity_action {
+.quantity__action {
   display: flex;
   gap: 20px;
   align-items: center;
 }
 
-.quantity_button {
+.quantity__button {
   color: #fff;
   font-size: 25px;
   cursor: pointer;
@@ -82,123 +82,145 @@
   border-radius: 10px;
 }
 
-.delete_button {
+.shop-cart__delete-button {
   color: #f41e1e;
   font-size: 16px;
   cursor: pointer;
 }
 
 @media (max-width: 1640px) {
-  .products {
+  .shop-cart__product-list {
     grid-template-columns: repeat(5, 1fr);
   }
 }
 
 @media (max-width: 1380px) {
-  .product {
+  .shop-cart__product {
     width: 180px;
     gap: 13px;
   }
-  .product_image {
+  .product__image {
     width: 160px;
     height: 160px;
   }
-  .wrapper {
+  .shop-cart__wrapper {
     font-size: 18px;
   }
-  .shop_cart_title {
+  .shop__cart__title {
     font-size: 28px;
   }
-  .product_text {
+  .product__text {
     font-size: 13px;
   }
 }
 
 @media (max-width: 1180px) {
-  .wrapper {
+  .shop-cart__wrapper {
     font-size: 18px;
   }
-  .products {
+  .shop-cart__product-list {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
 @media (max-width: 920px) {
-  .wrapper {
+  .shop-cart__wrapper {
     margin-top: 50px;
   }
-  .product {
+  .shop-cart__product {
     border-radius: 15px;
     width: 150px;
     gap: 13px;
   }
-  .product_image {
+  .product__image {
     width: 130px;
     height: 130px;
   }
-  .shop_cart_title {
+  .shop__cart__title {
     font-size: 24px;
   }
-  .product_text {
+  .product__text {
     font-size: 11px;
+  }
+  .quantity__action {
+    gap: 15px;
+  }
+  .quantity__button {
+    font-size: 20px;
+    padding: 2px 8px;
+    border-radius: 8px;
+  }
+  .shop-cart__delete-button {
+    font-size: 12px;
   }
 }
 
 @media (max-width: 750px) {
-  .wrapper {
+  .shop-cart__wrapper {
     font-size: 16px;
     gap: 30px;
   }
-  .products {
+  .shop-cart__product-list {
     grid-template-columns: repeat(3, 1fr);
   }
-  .delete_button {
+  .shop-cart__delete-button {
     font-size: 12px;
   }
-  .clear_button {
+  .shop-cart__clear-button {
     font-size: 12px;
   }
 }
 
 @media (max-width: 580px) {
-  .wrapper {
+  .shop-cart__wrapper {
     margin-top: 35px;
     font-size: 14px;
     gap: 20px;
   }
-  .products {
+  .shop-cart__product-list {
     grid-template-columns: repeat(2, 1fr);
     gap: 40px;
   }
-  .shop_cart_title {
+  .shop__cart__title {
     font-size: 17px;
   }
 }
 
 @media (max-width: 380px) {
-  .wrapper {
+  .shop-cart__wrapper {
     font-size: 11px;
     gap: 0;
   }
-  .product {
+  .shop-cart__product {
     border-radius: 10px;
     width: 100px;
     gap: 13px;
   }
-  .product_image {
+  .product__image {
     width: 80px;
     height: 80px;
   }
-  .product_text {
+  .product__text {
     font-size: 8px;
   }
-  .shop_cart_title {
+  .shop__cart__title {
     font-size: 14px;
   }
-  .delete_button {
+  .shop-cart__delete-button {
     font-size: 8px;
   }
-  .clear_button {
+  .shop-cart__clear-button {
+    font-size: 8px;
+  }
+  .quantity__action {
+    gap: 10px;
+  }
+  .quantity__button {
+    font-size: 16px;
+    padding: 1px 5px;
+    border-radius: 5px;
+  }
+  .shop-cart__delete-button {
     font-size: 8px;
   }
 }

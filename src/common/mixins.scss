@@ -1,18 +1,3 @@
-$mainColor: #eef2d1;
-$secondColor: #595d41;
-
-$borderRadius10: 10px;
-$borderRadius20: 20px;
-
-$fontSize22: 22px;
-$fontSize24: 24px;
-
-$fontWeight400: 400;
-$fontWeight500: 500;
-
-$mainFont: Iowan Old Style;
-$border: 1px solid rgba(0, 0, 0, 0.3);
-
 @mixin displey-flex-column {
   display: flex;
   flex-direction: column;
@@ -42,11 +27,11 @@ $border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 @mixin login-button-style {
-  font-family: Iowan Old Style;
+  font-family: $mainFont;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: $fontWeight400;
   background: inherit;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border: $border;
   border-radius: 10px;
   padding: 10px 30px;
   cursor: pointer;
@@ -62,7 +47,7 @@ $border: 1px solid rgba(0, 0, 0, 0.3);
   @media (max-width: 640px) {
     border-radius: 5px;
     padding: 5px 15px;
-    font-size: 9px;
+    font-size: 10px;
   }
 }
 

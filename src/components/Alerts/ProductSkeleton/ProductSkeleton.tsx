@@ -6,8 +6,6 @@ type ProductSkeletonProps = {
 };
 
 const ProductSkeleton: React.FC<ProductSkeletonProps> = ({ productsLength }) => {
-  console.log('products', productsLength);
-
   return (
     <div className="skeletons__wrapper">
       <div className="skeletons">

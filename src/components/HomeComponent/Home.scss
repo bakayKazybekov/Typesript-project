@@ -1,6 +1,6 @@
-@import '../../variables/variables.scss';
+@import '../../common';
 
-.wrapper {
+.home__wrapper {
   @include displey-flex-column;
   display: flex;
   width: 95vw;

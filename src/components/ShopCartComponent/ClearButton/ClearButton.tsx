@@ -1,6 +1,6 @@
 import React from 'react';
 import DeleteConfirm from '../../Alerts/DeleteConfirm/DeleteConfirm';
-import styles from '../ShopCart.module.scss';
+import '../ShopCart.scss';
 
 type CearButtonProps = {
   clearShopCart: () => void;
@@ -11,7 +11,7 @@ type CearButtonProps = {
 const ClearButton: React.FC<CearButtonProps> = ({ clearShopCart, confirmModalIsOpen, setConfirmModalIsOpen }) => {
   return (
     <>
-      <button className={styles.clear_button} onClick={() => setConfirmModalIsOpen(true)}>
+      <button className="shop-cart__clear-button" onClick={() => setConfirmModalIsOpen(true)}>
         Очистить корзину
       </button>
       <DeleteConfirm

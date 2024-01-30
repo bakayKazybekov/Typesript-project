@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LOGIN } from '../../../consts/paths';
 import { avatar } from '../../../images';
-import styles from '../Header.module.scss';
+import '../Header.scss';
 
 const LoginButton: React.FC = () => {
   const navigate = useNavigate();
@@ -17,17 +17,17 @@ const LoginButton: React.FC = () => {
 
   if (token) {
     return (
-      <div className={styles.logout_wrapper}>
-        <img className={styles.avatar_image} src={avatar} alt="avatar" />
-        <button className={styles.logout_button} onClick={onLogout}>
+      <div className="logout__wrapper">
+        <img className="avatar__image" src={avatar} alt="avatar" />
+        <button className="logout__button" onClick={onLogout}>
           ВЫЙТИ
         </button>
       </div>
     );
   }
   return (
-    <div className={styles.logout_wrapper}>
-      <Link className={styles.login_button} to={LOGIN}>
+    <div className="logout__wrapper">
+      <Link className="login__button" to={LOGIN}>
         ВОЙТИ
       </Link>
     </div>

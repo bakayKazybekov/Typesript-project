@@ -2,7 +2,7 @@ import { Alert } from 'antd';
 import React from 'react';
 import DeleteConfirm from '../../Alerts/DeleteConfirm/DeleteConfirm';
 import ProductSkeleton from '../../Alerts/ProductSkeleton/ProductSkeleton';
-import styles from '../ShopCart.module.scss';
+import '../ShopCart.scss';
 import { ShopCartProductListProps } from '../types';
 
 const ShopCartProductList: React.FC<ShopCartProductListProps> = ({
@@ -27,27 +27,27 @@ const ShopCartProductList: React.FC<ShopCartProductListProps> = ({
       ) : !shopCartProducts.length ? (
         <div>Корзина пуста!</div>
       ) : (
-        <ul className={styles.products}>
+        <ul className="shop-cart__product-list">
           {shopCartProducts.map((shopCart) => {
             const { product, quantity } = shopCart;
 
             const { title, price, image, id } = product;
             return (
-              <li className={styles.product} key={id}>
-                <div className={styles.product_image}>
+              <li className="shop-cart__product" key={id}>
+                <div className="product__image">
                   <img src={image} alt={title} />
                 </div>
-                <div className={styles.product_text}>{title}</div>
-                <div className={styles.product_text}>{+price * quantity} k</div>
-                <div className={styles.quantity_action}>
-                  <button className={styles.quantity_button}>-</button>
-                  <div className={styles.product_text}>{quantity}</div>
-                  <button className={styles.quantity_button} onClick={() => addCart(product)}>
+                <div className="product__text">{title}</div>
+                <div className="product__text">{+price * quantity} k</div>
+                <div className="quantity__action">
+                  <button className="quantity__button">-</button>
+                  <div className="product__text">{quantity}</div>
+                  <button className="quantity__button" onClick={() => addCart(product)}>
                     +
                   </button>
                 </div>
                 <div
-                  className={styles.delete_button}
+                  className="shop-cart__delete-button"
                   onClick={() => {
                     setConfirmModalIsOpen(true);
                     setDeleteId(id);

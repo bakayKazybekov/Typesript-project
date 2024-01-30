@@ -1,6 +1,6 @@
-@import '../../variables/variables.scss';
+@import '../../common';
 
-.wrapper {
+.create-product__wrapper {
   @include displey-flex-column;
   width: 95vw;
   margin: 30px auto 30px;
@@ -8,23 +8,23 @@
   gap: 200px;
 }
 
-.back_button {
+.create-product__back {
   @include button-styles;
   align-self: start;
 }
 
-.container {
+.create-product__container {
   @include displey-flex-column;
 }
 
-.content {
+.create-product__content {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 200px;
 }
 
-.add_image {
+.create-product__add-image {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,26 +41,27 @@
   }
 }
 
-.create_product_form {
+.create-product__form {
   @include displey-flex-column;
   align-items: center;
   gap: 30px;
 }
 
-.form_label {
+.create-product__label {
   @include displey-flex-column;
-  &_error {
-    text-align: center;
-    color: red;
-  }
 }
 
-.fields {
+.create-product__error {
+  text-align: center;
+  color: red;
+}
+
+.create-product__fields {
   display: flex;
   justify-content: center;
   flex-direction: column;
   gap: 60px;
-  &_input {
+  .create-product__field {
     width: 600px;
     border-radius: 10px;
     border: 1px solid rgba(106, 93, 93, 0.2);
@@ -72,43 +73,43 @@
   }
 }
 
-.save_button {
+.create-product__save {
   @include button-styles;
   align-self: end;
 }
 
 @media (max-width: 1510px) {
-  .fields {
+  .create-product__fields {
     gap: 40px;
-    &_input {
+    .create-product__field {
       width: 500px;
       padding: 10px 20px;
       font-size: 20px;
     }
   }
-  .add_image {
+  .create-product__add-image {
     width: 500px;
     height: 500px;
     font-size: 20px;
   }
-  .content {
+  .create-product__content {
     gap: 12vw;
   }
 }
 
 @media (max-width: 1220px) {
-  .wrapper {
+  .create-product__wrapper {
     gap: 12vh;
   }
-  .fields {
+  .create-product__fields {
     gap: 30px;
-    &_input {
+    .create-product__field {
       width: 400px;
       padding: 10px 20px;
       font-size: 16px;
     }
   }
-  .add_image {
+  .create-product__add-image {
     width: 400px;
     height: 400px;
     font-size: 16px;
@@ -116,15 +117,15 @@
 }
 
 @media (max-width: 980px) {
-  .fields {
+  .create-product__fields {
     gap: 20px;
-    &_input {
+    .create-product__field {
       width: 300px;
       padding: 10px 20px;
       font-size: 13px;
     }
   }
-  .add_image {
+  .create-product__add-image {
     width: 300px;
     height: 300px;
     font-size: 13px;
@@ -132,36 +133,36 @@
 }
 
 @media (max-width: 740px) {
-  .fields {
+  .create-product__fields {
     gap: 20px;
-    &_input {
+    .create-product__field {
       width: 300px;
       padding: 10px 20px;
       font-size: 13px;
     }
   }
-  .add_image {
+  .create-product__add-image {
     font-size: 13px;
   }
-  .save_button {
+  .create-product__save {
     align-self: center;
   }
-  .content {
+  .create-product__content {
     justify-content: center;
   }
 }
 
 @media (max-width: 480px) {
-  .fields {
+  .create-product__fields {
     gap: 15px;
-    &_input {
+    .create-product__field {
       width: 200px;
       padding: 8px 15px;
       border-radius: 8px;
       font-size: 10px;
     }
   }
-  .add_image {
+  .create-product__add-image {
     width: 200px;
     height: 200px;
     font-size: 10px;

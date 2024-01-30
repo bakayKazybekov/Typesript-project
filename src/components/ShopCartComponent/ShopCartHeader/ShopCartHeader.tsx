@@ -1,6 +1,6 @@
 import React from 'react';
 import DeleteConfirm from '../../Alerts/DeleteConfirm/DeleteConfirm';
-import styles from '../ShopCart.module.scss';
+import '../ShopCart.scss';
 import { ShopCartHeaderProps } from '../types';
 
 const ShopCartHeader: React.FC<ShopCartHeaderProps> = ({
@@ -9,9 +9,9 @@ const ShopCartHeader: React.FC<ShopCartHeaderProps> = ({
   clearShopCart,
 }) => {
   return (
-    <header className={styles.header}>
-      <div className={styles.shop_cart_title}>Корзина</div>
-      <button className={styles.clear_button} onClick={() => setClearConfirmModalIsOpen(true)}>
+    <header className="shop-cart__header">
+      <div className="shop__cart__title">Корзина</div>
+      <button className="shop-cart__clear-button" onClick={() => setClearConfirmModalIsOpen(true)}>
         Очистить корзину
       </button>
       <DeleteConfirm

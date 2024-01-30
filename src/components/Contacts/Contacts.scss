@@ -1,6 +1,6 @@
-@import '../../variables/variables.scss';
+@import '../../common';
 
-.wrapper {
+.contacts__wrapper {
   width: 90vw;
   height: 80vh;
   margin: 0 auto;
@@ -10,14 +10,14 @@
   align-items: center;
 }
 
-.links {
+.contacts__links {
   width: 90vw;
   display: flex;
   justify-content: center;
   gap: 100px;
 }
 
-.link_wrapper {
+.link__wrapper {
   width: 100px;
   height: 100px;
   cursor: pointer;
@@ -27,30 +27,30 @@
 }
 
 @media (max-width: 1180px) {
-  .links {
+  .contacts__links {
     gap: 80px;
   }
-  .link_wrapper {
+  .link__wrapper {
     width: 80px;
     height: 80px;
   }
 }
 
 @media (max-width: 920px) {
-  .links {
+  .contacts__links {
     gap: 60px;
   }
-  .link_wrapper {
+  .link__wrapper {
     width: 60px;
     height: 60px;
   }
 }
 
 @media (max-width: 480px) {
-  .links {
+  .contacts__links {
     gap: 40px;
   }
-  .link_wrapper {
+  .link__wrapper {
     width: 40px;
     height: 40px;
   }

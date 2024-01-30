@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { registerScheme } from '../../../utils/scheme';
 import { RegisterData, RegisterProps } from '../types';
-import styles from '../Login.module.scss';
+import '../Login.scss';
 import { BASE_ROUTER } from '../../../consts/paths';
 import { Alert, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
@@ -17,11 +17,11 @@ type RegisterFieldsType = {
 const Registration: React.FC<RegisterProps> = ({ setIsRegister, onSubmit, isLoad, error }) => {
   const navigate = useNavigate();
 
-  const registerFields: RegisterFieldsType[] = [
-    { name: 'username', placeholder: 'Введите логин/email', type: 'text' },
-    { name: 'password', placeholder: 'Введите пароль', type: 'password' },
-    { name: 'confirmPassword', placeholder: 'Подтвердите пароль', type: 'password' },
-  ];
+  // const registerFields: RegisterFieldsType[] = [
+  //   { name: 'username', placeholder: 'Введите логин/email', type: 'text' },
+  //   { name: 'password', placeholder: 'Введите пароль', type: 'password' },
+  //   { name: 'confirmPassword', placeholder: 'Подтвердите пароль', type: 'password' },
+  // ];
 
   const {
     register,
@@ -31,65 +31,58 @@ const Registration: React.FC<RegisterProps> = ({ setIsRegister, onSubmit, isLoad
     resolver: yupResolver(registerScheme),
   });
 
-  if (isLoad) {
-    return (
-      <div className={styles.container}>
-        <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
-      </div>
-    );
-  }
-
-  const authFields = [
-    { key: 'username', placeholder: 'Введите логин/email', type: 'text' },
-    { key: 'password', placeholder: 'Введите пароль', type: 'password' },
-  ];
-
   return (
-    <div className={styles.container}>
-      <div className={styles.back_button_wrapper}>
-        <button className={styles.back_button} onClick={() => navigate(BASE_ROUTER)}>
-          Вернуться на главную
-        </button>
-      </div>
-      <div className={styles.login_wrapper}>
-        <h3 className={styles.login_title}>Регистрация</h3>
-        <form className={styles.login_form} onSubmit={handleSubmit(onSubmit)}>
-          <label className={styles.login_form_label}>
-            <input className={styles.login_form_input} placeholder={'Введите логин/email'} {...register('username')} />
-            <span>{errors?.username?.message}</span>
-          </label>
-          <label className={styles.login_form_label}>
-            <input
-              className={styles.login_form_input}
-              type="password"
-              placeholder="Введите пароль"
-              {...register('password')}
-            />
-            <span>{errors?.password?.message}</span>
-          </label>
-          <label className={styles.login_form_label}>
-            <input
-              className={styles.login_form_input}
-              type="password"
-              placeholder="Подтвердите пароль"
-              {...register('confirmPassword')}
-            />
-            <span>{errors?.confirmPassword?.message}</span>
-          </label>
-          {error && (
-            <div className={styles.container}>
-              <Alert type="error" message={error} />
-            </div>
-          )}
-          <div className={styles.login_form_buttons}>
-            <button className={styles.login_form_button}>Зарегистрироваться</button>
-            <div>Есть аккаунт? Войдите</div>
-            <button className={styles.login_form_button} onClick={() => setIsRegister(false)}>
-              Войти
+    <div className="login__container">
+      {isLoad ? (
+        <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
+      ) : (
+        <>
+          <div className="login__back-button__wrapper">
+            <button className="login__back-button" onClick={() => navigate(BASE_ROUTER)}>
+              Вернуться на главную
             </button>
           </div>
-        </form>
-      </div>
+          <div className="login__wrapper">
+            <h3 className="login__title">Регистрация</h3>
+            <form className="login__form" onSubmit={handleSubmit(onSubmit)}>
+              <label className="login__form__label">
+                <input className="login__form__input" placeholder={'Введите логин/email'} {...register('username')} />
+                <span className="login__form__error">{errors?.username?.message}</span>
+              </label>
+              <label className="login__form__label">
+                <input
+                  className="login__form__input"
+                  type="password"
+                  placeholder="Введите пароль"
+                  {...register('password')}
+                />
+                <span className="login__form__error">{errors?.password?.message}</span>
+              </label>
+              <label className="login__form__label">
+                <input
+                  className="login__form__input"
+                  type="password"
+                  placeholder="Подтвердите пароль"
+                  {...register('confirmPassword')}
+                />
+                <span className="login__form__error">{errors?.confirmPassword?.message}</span>
+              </label>
+              {error && (
+                <div className="container">
+                  <Alert type="error" message={error} />
+                </div>
+              )}
+              <div className="login__form__buttons">
+                <button className="login__form__button">Зарегистрироваться</button>
+                <div>Есть аккаунт? Войдите</div>
+                <button className="login__form__button" onClick={() => setIsRegister(false)}>
+                  Войти
+                </button>
+              </div>
+            </form>
+          </div>
+        </>
+      )}
     </div>
   );
 };

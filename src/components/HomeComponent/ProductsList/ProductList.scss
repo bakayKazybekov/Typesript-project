@@ -1,19 +1,19 @@
-@import '../../../variables/variables.scss';
+@import '../../../common';
 
-.wrapper {
+.product-list_wrapper {
   width: 95vw;
   margin: 110px auto 40px;
   text-align: center;
   font-size: 25px;
 }
 
-.products {
+.product-list {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 40px;
 }
 
-.product {
+.product-list_product {
   max-width: 250px;
   border-radius: $borderRadius20;
   padding: 15px;
@@ -22,7 +22,7 @@
   gap: 12px;
   align-items: center;
 }
-.product:hover {
+.product-list_product:hover {
   box-shadow: 0px 0px 15px -10px;
   transition: all 0.25s;
 }
@@ -39,21 +39,7 @@
   }
 }
 
-.create_button_container {
-  align-self: end;
-}
-
-.create_button {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius: $borderRadius20;
-  padding: 10px 35px;
-  font-size: $fontSize22;
-  background-color: #eef2d1;
-}
-
-.edit_button {
+.product_edit-button {
   @include action-button;
   color: #f41e1e;
 }
@@ -63,7 +49,7 @@
   color: #17156c;
 }
 
-.delete_button {
+.product_delete-button {
   width: 25px;
   height: 25px;
   cursor: pointer;
@@ -77,22 +63,36 @@
   font-weight: $fontWeight500;
 }
 
+.create_button_container {
+  align-self: end;
+}
+
+.create_button {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: $borderRadius20;
+  padding: 10px 35px;
+  font-size: $fontSize22;
+  background-color: $mainColor;
+}
+
 @media (max-width: 1740px) {
-  .products {
+  .product-list {
     grid-template-columns: repeat(5, 1fr);
   }
 }
 
 @media (max-width: 1440px) {
-  .wrapper {
+  .product-list_wrapper {
     margin: 30px auto;
     font-size: 24px;
   }
-  .products {
+  .product-list {
     grid-template-columns: repeat(6, 1fr);
     gap: 20px 5px;
   }
-  .product {
+  .product-list_product {
     max-width: 220px;
     padding: 15px 10px;
     gap: 10px;
@@ -110,34 +110,34 @@
 }
 
 @media (max-width: 1240px) {
-  .wrapper {
+  .product-list_wrapper {
     font-size: 22px;
   }
-  .products {
+  .product-list {
     grid-template-columns: repeat(5, 1fr);
   }
 }
 
 @media (max-width: 1040px) {
-  .products {
+  .product-list {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
 @media (max-width: 840px) {
-  .wrapper {
+  .product-list_wrapper {
     font-size: 20px;
   }
-  .products {
+  .product-list {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 640px) {
-  .products {
+  .product-list {
     grid-template-columns: repeat(2, 1fr);
   }
-  .delete_button {
+  .product_delete-button {
     width: 20px;
     height: 20px;
   }
@@ -148,11 +148,11 @@
 }
 
 @media (max-width: 480px) {
-  .wrapper {
+  .product-list_wrapper {
     font-size: 18px;
     margin-top: 5px;
   }
-  .product {
+  .product-list_product {
     max-width: 180px;
     padding: 15px 10px;
     gap: 8px;
@@ -170,12 +170,12 @@
 }
 
 @media (max-width: 380px) {
-  .product {
+  .product-list_product {
     max-width: 120px;
     padding: 15px 10px;
     gap: 10px;
   }
-  .delete_button {
+  .product_delete-button {
     width: 15px;
     height: 15px;
   }
@@ -192,12 +192,12 @@
 }
 
 @media (max-width: 279px) {
-  .product {
+  .product-list_product {
     max-width: 100px;
     padding: 15px 10px;
     gap: 10px;
   }
-  .delete_button {
+  .product_delete-button {
     width: 12px;
     height: 12px;
   }
@@ -208,7 +208,7 @@
   .create_button {
     font-size: 10px;
   }
-  .product {
+  .product-list_product {
     padding: 10px;
     gap: 5px;
   }

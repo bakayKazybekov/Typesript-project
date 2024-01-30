@@ -3,7 +3,7 @@ import { HomeComponentProps } from './types';
 import Interaction from './Interaction/Interaction';
 import ProductsList from './ProductsList/ProductsList';
 import CreateButton from './CreateButton/CreateButton';
-import styles from './Home.module.scss';
+import './Home.scss';
 
 const HomeComponent: React.FC<HomeComponentProps> = ({
   onSubmitSearch,
@@ -23,7 +23,7 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
   token,
 }) => {
   return (
-    <div className={styles.wrapper}>
+    <div className="home__wrapper">
       <Interaction
         onSubmitSearch={onSubmitSearch}
         onChangeSearch={onChangeSearch}

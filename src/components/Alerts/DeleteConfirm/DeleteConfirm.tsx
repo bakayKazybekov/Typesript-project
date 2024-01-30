@@ -1,6 +1,6 @@
 import React from 'react';
 import { Transition } from 'react-transition-group';
-import styles from './DeleteConfirm.module.scss';
+import './DeleteConfirm.scss';
 
 type DeleteConfirmProps = {
   confirmFunction: () => void;
@@ -21,16 +21,16 @@ const DeleteConfirm: React.FC<DeleteConfirmProps> = ({ confirmFunction, onClose,
     <>
       <Transition in={isOpen} timeout={350} unmountOnExit={true}>
         {(state: AlertState) => (
-          <div className={`${styles.delete} ${styles[`delete_${state}`]}`}>
-            <div className={styles.delete_wrapper}>
-              <div className={styles.delete_content}>
+          <div className={`modal modal_${state}`}>
+            <div className="modal_wrapper">
+              <div className="modal_content">
                 <p>{text}</p>
-                <div className={styles.delete_buttons}>
-                  <button className={styles.close_button} onClick={onClose}>
+                <div className="modal_buttons">
+                  <button className="modal_close_button" onClick={onClose}>
                     Отмена
                   </button>
                   <button
-                    className={styles.confirm_button}
+                    className="modal_confirm_button"
                     onClick={() => {
                       confirmFunction();
                       onClose();

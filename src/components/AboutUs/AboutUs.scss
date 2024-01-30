@@ -1,6 +1,6 @@
-@import '../../variables/variables.scss';
+@import '../../common';
 
-.wrapper {
+.about-us__wrapper {
   width: 90vw;
   height: 80vh;
   margin: 0 auto;
@@ -11,38 +11,38 @@
   gap: 30px;
 }
 
-.title {
+.about-us__title {
   font-size: 48px;
 }
 
-.info {
+.about-us__info {
   font-family: $mainFont;
   font-size: 20px;
 }
 
-@media (max-width: 1180px) {
-  .title {
+@include laptop {
+  .about-us__title {
     font-size: 38px;
   }
-  .info {
+  .about-us__info {
     font-size: 16px;
   }
 }
 
-@media (max-width: 920px) {
-  .title {
+@include tablet_large {
+  .about-us__title {
     font-size: 30px;
   }
-  .info {
+  .about-us__info {
     font-size: 14px;
   }
 }
 
-@media (max-width: 480px) {
-  .title {
+@include mobile_large {
+  .about-us__title {
     font-size: 24px;
   }
-  .info {
+  .about-us__info {
     font-size: 10px;
   }
 }

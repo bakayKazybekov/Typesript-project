@@ -1,5 +1,5 @@
 import { Transition } from 'react-transition-group';
-import styles from './ShopCartAlert.module.scss';
+import './ShopCartAlert.scss';
 
 type ShopCartAlertProps = {
   shopCartAlert: boolean;
@@ -17,9 +17,9 @@ const ShopCartAlert: React.FC<ShopCartAlertProps> = ({ shopCartAlert }) => {
     <>
       <Transition in={shopCartAlert} timeout={350} unmountOnExit={true}>
         {(state: AlertState) => (
-          <div className={`${styles.alert} ${styles[`alert_${state}`]}`}>
-            <div className={styles.alert_wrapper}>
-              <div className={styles.alert_content}>
+          <div className={`alert alert__${state}`}>
+            <div className="alert__wrapper">
+              <div className="alert__content">
                 <p>Добавлено в корзину!</p>
               </div>
             </div>
