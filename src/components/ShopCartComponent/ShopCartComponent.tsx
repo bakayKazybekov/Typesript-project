@@ -21,6 +21,7 @@ const ShopCartComponent: React.FC<ShopCartComponentProps> = ({
   setClearConfirmModalIsOpen,
   isLoad,
   error,
+  token,
 }) => {
   return (
     <div className={styles.wrapper}>
@@ -38,6 +39,7 @@ const ShopCartComponent: React.FC<ShopCartComponentProps> = ({
         setDeleteId={setDeleteId}
         confirmModalIsOpen={confirmModalIsOpen}
         setConfirmModalIsOpen={setConfirmModalIsOpen}
+        token={token}
       />
     </div>
   );

@@ -11,6 +11,7 @@ export type ShopCartProductListProps = {
   setConfirmModalIsOpen: (state: boolean) => void;
   isLoad: boolean;
   error?: string;
+  token: string | null;
 };
 export type ShopCartHeaderProps = {
   clearConfirmModalIsOpen: boolean;

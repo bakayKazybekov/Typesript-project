@@ -21,9 +21,10 @@ const ShopCartContainer = () => {
 
   const { shopCart, isLoad, error } = useAppSelector((state) => state.shopCartReducer);
 
+  const token = localStorage.getItem('token');
   useEffect(() => {
-    dispatch(getShopCartProductsAction());
-  }, [dispatch, getShopCartProductsAction]);
+    if (token) dispatch(getShopCartProductsAction());
+  }, [dispatch, getShopCartProductsAction, token]);
 
   const addCart = (product: ProductType) => {
     dispatch(addShopCartProductsAction({ product: product.id, quantity: 1 }))
@@ -58,6 +59,7 @@ const ShopCartContainer = () => {
       clearShopCart={clearShopCart}
       clearConfirmModalIsOpen={clearConfirmModalIsOpen}
       setClearConfirmModalIsOpen={setClearConfirmModalIsOpen}
+      token={token}
     />
   );
 };

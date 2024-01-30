@@ -14,11 +14,14 @@ const ShopCartProductList: React.FC<ShopCartProductListProps> = ({
   setConfirmModalIsOpen,
   isLoad,
   error,
+  token,
 }) => {
   return (
     <>
       {isLoad ? (
         <ProductSkeleton productsLength={shopCartProducts.length} />
+      ) : !token ? (
+        <div>Авторизуйтесь!</div>
       ) : error ? (
         <Alert type="error" message={error} />
       ) : !shopCartProducts.length ? (
