@@ -10,6 +10,8 @@ const ShopCartProductList: React.FC<ShopCartProductListProps> = ({
   addCart,
   deleteFromCart,
   setDeleteId,
+  deleteProductTitle,
+  setDeleteProductTitle,
   confirmModalIsOpen,
   setConfirmModalIsOpen,
   isLoad,
@@ -51,6 +53,7 @@ const ShopCartProductList: React.FC<ShopCartProductListProps> = ({
                   onClick={() => {
                     setConfirmModalIsOpen(true);
                     setDeleteId(id);
+                    setDeleteProductTitle(title);
                   }}
                 >
                   Удалить из корзины
@@ -60,6 +63,7 @@ const ShopCartProductList: React.FC<ShopCartProductListProps> = ({
                   onClose={() => setConfirmModalIsOpen(false)}
                   isOpen={confirmModalIsOpen}
                   text="Вы уверены что хотите удалить данный товар из корзины?"
+                  productTitle={deleteProductTitle}
                 />
               </li>
             );

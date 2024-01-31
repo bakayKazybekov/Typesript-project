@@ -4,8 +4,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: $width100percent;
+  height: $width100percent;
   overflow: hidden;
   overflow-y: auto;
   transition: opacity 0.3s;
@@ -18,7 +18,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: $width100percent;
   min-height: 100%;
 }
 .modal_content {
@@ -27,9 +27,9 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 40px;
+  gap: 30px;
   font-size: $fontSize22;
-  width: 100%;
+  width: $width100percent;
   max-width: 700px;
   border-radius: $borderRadius20;
   background-color: #fff;
@@ -76,34 +76,34 @@
   transform: translateY(-50%);
 }
 
-@media (max-width: 980px) {
+@include laptop_medium {
   .modal_content {
     gap: 30px;
     font-size: 18px;
-    width: 100%;
+    width: $width100percent;
     max-width: 500px;
   }
   .modal_buttons {
     gap: 50px;
   }
 }
-@media (max-width: 720px) {
+@include tablet_large {
   .modal_content {
     gap: 20px;
     font-size: 15px;
-    width: 100%;
-    max-width: 380px;
+    width: $width100percent;
+    max-width: 350px;
   }
   .modal_buttons {
     gap: 40px;
   }
 }
-@media (max-width: 480px) {
+@include mobile_large {
   .modal_content {
     gap: 20px;
     padding: 30px 10px 20px;
     font-size: 10px;
-    width: 100%;
+    width: $width100percent;
     max-width: 250px;
   }
   .modal_buttons {

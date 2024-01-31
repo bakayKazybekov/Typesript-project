@@ -8,30 +8,35 @@ import { addShopCartProductsAction } from '../../store/shopCart/actions';
 
 function HomeContainer() {
   const dispatch = useAppDispatch();
+  const { products, isLoad, error } = useAppSelector((state) => state.productReducer);
+  const token = localStorage.getItem('token');
 
+  // Filter states
   const [searchProducts, setSearchProducts] = useState<string>('');
-  const [showResetButton, setShowResetButton] = useState<boolean>(false);
   const [sortingOpertator, setSortingOperator] = useState('');
   const [priceSortingState, setPriceSortingState] = useState<boolean>(false);
   const [dateSortingState, setDateSortingState] = useState<boolean>(false);
-
+  // Shop cart states
+  const [showResetButton, setShowResetButton] = useState<boolean>(false);
   const [shopCartAlert, setShopCartAlert] = useState<boolean>(false);
-
+  // Delete Confirm Modal states
+  const [deleteProductTitle, setDeleteProductTitle] = useState<string>('');
   const [deleteId, setDeleteId] = useState<number>(0);
   const [confirmModalIsOpen, setConfirmModalIsOpen] = useState<boolean>(false);
 
-  const { products, isLoad, error } = useAppSelector((state) => state.productReducer);
-
-  const token = localStorage.getItem('token');
   useEffect(() => {
     if (token) dispatch(getProductAction());
   }, [dispatch, token]);
 
-  const onDelete = useCallback(() => {
+  const onDelete = useCallback(async () => {
     if (deleteId) {
-      dispatch(deleteProductAction(deleteId))
-        .then(() => dispatch(getProductAction()))
-        .catch(() => dispatch(getProductAction()));
+      try {
+        await dispatch(deleteProductAction(deleteId));
+        dispatch(getProductAction());
+      } catch (e) {
+        dispatch(getProductAction());
+        console.log('e', e);
+      }
     }
   }, [dispatch, deleteId]);
 
@@ -48,10 +53,9 @@ function HomeContainer() {
 
     if (searchProducts) {
       return _.filter(filtered, (product) =>
-        _.includes(product.title.toLowerCase(), searchProducts.toLowerCase().trim()),
+        _.startsWith(product.title.toLowerCase(), searchProducts.toLowerCase().trim()),
       );
     }
-
     return filtered.sort((a: ProductType, b: ProductType): number => {
       switch (sortingOpertator) {
         case 'firstCheap':
@@ -113,11 +117,15 @@ function HomeContainer() {
       products={filteredProducts}
       onDelete={onDelete}
       setDeleteId={setDeleteId}
+      deleteProductTitle={deleteProductTitle}
+      setDeleteProductTitle={setDeleteProductTitle}
       confirmModalIsOpen={confirmModalIsOpen}
       setConfirmModalIsOpen={setConfirmModalIsOpen}
       shopCartAlert={shopCartAlert}
       addCart={addCart}
       token={token}
+      isLoad={isLoad}
+      error={error}
     />
   );
 }

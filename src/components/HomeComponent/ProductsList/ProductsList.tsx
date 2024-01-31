@@ -16,16 +16,17 @@ const ProductsList: React.FC<ProductsListProps> = ({
   products,
   onDelete,
   setDeleteId,
+  deleteProductTitle,
+  setDeleteProductTitle,
   confirmModalIsOpen,
   setConfirmModalIsOpen,
   shopCartAlert,
   addCart,
   token,
+  isLoad,
+  error,
 }) => {
-  // console.log('productsList Render');
-
   const navigate = useNavigate();
-  const { isLoad, error } = useAppSelector((state) => state.productReducer);
 
   return (
     <div className="product-list_wrapper">
@@ -53,6 +54,7 @@ const ProductsList: React.FC<ProductsListProps> = ({
                     onClick={() => {
                       setConfirmModalIsOpen(true);
                       setDeleteId(id);
+                      setDeleteProductTitle(title);
                     }}
                   />
                 </div>
@@ -61,6 +63,7 @@ const ProductsList: React.FC<ProductsListProps> = ({
                   onClose={() => setConfirmModalIsOpen(false)}
                   isOpen={confirmModalIsOpen}
                   text="Вы уверены что хотите удалить данный товар?"
+                  productTitle={deleteProductTitle}
                 />
                 <div className="product_text">{title}</div>
                 <div className="product_text">{+price - 0} k</div>

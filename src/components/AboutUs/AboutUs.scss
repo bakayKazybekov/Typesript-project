@@ -1,7 +1,7 @@
 @import '../../common';
 
 .about-us__wrapper {
-  width: 90vw;
+  width: $width90vw;
   height: 80vh;
   margin: 0 auto;
   display: flex;
@@ -16,11 +16,10 @@
 }
 
 .about-us__info {
-  font-family: $mainFont;
-  font-size: 20px;
+  @include text-styles(20px);
 }
 
-@include laptop {
+@include laptop_large {
   .about-us__title {
     font-size: 38px;
   }
@@ -29,7 +28,7 @@
   }
 }
 
-@include tablet_large {
+@include laptop_medium {
   .about-us__title {
     font-size: 30px;
   }

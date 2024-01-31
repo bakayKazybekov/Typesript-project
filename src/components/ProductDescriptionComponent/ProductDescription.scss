@@ -1,7 +1,7 @@
 @import '../../common';
 
 .description_container {
-  width: 95vw;
+  width: $width95vw;
   margin: 55px auto;
   display: flex;
   align-items: center;
@@ -22,15 +22,14 @@
 }
 
 .description_wrapper {
-  width: 91vw;
-  @include displey-flex-column;
+  width: $width90vw;
+  @include display-flex-column;
   align-items: center;
   gap: 60px;
 }
 
 .description_product-name {
-  font-size: 30px;
-  font-weight: 600;
+  @include text-styles(30px, 600);
   text-align: center;
 }
 
@@ -57,18 +56,17 @@
   font-size: 20px;
   &_title {
     padding-bottom: 20px;
-    font-size: $fontSize22;
-    font-weight: 600;
+    @include text-styles(22px, 600);
   }
 }
 .description_text-title {
-  font-weight: 600;
+  @include text-styles(_, 600);
   padding-bottom: 10px;
 }
 
-@media (max-width: 1440px) {
+@include desktop_medium {
   .description_content {
-    width: 90vw;
+    width: $width90vw;
   }
   .description_image {
     width: 450px;
@@ -83,7 +81,7 @@
   }
 }
 
-@media (max-width: 1080px) {
+@include laptop_large {
   .description_image {
     width: 350px;
     height: 350px;
@@ -98,7 +96,7 @@
   }
 }
 
-@media (max-width: 720px) {
+@include tablet_large {
   .description_back-button {
     font-size: 18px;
   }
@@ -119,7 +117,7 @@
   }
 }
 
-@media (max-width: 580px) {
+@include tablet_medium {
   .description_back-button {
     font-size: 16px;
   }
@@ -135,7 +133,7 @@
   }
 }
 
-@media (max-width: 440px) {
+@include mobile_large {
   .description_image {
     width: 140px;
     height: 140px;
@@ -149,7 +147,7 @@
     font-size: 11px;
   }
 }
-@media (max-width: 280px) {
+@include mobile_small {
   .description_image {
     width: 100px;
     height: 100px;

@@ -7,6 +7,7 @@ type DeleteConfirmProps = {
   onClose: () => void;
   isOpen: boolean;
   text: string;
+  productTitle?: string;
 };
 
 enum AlertState {
@@ -16,15 +17,21 @@ enum AlertState {
   Exited = 'exited',
 }
 
-const DeleteConfirm: React.FC<DeleteConfirmProps> = ({ confirmFunction, onClose, isOpen, text }) => {
+const DeleteConfirm: React.FC<DeleteConfirmProps> = ({ confirmFunction, onClose, isOpen, text, productTitle }) => {
+  const onWrapperClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (event.currentTarget.className === 'modal_wrapper') {
+      onClose();
+    }
+  };
   return (
     <>
       <Transition in={isOpen} timeout={350} unmountOnExit={true}>
         {(state: AlertState) => (
           <div className={`modal modal_${state}`}>
-            <div className="modal_wrapper">
+            <div className="modal_wrapper" onClick={onWrapperClick}>
               <div className="modal_content">
-                <p>{text}</p>
+                <div>{text}</div>
+                {productTitle && <div>{productTitle}</div>}
                 <div className="modal_buttons">
                   <button className="modal_close_button" onClick={onClose}>
                     Отмена

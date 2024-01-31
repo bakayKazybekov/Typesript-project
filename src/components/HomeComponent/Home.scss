@@ -1,8 +1,8 @@
 @import '../../common';
 
 .home__wrapper {
-  @include displey-flex-column;
+  @include display-flex-column;
   display: flex;
-  width: 95vw;
+  width: $width95vw;
   margin: 0 auto 50px;
 }

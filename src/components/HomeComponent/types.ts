@@ -7,11 +7,15 @@ export type ProductsListProps = {
   products: ProductType[];
   onDelete: () => void;
   setDeleteId: (id: number) => void;
+  deleteProductTitle: string;
+  setDeleteProductTitle: (title: string) => void;
   confirmModalIsOpen: boolean;
   setConfirmModalIsOpen: (state: boolean) => void;
   shopCartAlert: boolean;
   addCart: (product: ProductType) => void;
   token: string | null;
+  isLoad: boolean;
+  error?: string;
 };
 
 export type InteractionProps = {

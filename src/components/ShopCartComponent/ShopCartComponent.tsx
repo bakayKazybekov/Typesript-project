@@ -9,6 +9,8 @@ const ShopCartComponent: React.FC<ShopCartComponentProps> = ({
   addCart,
   deleteFromCart,
   setDeleteId,
+  deleteProductTitle,
+  setDeleteProductTitle,
   confirmModalIsOpen,
   setConfirmModalIsOpen,
   clearShopCart,
@@ -24,6 +26,7 @@ const ShopCartComponent: React.FC<ShopCartComponentProps> = ({
         clearConfirmModalIsOpen={clearConfirmModalIsOpen}
         setClearConfirmModalIsOpen={setClearConfirmModalIsOpen}
         clearShopCart={clearShopCart}
+        productsLength={shopCartProducts.length}
       />
       <ShopCartProductList
         shopCartProducts={shopCartProducts}
@@ -32,6 +35,8 @@ const ShopCartComponent: React.FC<ShopCartComponentProps> = ({
         addCart={addCart}
         deleteFromCart={deleteFromCart}
         setDeleteId={setDeleteId}
+        deleteProductTitle={deleteProductTitle}
+        setDeleteProductTitle={setDeleteProductTitle}
         confirmModalIsOpen={confirmModalIsOpen}
         setConfirmModalIsOpen={setConfirmModalIsOpen}
         token={token}

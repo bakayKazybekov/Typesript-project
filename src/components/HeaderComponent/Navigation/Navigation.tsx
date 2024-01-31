@@ -46,7 +46,7 @@ const Navigation: React.FC = () => {
             <header className={`adaptive-nav__wrapper menu__wrapper__${state}`}>
               <nav className={`adaptive-navigate menu__${state}`}>
                 {links.map(({ link, name }) => (
-                  <NavLink key={name} className={setActive} to={link}>
+                  <NavLink key={name} className={setActive} to={link} onClick={() => setNavIsOpen(false)}>
                     {name}
                   </NavLink>
                 ))}

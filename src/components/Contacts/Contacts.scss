@@ -1,7 +1,7 @@
 @import '../../common';
 
 .contacts__wrapper {
-  width: 90vw;
+  width: $width90vw;
   height: 80vh;
   margin: 0 auto;
   display: flex;
@@ -11,7 +11,7 @@
 }
 
 .contacts__links {
-  width: 90vw;
+  width: $width90vw;
   display: flex;
   justify-content: center;
   gap: 100px;
@@ -26,7 +26,7 @@
   }
 }
 
-@media (max-width: 1180px) {
+@include laptop_large {
   .contacts__links {
     gap: 80px;
   }
@@ -36,7 +36,7 @@
   }
 }
 
-@media (max-width: 920px) {
+@include laptop_medium {
   .contacts__links {
     gap: 60px;
   }
@@ -46,7 +46,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@include mobile_large {
   .contacts__links {
     gap: 40px;
   }

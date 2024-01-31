@@ -15,12 +15,16 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
   dateSortingState,
   products,
   setDeleteId,
+  deleteProductTitle,
+  setDeleteProductTitle,
   onDelete,
   confirmModalIsOpen,
   setConfirmModalIsOpen,
   shopCartAlert,
   addCart,
   token,
+  isLoad,
+  error,
 }) => {
   return (
     <div className="home__wrapper">
@@ -36,12 +40,16 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
       <ProductsList
         products={products}
         setDeleteId={setDeleteId}
+        deleteProductTitle={deleteProductTitle}
+        setDeleteProductTitle={setDeleteProductTitle}
         onDelete={onDelete}
         confirmModalIsOpen={confirmModalIsOpen}
         setConfirmModalIsOpen={setConfirmModalIsOpen}
         shopCartAlert={shopCartAlert}
         addCart={addCart}
         token={token}
+        isLoad={isLoad}
+        error={error}
       />
       <CreateButton token={token} />
     </div>
