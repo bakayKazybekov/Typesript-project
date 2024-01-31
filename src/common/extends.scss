@@ -75,31 +75,30 @@
 
 @mixin product-action-button {
   cursor: pointer;
-  font-size: calc(5px + 13 * ((100vw - 280px) / (1680 - 280)));
-  // font-size: 18px;
+  font-size: 18px;
   border-radius: 8px;
   gap: 10px;
   padding: 8px;
   display: flex;
   align-items: center;
   @include desktop_medium {
-    // font-size: 12px;
+    font-size: 12px;
   }
   @include laptop_large {
-    // font-size: 11px;
+    font-size: 11px;
   }
   @include laptop_small {
-    // font-size: 9px;
+    font-size: 9px;
     padding: 5px 8px;
     border-radius: 5px;
     gap: 8px;
   }
   @include mobile_medium {
-    // font-size: 7px;
-    // gap: 5px;
+    font-size: 7px;
+    gap: 5px;
   }
   @include mobile_small {
-    // font-size: 5px;
+    font-size: 5px;
   }
 }
 

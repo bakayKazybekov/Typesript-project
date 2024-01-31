@@ -4,3 +4,11 @@
   font-family: $fontFamily;
   line-height: $lineHeight;
 }
+
+$maxWidth: 1680;
+$minWidth: 280;
+@mixin adaptive-size($elem, $maxSize, $minSize) {
+  $sizeDifference: $maxSize - $minSize;
+  $widthDifference: $maxWidth - $minWidth;
+  #{$elem}: calc(#{$minSize + px} + $sizeDifference * ((100vw - #{$minWidth + px}) / ($widthDifference)));
+}

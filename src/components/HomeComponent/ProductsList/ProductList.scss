@@ -77,8 +77,7 @@
 }
 
 .product_text {
-  font-size: calc(6px + 10 * ((100vw - 280px) / (1680 - 280)));
-  // @include text-styles(16px, 500);
+  @include text-styles(16px, 500);
 }
 
 .create_button_container {
@@ -122,7 +121,7 @@
     font-size: 20px;
   }
   .product_text {
-    // font-size: 13px;
+    font-size: 13px;
   }
 }
 
@@ -193,7 +192,7 @@
     font-size: 14px;
   }
   .product_text {
-    // font-size: 11px;
+    font-size: 11px;
   }
 }
 
@@ -215,7 +214,7 @@
     font-size: 12px;
   }
   .product_text {
-    // font-size: 8px;
+    font-size: 8px;
   }
   .button_icon {
     width: 10px;
@@ -245,7 +244,7 @@
     gap: 5px;
   }
   .product_text {
-    // font-size: 6px;
+    font-size: 6px;
   }
   .button_icon {
     width: 8px;

@@ -18,7 +18,7 @@
 }
 
 .description_back-button {
-  font-size: calc(14px + 8 * ((100vw - 280px) / (1680 - 280)));
+  @include adaptive-size(font-size, 22, 14);
 }
 
 .description_wrapper {
@@ -30,7 +30,7 @@
 
 .description_product-name {
   font-weight: 600;
-  font-size: calc(13px + 17 * ((100vw - 280px) / (1680 - 280)));
+  @include adaptive-size(font-size, 30, 13);
   text-align: center;
 }
 
@@ -38,14 +38,12 @@
   width: 80vw;
 }
 
-$description_image-size: calc(100px + 500 * ((100vw - 280px) / (1680 - 280)));
-$image_margin-size: calc(20px + 100 * ((100vw - 280px) / (1680 - 280)));
 .description_image {
-  width: $description_image-size;
-  height: $description_image-size;
+  @include adaptive-size(width, 600, 100);
+  @include adaptive-size(height, 600, 100);
+  @include adaptive-size(margin-right, 120, 20);
+  @include adaptive-size(margin-bottom, 100, 10);
   float: left;
-  margin-right: $image_margin-size;
-  margin-bottom: $image_margin-size;
   border: solid 1px #eef2d1;
   border-radius: $borderRadius20;
   text-align: center;
@@ -56,11 +54,11 @@ $image_margin-size: calc(20px + 100 * ((100vw - 280px) / (1680 - 280)));
 }
 
 .description_text {
-  font-size: calc(9px + 11 * ((100vw - 280px) / (1680 - 280)));
+  @include adaptive-size(font-size, 20, 9);
 }
 
 .description_text-title {
-  font-size: calc(11px + 13 * ((100vw - 280px) / (1680 - 280)));
+  @include adaptive-size(font-size, 24, 11);
   font-weight: 600;
   padding-bottom: 10px;
 }

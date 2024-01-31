@@ -7,6 +7,7 @@ import { BASE_ROUTER } from '../../../consts/paths';
 import '../Login.scss';
 import { Alert, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import { authFields } from '../../../utils/loginUtils';
 const Authorization: React.FC<AuthProps> = ({ setIsRegister, onSubmit, isLoad, error }) => {
   const navigate = useNavigate();
 
@@ -17,14 +18,6 @@ const Authorization: React.FC<AuthProps> = ({ setIsRegister, onSubmit, isLoad, e
   } = useForm({
     resolver: yupResolver(authorizationScheme),
   });
-
-  if (isLoad) {
-    return (
-      <div className="login__container">
-        <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
-      </div>
-    );
-  }
 
   return (
     <div className="login__container">
@@ -40,24 +33,14 @@ const Authorization: React.FC<AuthProps> = ({ setIsRegister, onSubmit, isLoad, e
           <div className="login__wrapper">
             <h3 className="login__title">Авторизация</h3>
             <form className="login__form" onSubmit={handleSubmit(onSubmit)}>
-              <label className="login__form__label">
-                <input
-                  className="login__form__input"
-                  type="text"
-                  placeholder="Введите логин/email"
-                  {...register('username')}
-                />
-                <span className="login__form__error">{errors?.username?.message}</span>
-              </label>
-              <label className="login__form__label">
-                <input
-                  className="login__form__input"
-                  type="password"
-                  placeholder="Введите пароль"
-                  {...register('password')}
-                />
-                <span className="login__form__error">{errors?.password?.message}</span>
-              </label>
+              {authFields.map(({ name, placeholder, type }) => {
+                return (
+                  <label className="login__form__label">
+                    <input type={type} className="login__form__input" placeholder={placeholder} {...register(name)} />
+                    <span className="login__form__error">{errors[name]?.message}</span>
+                  </label>
+                );
+              })}
               {error && (
                 <div className="login__container">
                   <Alert type="error" message={error} />

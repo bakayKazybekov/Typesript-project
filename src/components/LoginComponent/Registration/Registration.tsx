@@ -7,21 +7,10 @@ import '../Login.scss';
 import { BASE_ROUTER } from '../../../consts/paths';
 import { Alert, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-
-type RegisterFieldsType = {
-  name: 'username' | 'password' | 'confirmPassword';
-  placeholder: string;
-  type: string;
-};
+import { registerFields } from '../../../utils/loginUtils';
 
 const Registration: React.FC<RegisterProps> = ({ setIsRegister, onSubmit, isLoad, error }) => {
   const navigate = useNavigate();
-
-  const registerFields: RegisterFieldsType[] = [
-    { name: 'username', placeholder: 'Введите логин/email', type: 'text' },
-    { name: 'password', placeholder: 'Введите пароль', type: 'password' },
-    { name: 'confirmPassword', placeholder: 'Подтвердите пароль', type: 'password' },
-  ];
 
   const {
     register,
@@ -53,28 +42,6 @@ const Registration: React.FC<RegisterProps> = ({ setIsRegister, onSubmit, isLoad
                   </label>
                 );
               })}
-              {/* <label className="login__form__label">
-                <input className="login__form__input" placeholder={'Введите логин/email'} {...register('username')} />
-                <span className="login__form__error">{errors?.username?.message}</span>
-              </label>
-              <label className="login__form__label">
-                <input
-                  className="login__form__input"
-                  type="password"
-                  placeholder="Введите пароль"
-                  {...register('password')}
-                />
-                <span className="login__form__error">{errors?.password?.message}</span>
-              </label>
-              <label className="login__form__label">
-                <input
-                  className="login__form__input"
-                  type="password"
-                  placeholder="Подтвердите пароль"
-                  {...register('confirmPassword')}
-                />
-                <span className="login__form__error">{errors?.confirmPassword?.message}</span>
-              </label> */}
               {error && (
                 <div className="container">
                   <Alert type="error" message={error} />
