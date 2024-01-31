@@ -37,9 +37,10 @@
   width: 80vw;
 }
 
+$description_image-size: calc(100px + 500 * ((100vw - 280px) / (1680 - 280)));
 .description_image {
-  width: 600px;
-  height: 600px;
+  width: $description_image-size;
+  height: $description_image-size;
   float: left;
   margin-right: 12vw;
   margin-bottom: 80px;
@@ -53,7 +54,7 @@
 }
 
 .description_text {
-  font-size: 20px;
+  font-size: calc(9px + 11 * ((100vw - 280px) / (1680 - 280)));
   &_title {
     padding-bottom: 20px;
     @include text-styles(22px, 600);
@@ -69,22 +70,22 @@
     width: $width90vw;
   }
   .description_image {
-    width: 450px;
-    height: 450px;
+    // width: 450px;
+    // height: 450px;
     margin-right: 100px;
   }
   .description_product-name {
     font-size: 26px;
   }
   .description_text {
-    font-size: 18px;
+    // font-size: 18px;
   }
 }
 
 @include laptop_large {
   .description_image {
-    width: 350px;
-    height: 350px;
+    // width: 350px;
+    // height: 350px;
     margin-right: 50px;
     margin-bottom: 30px;
   }
@@ -92,7 +93,7 @@
     font-size: 22px;
   }
   .description_text {
-    font-size: 16px;
+    // font-size: 16px;
   }
 }
 
@@ -101,8 +102,8 @@
     font-size: 18px;
   }
   .description_image {
-    width: 250px;
-    height: 250px;
+    // width: 250px;
+    // height: 250px;
     margin-right: 30px;
     margin-bottom: 20px;
   }
@@ -110,7 +111,7 @@
     font-size: 19px;
   }
   .description_text {
-    font-size: 14px;
+    // font-size: 14px;
     &_title {
       font-size: 16px;
     }
@@ -122,21 +123,21 @@
     font-size: 16px;
   }
   .description_image {
-    width: 180px;
-    height: 180px;
+    // width: 180px;
+    // height: 180px;
   }
   .description_product-name {
     font-size: 16px;
   }
   .description_text {
-    font-size: 12px;
+    // font-size: 12px;
   }
 }
 
 @include mobile_large {
   .description_image {
-    width: 140px;
-    height: 140px;
+    // width: 140px;
+    // height: 140px;
     margin-right: 20px;
     margin-bottom: 10px;
   }
@@ -144,17 +145,17 @@
     font-size: 13px;
   }
   .description_text {
-    font-size: 11px;
+    // font-size: 11px;
   }
 }
 @include mobile_small {
   .description_image {
-    width: 100px;
-    height: 100px;
+    // width: 100px;
+    // height: 100px;
     margin-right: 20px;
     margin-bottom: 10px;
   }
   .description_text {
-    font-size: 9px;
+    // font-size: 9px;
   }
 }

@@ -3,13 +3,12 @@ import { Alert } from 'antd';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { EDIT_PRODUCT, PRODUCT_DESCRIPTION } from '../../../consts/paths';
-import { deleteIcon } from '../../../images';
+import { deleteIcon, editIcon, shopCartIcon } from '../../../images';
 import { ProductType } from '../../../Types/types';
 import { ProductsListProps } from '../types';
 import DeleteConfirm from '../../Alerts/DeleteConfirm/DeleteConfirm';
 import ShopCartAlert from '../../Alerts/ShopCartAlert/ShopCartAlert';
 import ProductSkeleton from '../../Alerts/ProductSkeleton/ProductSkeleton';
-import { useAppSelector } from '../../../hook';
 import './ProductList.scss';
 
 const ProductsList: React.FC<ProductsListProps> = ({
@@ -68,9 +67,15 @@ const ProductsList: React.FC<ProductsListProps> = ({
                 <div className="product_text">{title}</div>
                 <div className="product_text">{+price - 0} k</div>
                 <div className="product_edit-button" onClick={() => navigate(`${EDIT_PRODUCT}/${id}`)}>
+                  <div className="button_icon">
+                    <img src={editIcon} alt="" />
+                  </div>
                   Редактировать
                 </div>
                 <div className="add_cart_button" onClick={() => addCart(product)}>
+                  <div className="button_icon">
+                    <img src={shopCartIcon} alt="" />
+                  </div>
                   Добавить в корзину
                 </div>
                 <ShopCartAlert shopCartAlert={shopCartAlert} />

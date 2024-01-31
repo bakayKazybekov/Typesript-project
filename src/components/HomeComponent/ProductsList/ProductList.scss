@@ -42,13 +42,29 @@
 }
 
 .product_edit-button {
-  @include action-button;
-  color: #f41e1e;
+  @include product-action-button;
+  color: rgb(50, 50, 50);
+  background-color: #eef2d1;
+}
+.product_edit-button:hover {
+  background-color: #e4e7cf;
 }
 
 .add_cart_button {
-  @include action-button;
-  color: #17156c;
+  @include product-action-button;
+  color: #fff;
+  background-color: #767b5f;
+}
+.add_cart_button:hover {
+  background-color: #888e6f;
+}
+
+.button_icon {
+  width: 20px;
+  height: 20px;
+  img {
+    @include image-style;
+  }
 }
 
 .product_delete-button {
@@ -61,7 +77,8 @@
 }
 
 .product_text {
-  @include text-styles(16px, 500);
+  font-size: calc(6px + 10 * ((100vw - 280px) / (1680 - 280)));
+  // @include text-styles(16px, 500);
 }
 
 .create_button_container {
@@ -86,15 +103,14 @@
 
 @include desktop_medium {
   .product-list_wrapper {
-    margin: 30px auto;
+    margin: 60px auto;
     font-size: 24px;
   }
   .product-list {
-    grid-template-columns: repeat(6, 1fr);
-    gap: 20px 5px;
+    gap: 20px 10x;
   }
   .product-list_product {
-    max-width: 220px;
+    max-width: 200px;
     padding: 15px 10px;
     gap: 10px;
   }
@@ -106,7 +122,7 @@
     font-size: 20px;
   }
   .product_text {
-    font-size: 13px;
+    // font-size: 13px;
   }
 }
 
@@ -116,6 +132,13 @@
   }
   .product-list {
     grid-template-columns: repeat(5, 1fr);
+  }
+  .product-list_product {
+    max-width: 180px;
+  }
+  .product_image {
+    width: 160px;
+    height: 160px;
   }
 }
 
@@ -131,6 +154,10 @@
   }
   .product-list {
     grid-template-columns: repeat(3, 1fr);
+  }
+  .button_icon {
+    width: 15px;
+    height: 15px;
   }
 }
 
@@ -166,7 +193,7 @@
     font-size: 14px;
   }
   .product_text {
-    font-size: 11px;
+    // font-size: 11px;
   }
 }
 
@@ -188,7 +215,11 @@
     font-size: 12px;
   }
   .product_text {
-    font-size: 9px;
+    // font-size: 8px;
+  }
+  .button_icon {
+    width: 10px;
+    height: 10px;
   }
 }
 
@@ -214,6 +245,10 @@
     gap: 5px;
   }
   .product_text {
-    font-size: 6px;
+    // font-size: 6px;
+  }
+  .button_icon {
+    width: 8px;
+    height: 8px;
   }
 }
