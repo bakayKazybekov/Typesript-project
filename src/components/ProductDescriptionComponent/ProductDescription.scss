@@ -18,7 +18,7 @@
 }
 
 .description_back-button {
-  font-size: $fontSize22;
+  font-size: calc(14px + 8 * ((100vw - 280px) / (1680 - 280)));
 }
 
 .description_wrapper {
@@ -29,7 +29,8 @@
 }
 
 .description_product-name {
-  @include text-styles(30px, 600);
+  font-weight: 600;
+  font-size: calc(13px + 17 * ((100vw - 280px) / (1680 - 280)));
   text-align: center;
 }
 
@@ -38,12 +39,13 @@
 }
 
 $description_image-size: calc(100px + 500 * ((100vw - 280px) / (1680 - 280)));
+$image_margin-size: calc(20px + 100 * ((100vw - 280px) / (1680 - 280)));
 .description_image {
   width: $description_image-size;
   height: $description_image-size;
   float: left;
-  margin-right: 12vw;
-  margin-bottom: 80px;
+  margin-right: $image_margin-size;
+  margin-bottom: $image_margin-size;
   border: solid 1px #eef2d1;
   border-radius: $borderRadius20;
   text-align: center;
@@ -55,107 +57,10 @@ $description_image-size: calc(100px + 500 * ((100vw - 280px) / (1680 - 280)));
 
 .description_text {
   font-size: calc(9px + 11 * ((100vw - 280px) / (1680 - 280)));
-  &_title {
-    padding-bottom: 20px;
-    @include text-styles(22px, 600);
-  }
 }
+
 .description_text-title {
-  @include text-styles(_, 600);
+  font-size: calc(11px + 13 * ((100vw - 280px) / (1680 - 280)));
+  font-weight: 600;
   padding-bottom: 10px;
-}
-
-@include desktop_medium {
-  .description_content {
-    width: $width90vw;
-  }
-  .description_image {
-    // width: 450px;
-    // height: 450px;
-    margin-right: 100px;
-  }
-  .description_product-name {
-    font-size: 26px;
-  }
-  .description_text {
-    // font-size: 18px;
-  }
-}
-
-@include laptop_large {
-  .description_image {
-    // width: 350px;
-    // height: 350px;
-    margin-right: 50px;
-    margin-bottom: 30px;
-  }
-  .description_product-name {
-    font-size: 22px;
-  }
-  .description_text {
-    // font-size: 16px;
-  }
-}
-
-@include tablet_large {
-  .description_back-button {
-    font-size: 18px;
-  }
-  .description_image {
-    // width: 250px;
-    // height: 250px;
-    margin-right: 30px;
-    margin-bottom: 20px;
-  }
-  .description_product-name {
-    font-size: 19px;
-  }
-  .description_text {
-    // font-size: 14px;
-    &_title {
-      font-size: 16px;
-    }
-  }
-}
-
-@include tablet_medium {
-  .description_back-button {
-    font-size: 16px;
-  }
-  .description_image {
-    // width: 180px;
-    // height: 180px;
-  }
-  .description_product-name {
-    font-size: 16px;
-  }
-  .description_text {
-    // font-size: 12px;
-  }
-}
-
-@include mobile_large {
-  .description_image {
-    // width: 140px;
-    // height: 140px;
-    margin-right: 20px;
-    margin-bottom: 10px;
-  }
-  .description_product-name {
-    font-size: 13px;
-  }
-  .description_text {
-    // font-size: 11px;
-  }
-}
-@include mobile_small {
-  .description_image {
-    // width: 100px;
-    // height: 100px;
-    margin-right: 20px;
-    margin-bottom: 10px;
-  }
-  .description_text {
-    // font-size: 9px;
-  }
 }
