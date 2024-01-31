@@ -1,12 +1,13 @@
 import React from 'react';
 import { Transition } from 'react-transition-group';
-import styles from './DeleteConfirm.module.scss';
+import './DeleteConfirm.scss';
 
 type DeleteConfirmProps = {
   confirmFunction: () => void;
   onClose: () => void;
   isOpen: boolean;
   text: string;
+  productTitle?: string;
 };
 
 enum AlertState {
@@ -16,21 +17,27 @@ enum AlertState {
   Exited = 'exited',
 }
 
-const DeleteConfirm: React.FC<DeleteConfirmProps> = ({ confirmFunction, onClose, isOpen, text }) => {
+const DeleteConfirm: React.FC<DeleteConfirmProps> = ({ confirmFunction, onClose, isOpen, text, productTitle }) => {
+  const onWrapperClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (event.currentTarget.className === 'modal_wrapper') {
+      onClose();
+    }
+  };
   return (
     <>
       <Transition in={isOpen} timeout={350} unmountOnExit={true}>
         {(state: AlertState) => (
-          <div className={`${styles.delete} ${styles[`delete_${state}`]}`}>
-            <div className={styles.delete_wrapper}>
-              <div className={styles.delete_content}>
-                <p>{text}</p>
-                <div className={styles.delete_buttons}>
-                  <button className={styles.close_button} onClick={onClose}>
+          <div className={`modal modal_${state}`}>
+            <div className="modal_wrapper" onClick={onWrapperClick}>
+              <div className="modal_content">
+                <div>{text}</div>
+                {productTitle && <div>{productTitle}</div>}
+                <div className="modal_buttons">
+                  <button className="modal_close_button" onClick={onClose}>
                     Отмена
                   </button>
                   <button
-                    className={styles.confirm_button}
+                    className="modal_confirm_button"
                     onClick={() => {
                       confirmFunction();
                       onClose();

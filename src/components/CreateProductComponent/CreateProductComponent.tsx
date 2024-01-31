@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { BASE_ROUTER } from '../../consts/paths';
 import { ProductFormValues } from '../../Types/types';
 import { createProductScheme } from '../../utils/scheme';
-import styles from './CreateProduct.module.scss';
+import './CreateProduct.scss';
 
 type CreateProductProps = {
   onSubmit: SubmitHandler<ProductFormValues>;
@@ -32,63 +32,63 @@ const CreateProductComponent: React.FC<CreateProductProps> = ({ onSubmit, onImag
 
   if (isLoad) {
     return (
-      <div className={styles.wrapper}>
+      <div className="create-product__wrapper">
         <Spin indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />} />
       </div>
     );
   }
   if (error) {
     return (
-      <div className={styles.wrapper}>
+      <div className="create-product__wrapper">
         <Alert type="error" message={error} />
       </div>
     );
   }
 
   return (
-    <div className={styles.wrapper}>
-      <button className={styles.back_button} onClick={() => navigate(BASE_ROUTER)}>
+    <div className="create-product__wrapper">
+      <button className="create-product__back" onClick={() => navigate(BASE_ROUTER)}>
         Отмена
       </button>
-      <div className={styles.container}>
-        <form className={styles.create_product_form} onSubmit={handleSubmit(onSubmit)}>
-          <div className={styles.content}>
-            <div className={styles.add_image} onClick={onImage}>
+      <div className="create-product__container">
+        <form className="create-product__form" onSubmit={handleSubmit(onSubmit)}>
+          <div className="create-product__content">
+            <div className="create-product__add-image" onClick={onImage}>
               {!image ? <h4>Добавить фотографию</h4> : <img src={image} alt="Картинка товара" />}
             </div>
-            <div className={styles.fields}>
+            <div className="create-product__fields">
               {/* {createFields.map((field) => {
                 return (
-                  <label className={styles.form_label} key={field.key}>
-                    <input className={styles.fields_input} placeholder={field.placeholder} {...register(field.key)}/>
-                    <span className={styles.form_label_error}>{errors?.field.key?.message}</span>
+                  <label className="form__label" key={field.key}>
+                    <input className="create-product__field" placeholder={field.placeholder} {...register(field.key)}/>
+                    <span className="create-product__error">{errors?.field.key?.message}</span>
                   </label>
                 )
               })} */}
-              <label className={styles.form_label}>
-                <input className={styles.fields_input} placeholder="Введите название товара" {...register('title')} />
-                <span className={styles.form_label_error}>{errors?.title?.message}</span>
+              <label className="create-product__label">
+                <input className="create-product__field" placeholder="Введите название товара" {...register('title')} />
+                <span className="create-product__error">{errors?.title?.message}</span>
               </label>
-              <label className={styles.form_label}>
+              <label className="create-product__label">
                 <input
-                  className={styles.fields_input}
+                  className="create-product__field"
                   placeholder="Введите описание товара"
                   {...register('description')}
                 />
-                <span className={styles.form_label_error}>{errors?.description?.message}</span>
+                <span className="create-product__error">{errors?.description?.message}</span>
               </label>
-              <label className={styles.form_label}>
+              <label className="create-product__label">
                 <input
-                  className={styles.fields_input}
+                  className="create-product__field"
                   type="number"
                   placeholder="Введите цену товара"
                   {...register('price')}
                 />
-                <span className={styles.form_label_error}>{errors?.price?.message}</span>
+                <span className="create-product__error">{errors?.price?.message}</span>
               </label>
             </div>
           </div>
-          <button className={styles.save_button}>Сохранить</button>
+          <button className="create-product__save">Сохранить</button>
         </form>
       </div>
     </div>

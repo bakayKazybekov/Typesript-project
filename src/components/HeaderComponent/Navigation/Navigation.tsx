@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Transition } from 'react-transition-group';
 import { ABOUT, BASE_ROUTER, CONTACTS, SHOP_CART } from '../../../consts/paths';
 import { menuButton } from '../../../images';
-import styles from '../Header.module.scss';
+import '../Header.scss';
 
 enum AlertState {
   Entering = 'entering',
@@ -22,12 +22,12 @@ const Navigation: React.FC = () => {
     { link: SHOP_CART, name: 'Корзина' },
   ];
 
-  const setActive = ({ isActive }: { isActive: boolean }) => (isActive ? styles.active : '');
+  const setActive = ({ isActive }: { isActive: boolean }) => (isActive ? 'active' : '');
 
   return (
     <>
-      <header className={styles.nav_wrapper}>
-        <nav className={styles.navigate}>
+      <header className="nav__wrapper">
+        <nav className="navigate">
           {links.map(({ link, name }) => (
             <NavLink key={name} className={setActive} to={link}>
               {name}
@@ -36,17 +36,17 @@ const Navigation: React.FC = () => {
         </nav>
       </header>
       <div>
-        <div className={styles.nav_button_wrapper}>
-          <div className={styles.adaptive_nav_button} onClick={() => setNavIsOpen(!navIsOpen)}>
+        <div className="nav-button__wrapper">
+          <div className="adaptive-nav__button" onClick={() => setNavIsOpen(!navIsOpen)}>
             <img src={menuButton} alt="menu-button" />
           </div>
         </div>
         <Transition in={navIsOpen} timeout={300}>
           {(state: AlertState) => (
-            <header className={`${styles.adaptive_nav_wrapper} ${styles[`menu_wrapper_${state}`]}`}>
-              <nav className={`${styles.adaptive_navigate} ${styles[`menu_${state}`]}`}>
+            <header className={`adaptive-nav__wrapper menu__wrapper__${state}`}>
+              <nav className={`adaptive-navigate menu__${state}`}>
                 {links.map(({ link, name }) => (
-                  <NavLink key={name} className={setActive} to={link}>
+                  <NavLink key={name} className={setActive} to={link} onClick={() => setNavIsOpen(false)}>
                     {name}
                   </NavLink>
                 ))}

@@ -1,28 +1,27 @@
-@import '../../../variables/variables.scss';
+@import '../../../common';
 
-.wrapper {
-  width: 94vw;
+.interaction_wrapper {
+  width: $width95vw;
   margin: 30px auto 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.search {
+.interaction_search {
   display: flex;
   gap: 10px;
 }
 
 .search_input {
   @include search-style;
+  @include text-styles(14px);
   width: 600px;
   padding: 15px 20px;
-  font-size: 14px;
-  font-weight: $fontWeight400;
   outline: none;
 }
 
-.reset_button {
+.fields_reset-button {
   @include search-style;
   padding: 10px 20px;
   cursor: pointer;
@@ -40,8 +39,7 @@
 }
 
 .sorting_title {
-  font-size: 16px;
-  font-weight: $fontWeight500;
+  @include text-styles(16px, 500);
 }
 
 .sorting_buttons {
@@ -63,7 +61,7 @@
   gap: 10px;
 }
 
-.icon_wrapper {
+.sorting_icon-wrapper {
   width: 20px;
   height: 20px;
   img {
@@ -72,9 +70,9 @@
   }
 }
 
-@media (max-width: 1440px) {
-  .wrapper {
-    width: 90vw;
+@include desktop_medium {
+  .interaction_wrapper {
+    width: $width90vw;
     margin: 25px auto 0;
   }
   .search_input {
@@ -96,14 +94,14 @@
   .sorting_section {
     gap: 5px;
   }
-  .icon_wrapper {
+  .sorting_icon-wrapper {
     width: 15px;
     height: 15px;
   }
 }
 
-@media (max-width: 1040px) {
-  .wrapper {
+@include laptop_large {
+  .interaction_wrapper {
     width: 87vw;
     margin: 20px auto 0;
   }
@@ -127,7 +125,7 @@
   .sorting_section {
     gap: 5px;
   }
-  .icon_wrapper {
+  .sorting_icon-wrapper {
     width: 12px;
     height: 12px;
   }
@@ -137,8 +135,8 @@
   }
 }
 
-@media (max-width: 520px) {
-  .wrapper {
+@include tablet_medium {
+  .interaction_wrapper {
     width: 85vw;
     margin: 20px auto;
   }
@@ -163,7 +161,7 @@
   .sorting_section {
     gap: 3px;
   }
-  .icon_wrapper {
+  .sorting_icon-wrapper {
     width: 10px;
     height: 10px;
   }
@@ -173,7 +171,7 @@
   }
 }
 
-@media (max-width: 380px) {
+@include mobile_medium {
   .search_input {
     width: 200px;
     padding: 5px 10px;
@@ -194,7 +192,7 @@
   .sorting_section {
     gap: 3px;
   }
-  .icon_wrapper {
+  .sorting_icon-wrapper {
     width: 8px;
     height: 8px;
   }
@@ -204,7 +202,7 @@
   }
 }
 
-@media (max-width: 279px) {
+@include mobile_small {
   .search_input {
     width: 180px;
   }
@@ -221,7 +219,7 @@
   .sorting_section {
     gap: 1px;
   }
-  .icon_wrapper {
+  .sorting_icon-wrapper {
     width: 5px;
     height: 5px;
   }

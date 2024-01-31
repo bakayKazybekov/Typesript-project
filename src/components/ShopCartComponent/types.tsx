@@ -7,6 +7,8 @@ export type ShopCartProductListProps = {
   addCart: (product: ProductType) => void;
   deleteFromCart: () => void;
   setDeleteId: (id: number) => void;
+  deleteProductTitle: string;
+  setDeleteProductTitle: (title: string) => void;
   confirmModalIsOpen: boolean;
   setConfirmModalIsOpen: (state: boolean) => void;
   isLoad: boolean;
@@ -17,4 +19,5 @@ export type ShopCartHeaderProps = {
   clearConfirmModalIsOpen: boolean;
   setClearConfirmModalIsOpen: (state: boolean) => void;
   clearShopCart: () => void;
+  productsLength?: number;
 };

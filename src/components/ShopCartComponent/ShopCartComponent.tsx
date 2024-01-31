@@ -1,10 +1,5 @@
-import { Alert } from 'antd';
 import React from 'react';
-import { ProductType, ShopCartProductType } from '../../Types/types';
-import DeleteConfirm from '../Alerts/DeleteConfirm/DeleteConfirm';
-import ProductSkeleton from '../Alerts/ProductSkeleton/ProductSkeleton';
-import ClearButton from './ClearButton/ClearButton';
-import styles from './ShopCart.module.scss';
+import './ShopCart.scss';
 import ShopCartHeader from './ShopCartHeader/ShopCartHeader';
 import ShopCartProductList from './ShopCartProductList/ShopCartProductList';
 import { ShopCartComponentProps } from './types';
@@ -14,6 +9,8 @@ const ShopCartComponent: React.FC<ShopCartComponentProps> = ({
   addCart,
   deleteFromCart,
   setDeleteId,
+  deleteProductTitle,
+  setDeleteProductTitle,
   confirmModalIsOpen,
   setConfirmModalIsOpen,
   clearShopCart,
@@ -24,11 +21,12 @@ const ShopCartComponent: React.FC<ShopCartComponentProps> = ({
   token,
 }) => {
   return (
-    <div className={styles.wrapper}>
+    <div className="shop-cart__wrapper">
       <ShopCartHeader
         clearConfirmModalIsOpen={clearConfirmModalIsOpen}
         setClearConfirmModalIsOpen={setClearConfirmModalIsOpen}
         clearShopCart={clearShopCart}
+        productsLength={shopCartProducts.length}
       />
       <ShopCartProductList
         shopCartProducts={shopCartProducts}
@@ -37,6 +35,8 @@ const ShopCartComponent: React.FC<ShopCartComponentProps> = ({
         addCart={addCart}
         deleteFromCart={deleteFromCart}
         setDeleteId={setDeleteId}
+        deleteProductTitle={deleteProductTitle}
+        setDeleteProductTitle={setDeleteProductTitle}
         confirmModalIsOpen={confirmModalIsOpen}
         setConfirmModalIsOpen={setConfirmModalIsOpen}
         token={token}

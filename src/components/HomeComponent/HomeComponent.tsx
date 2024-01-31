@@ -3,7 +3,7 @@ import { HomeComponentProps } from './types';
 import Interaction from './Interaction/Interaction';
 import ProductsList from './ProductsList/ProductsList';
 import CreateButton from './CreateButton/CreateButton';
-import styles from './Home.module.scss';
+import './Home.scss';
 
 const HomeComponent: React.FC<HomeComponentProps> = ({
   onSubmitSearch,
@@ -15,15 +15,19 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
   dateSortingState,
   products,
   setDeleteId,
+  deleteProductTitle,
+  setDeleteProductTitle,
   onDelete,
   confirmModalIsOpen,
   setConfirmModalIsOpen,
   shopCartAlert,
   addCart,
   token,
+  isLoad,
+  error,
 }) => {
   return (
-    <div className={styles.wrapper}>
+    <div className="home__wrapper">
       <Interaction
         onSubmitSearch={onSubmitSearch}
         onChangeSearch={onChangeSearch}
@@ -36,12 +40,16 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
       <ProductsList
         products={products}
         setDeleteId={setDeleteId}
+        deleteProductTitle={deleteProductTitle}
+        setDeleteProductTitle={setDeleteProductTitle}
         onDelete={onDelete}
         confirmModalIsOpen={confirmModalIsOpen}
         setConfirmModalIsOpen={setConfirmModalIsOpen}
         shopCartAlert={shopCartAlert}
         addCart={addCart}
         token={token}
+        isLoad={isLoad}
+        error={error}
       />
       <CreateButton token={token} />
     </div>

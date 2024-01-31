@@ -1,13 +1,13 @@
 import LoginButton from './LoginButton/LoginButton';
 import Navigation from './Navigation/Navigation';
-import styles from './Header.module.scss';
+import './Header.scss';
 
 function HeaderComponent() {
   return (
-    <div className={styles.wrapper}>
+    <header className="header__wrapper">
       <Navigation />
       <LoginButton />
-    </div>
+    </header>
   );
 }
 

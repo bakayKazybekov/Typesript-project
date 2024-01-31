@@ -1,180 +1,171 @@
-@import '../../variables/variables.scss';
+@import '../../common';
 
-.container {
+.login__container {
   font-family: $mainFont;
-  width: 90vw;
+  width: $width90vw;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.back_button {
-  font-family: $mainFont;
-  font-weight: $fontWeight400;
+.login__back-button {
+  @include text-styles(16px);
   padding: 10px 30px;
   border-radius: $borderRadius10;
   border: $border;
   background-color: #fff;
-  font-size: 20px;
   cursor: pointer;
 }
 
-.back_button_wrapper {
+.login__back-button__wrapper {
   height: 9vh;
-  width: 100%;
+  width: $width100percent;
   display: flex;
   align-items: flex-end;
 }
 
-.login_wrapper {
+.login__wrapper {
   display: flex;
   flex-direction: column;
 }
 
-.login_title {
+.login__title {
   text-align: center;
-  font-family: $mainFont;
-  font-size: 36px;
-  font-weight: $fontWeight400;
+  @include text-styles(36px);
 }
 
-.login_form {
+.login__form {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
   margin-top: 75px;
-  &_label {
+  &__label {
     font-family: $mainFont;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5px;
-    &_error {
+    &__error {
       color: red;
     }
   }
-  &_input {
-    font-family: $mainFont;
+  &__input {
+    @include text-styles(24px);
     width: 600px;
     padding: 20px 25px;
     border-radius: 20px;
     border: none;
     background-color: $mainColor;
-    font-size: $fontSize24;
-    font-weight: $fontWeight400;
     outline: none;
   }
-  &_buttons {
+  &__buttons {
     margin-top: 35px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 22px;
     div {
-      font-family: $mainFont;
-      font-size: 20px;
+      @include text-styles(20px);
     }
   }
-  &_button {
-    font-family: $mainFont;
-    font-weight: $fontWeight400;
+  &__button {
+    @include text-styles(24px);
     padding: 10px 30px;
     border-radius: $borderRadius10;
     border: $border;
-    font-size: $fontSize24;
     color: $mainColor;
     background: $secondColor;
     cursor: pointer;
   }
-  &_error {
+  &__error {
     color: rgb(212, 51, 51);
   }
 }
 
-@media (max-width: 1240px) {
-  .login_wrapper {
+@include desktop_small {
+  .login__wrapper {
     height: 70vh;
     justify-content: center;
   }
-  .back_button {
+  .login__back-button {
     font-size: 15px;
   }
-  .login_title {
+  .login__title {
     font-size: 30px;
   }
-  .login_form {
+  .login__form {
     margin-top: 60px;
-    &_input {
+    &__input {
       padding: 15px 20px;
       font-size: 20px;
       width: 500px;
     }
-    &_buttons {
+    &__buttons {
       gap: 20px;
       div {
         font-size: 18px;
       }
     }
-    &_button {
+    &__button {
       font-size: 21px;
     }
   }
 }
 
-@media (max-width: 780px) {
-  .back_button {
+@include laptop_small {
+  .login__back-button {
     font-size: 13px;
   }
-  .login_title {
+  .login__title {
     font-size: 26px;
   }
-  .login_form {
+  .login__form {
     margin-top: 40px;
     gap: 10px;
-    &_input {
+    &__input {
       padding: 12px 18px;
       font-size: 18px;
       width: 400px;
     }
-    &_buttons {
+    &__buttons {
       margin-top: 25px;
       gap: 15px;
       div {
         font-size: 15px;
       }
     }
-    &_button {
+    &__button {
       font-size: 17px;
     }
   }
 }
 
-@media (max-width: 540px) {
-  .back_button {
+@include tablet_medium {
+  .login__back-button {
     font-size: 8px;
   }
-  .login_title {
+  .login__title {
     font-size: 22px;
   }
-  .login_form {
+  .login__form {
     margin-top: 40px;
     gap: 10px;
-    &_input {
+    &__input {
       padding: 10px 15px;
       font-size: 15px;
       width: 250px;
       border-radius: 8px;
     }
-    &_buttons {
+    &__buttons {
       margin-top: 20px;
       gap: 10px;
       div {
         font-size: 12px;
       }
     }
-    &_button {
+    &__button {
       padding: 8px 25px;
       font-size: 14px;
     }

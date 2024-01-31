@@ -1,39 +1,39 @@
-@import '../../variables/variables.scss';
+@import '../../common';
 
-.wrapper {
-  width: 95vw;
-  margin: 0 auto;
+.header__wrapper {
+  width: $width95vw;
+  margin: auto;
   display: flex;
   justify-content: space-between;
 }
 
 // Login button styles
-.logout_wrapper {
+.logout__wrapper {
   display: flex;
   align-items: center;
   gap: 30px;
 }
 
-.avatar_image {
+.avatar__image {
   width: 50px;
   height: 50px;
   object-fit: cover;
   border-radius: 30px;
 }
 
-.logout_button {
+.logout__button {
   @include login-button-style;
 }
 
-.login_button {
+.login__button {
   @include login-button-style;
   color: #000;
   text-decoration: none;
 }
 
 // Navigation styles
-.nav_wrapper {
-  width: 96vw;
+.nav__wrapper {
+  width: $width95vw;
   margin: 30px auto 0;
   display: flex;
   justify-content: space-between;
@@ -42,12 +42,11 @@
 .navigate {
   padding: 25px;
   border-radius: 20px;
-  background-color: #eef2d1;
+  background-color: $mainColor;
   display: flex;
   justify-content: center;
   gap: 45px;
-  font-size: 20px;
-  font-weight: 600;
+  @include text-styles(20px, 600);
   a {
     text-decoration: none;
   }
@@ -58,17 +57,17 @@
 }
 
 // Adaptive navigation
-.adaptive_nav_button {
+.adaptive-nav__button {
   display: none;
 }
 
-.adaptive_nav_wrapper {
+.adaptive-nav__wrapper {
   position: absolute;
   left: 0;
 }
-.adaptive_navigate {
+.adaptive-navigate {
   position: relative;
-  width: 100vw;
+  width: $width100vw;
   background-color: $mainColor;
   z-index: 0;
   padding: 20px;
@@ -79,33 +78,33 @@
   transition: transform 0.2s;
 }
 .menu {
-  &_entering,
-  &_entered {
+  &__entering,
+  &__entered {
     transform: translateY(0);
   }
-  &_exiting,
-  &_exited {
+  &__exiting,
+  &__exited {
     transform: translateY(-150%);
   }
 }
 
-.menu_wrapper {
-  &_entering,
-  &_entered,
-  &_exiting {
+.menu__wrapper {
+  &__entering,
+  &__entered,
+  &__exiting {
     transform: translateY(0);
   }
-  &_exited {
+  &__exited {
     transform: translateY(-150%);
   }
 }
 
-.nav_button_wrapper {
-  width: 100%;
+.nav-button__wrapper {
+  width: $width100percent;
   background-color: $mainColor;
 }
 
-.adaptive_nav_button {
+.adaptive-nav__button {
   width: 40px;
   height: 40px;
   cursor: pointer;
@@ -114,9 +113,9 @@
   }
 }
 
-@media (max-width: 1440px) {
-  .nav_wrapper {
-    width: 95vw;
+@include desktop_medium {
+  .nav__wrapper {
+    width: $width95vw;
     margin: 20px auto 0;
   }
   .navigate {
@@ -124,23 +123,23 @@
     gap: 40px;
     font-size: 18px;
   }
-  .logout_wrapper {
+  .logout__wrapper {
     gap: 20px;
   }
-  .avatar_image {
+  .avatar__image {
     width: 45px;
     height: 45px;
   }
-  .logout_button {
+  .logout__button {
     @include login-button-style;
   }
-  .login_button {
+  .login__button {
     @include login-button-style;
   }
 }
 
-@media (max-width: 1040px) {
-  .nav_wrapper {
+@include laptop_large {
+  .nav__wrapper {
     margin: 15px auto 0;
   }
   .navigate {
@@ -148,56 +147,56 @@
     gap: 35px;
     font-size: 16px;
   }
-  .logout_wrapper {
+  .logout__wrapper {
     margin-top: 15px;
     display: flex;
     align-items: center;
     gap: 15px;
   }
-  .avatar_image {
+  .avatar__image {
     width: 35px;
     height: 35px;
   }
-  .logout_button {
+  .logout__button {
     @include login-button-style;
   }
-  .login_button {
+  .login__button {
     @include login-button-style;
   }
 }
 
-@media (max-width: 640px) {
-  .wrapper {
-    width: 100vw;
+@include tablet_large {
+  .header__wrapper {
+    width: $width100vw;
     margin: 0;
     flex-direction: column;
     align-items: end;
   }
-  .logout_wrapper {
+  .logout__wrapper {
     margin-top: 10px;
     margin-right: 10px;
     gap: 10px;
   }
-  .avatar_image {
+  .avatar__image {
     width: 25px;
     height: 25px;
   }
-  .logout_button {
+  .logout__button {
     @include login-button-style;
   }
-  .login_button {
+  .login__button {
     @include login-button-style;
   }
 }
 
-@media (max-width: 540px) {
-  .nav_wrapper {
-    width: 100vw;
+@include tablet_medium {
+  .nav__wrapper {
+    width: $width100vw;
     margin: 0;
     justify-content: center;
   }
   .navigate {
-    width: 100%;
+    width: $width100percent;
     border-radius: 0;
     gap: 0;
     justify-content: space-around;
@@ -205,26 +204,26 @@
   }
 }
 
-@media (max-width: 430px) {
-  .wrapper {
+@include mobile_large {
+  .header__wrapper {
     flex-direction: row;
     background-color: $mainColor;
     padding: 12px;
   }
-  .logout_wrapper {
+  .logout__wrapper {
     align-self: start;
   }
-  .nav_wrapper {
+  .nav__wrapper {
     display: none;
   }
-  .avatar_image {
+  .avatar__image {
     width: 20px;
     height: 20px;
   }
-  .adaptive_nav_button {
+  .adaptive-nav__button {
     display: flex;
   }
-  .adaptive_navigate {
+  .adaptive-navigate {
     flex-direction: column;
     display: flex;
   }

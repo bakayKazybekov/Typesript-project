@@ -1,7 +1,7 @@
-@import '../../variables/variables.scss';
+@import '../../common';
 
-.wrapper {
-  width: 90vw;
+.contacts__wrapper {
+  width: $width90vw;
   height: 80vh;
   margin: 0 auto;
   display: flex;
@@ -10,14 +10,14 @@
   align-items: center;
 }
 
-.links {
-  width: 90vw;
+.contacts__links {
+  width: $width90vw;
   display: flex;
   justify-content: center;
   gap: 100px;
 }
 
-.link_wrapper {
+.link__wrapper {
   width: 100px;
   height: 100px;
   cursor: pointer;
@@ -26,31 +26,31 @@
   }
 }
 
-@media (max-width: 1180px) {
-  .links {
+@include laptop_large {
+  .contacts__links {
     gap: 80px;
   }
-  .link_wrapper {
+  .link__wrapper {
     width: 80px;
     height: 80px;
   }
 }
 
-@media (max-width: 920px) {
-  .links {
+@include laptop_medium {
+  .contacts__links {
     gap: 60px;
   }
-  .link_wrapper {
+  .link__wrapper {
     width: 60px;
     height: 60px;
   }
 }
 
-@media (max-width: 480px) {
-  .links {
+@include mobile_large {
+  .contacts__links {
     gap: 40px;
   }
-  .link_wrapper {
+  .link__wrapper {
     width: 40px;
     height: 40px;
   }

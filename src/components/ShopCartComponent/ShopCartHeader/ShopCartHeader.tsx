@@ -1,24 +1,25 @@
 import React from 'react';
 import DeleteConfirm from '../../Alerts/DeleteConfirm/DeleteConfirm';
-import styles from '../ShopCart.module.scss';
+import '../ShopCart.scss';
 import { ShopCartHeaderProps } from '../types';
 
 const ShopCartHeader: React.FC<ShopCartHeaderProps> = ({
   clearConfirmModalIsOpen,
   setClearConfirmModalIsOpen,
   clearShopCart,
+  productsLength,
 }) => {
   return (
-    <header className={styles.header}>
-      <div className={styles.shop_cart_title}>Корзина</div>
-      <button className={styles.clear_button} onClick={() => setClearConfirmModalIsOpen(true)}>
+    <header className="shop-cart__header">
+      <div className="shop__cart__title">Корзина</div>
+      <button className="shop-cart__clear-button" onClick={() => productsLength && setClearConfirmModalIsOpen(true)}>
         Очистить корзину
       </button>
       <DeleteConfirm
         confirmFunction={clearShopCart}
         onClose={() => setClearConfirmModalIsOpen(false)}
         isOpen={clearConfirmModalIsOpen}
-        text="Вы уверены что хотите очистить корзину?"
+        text="Вы уверены что хотите удалить все товары из корзины?"
       />
     </header>
   );

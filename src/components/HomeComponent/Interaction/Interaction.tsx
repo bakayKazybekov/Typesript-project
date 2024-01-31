@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { downArrowIcon, upArrowIcon } from '../../../images';
 import { InteractionProps } from '../types';
-import styles from './Interaction.module.scss';
+import './Interaction.scss';
 
 const Interaction: React.FC<InteractionProps> = ({
   onSubmitSearch,
@@ -13,22 +13,20 @@ const Interaction: React.FC<InteractionProps> = ({
   priceSortingState,
   dateSortingState,
 }) => {
-  console.log('showResetButton', showResetButton);
-
   const { register, handleSubmit, resetField } = useForm<{ search: string }>();
 
   return (
-    <div className={styles.wrapper}>
-      <form className={styles.search} onSubmit={handleSubmit(onSubmitSearch)}>
+    <div className="interaction_wrapper">
+      <form className="interaction_search" onSubmit={handleSubmit(onSubmitSearch)}>
         <input
-          className={styles.search_input}
+          className="search_input"
           type="text"
           placeholder="Введите поисковик"
           {...register('search', { onChange: onChangeSearch })}
         />
         {showResetButton && (
           <button
-            className={styles.reset_button}
+            className="fields_reset-button"
             type="reset"
             onClick={() => {
               onResetSearch();
@@ -38,14 +36,14 @@ const Interaction: React.FC<InteractionProps> = ({
             Очистить
           </button>
         )}
-        <button className={styles.search_button}>Поиск</button>
+        <button className="search_button">Поиск</button>
       </form>
-      <div className={styles.sorting}>
-        <div className={styles.sorting_title}>Сортировать по:</div>
-        <div className={styles.sorting_buttons}>
-          <section className={styles.sorting_section}>
+      <div className="sorting">
+        <div className="sorting_title">Сортировать по:</div>
+        <div className="sorting_buttons">
+          <section className="sorting_section">
             <p>Ценам</p>
-            <div className={styles.icon_wrapper}>
+            <div className="sorting_icon-wrapper">
               {priceSortingState ? (
                 <img alt="Up Arrow" onClick={() => filters('firstCheap')} src={upArrowIcon} />
               ) : (
@@ -53,9 +51,9 @@ const Interaction: React.FC<InteractionProps> = ({
               )}
             </div>
           </section>
-          <section className={styles.sorting_section}>
+          <section className="sorting_section">
             <p>Дате</p>
-            <div className={styles.icon_wrapper}>
+            <div className="sorting_icon-wrapper">
               {dateSortingState ? (
                 <img alt="Up Arrow" onClick={() => filters('firstNew')} src={upArrowIcon} />
               ) : (
@@ -63,7 +61,7 @@ const Interaction: React.FC<InteractionProps> = ({
               )}
             </div>
           </section>
-          <button className={styles.wtihout_filters_button} onClick={() => filters('withoutFilter')}>
+          <button className="wtihout_filters_button" onClick={() => filters('withoutFilter')}>
             Без фильтров
           </button>
         </div>

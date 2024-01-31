@@ -1,5 +1,7 @@
+@import '../../../common';
+
 .skeletons__wrapper {
-  width: 95vw;
+  width: $width95vw;
   margin: 20px auto;
   display: flex;
   justify-content: center;
@@ -12,7 +14,7 @@
 }
 
 .product__skeleton {
-  width: 100%;
+  width: $width100percent;
   height: 100%;
   padding: 0.5rem;
   border-radius: 5px;
@@ -23,13 +25,13 @@
   height: 230px;
 }
 
-@media (max-width: 1740px) {
+@include desktop_large {
   .skeletons {
     grid-template-columns: repeat(5, 1fr);
   }
 }
 
-@media (max-width: 1440px) {
+@include desktop_medium {
   .skeletons {
     grid-template-columns: repeat(6, 1fr);
   }
@@ -39,45 +41,45 @@
   }
 }
 
-@media (max-width: 1240px) {
+@include desktop_small {
   .skeletons {
     grid-template-columns: repeat(5, 1fr);
   }
 }
 
-@media (max-width: 1040px) {
+@include laptop_large {
   .skeletons {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-@media (max-width: 840px) {
+@include laptop_small {
   .skeletons {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (max-width: 640px) {
+@include tablet_large {
   .skeletons {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 480px) {
+@include mobile_large {
   .skeleton__image {
     width: 130px;
     height: 130px;
   }
 }
 
-@media (max-width: 380px) {
+@include mobile_medium {
   .skeleton__image {
     width: 90px;
     height: 90px;
   }
 }
 
-@media (max-width: 279px) {
+@include mobile_small {
   .skeleton__image {
     width: 70px;
     height: 70px;
