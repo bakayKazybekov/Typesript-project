@@ -6,6 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { BASE_ROUTER } from '../../consts/paths';
 import { ProductFormValues } from '../../Types/types';
+import { createProductFields } from '../../utils/utils';
 import { createProductScheme } from '../../utils/scheme';
 import './CreateProduct.scss';
 
@@ -57,35 +58,12 @@ const CreateProductComponent: React.FC<CreateProductProps> = ({ onSubmit, onImag
               {!image ? <h4>Добавить фотографию</h4> : <img src={image} alt="Картинка товара" />}
             </div>
             <div className="create-product__fields">
-              {/* {createFields.map((field) => {
-                return (
-                  <label className="form__label" key={field.key}>
-                    <input className="create-product__field" placeholder={field.placeholder} {...register(field.key)}/>
-                    <span className="create-product__error">{errors?.field.key?.message}</span>
-                  </label>
-                )
-              })} */}
-              <label className="create-product__label">
-                <input className="create-product__field" placeholder="Введите название товара" {...register('title')} />
-                <span className="create-product__error">{errors?.title?.message}</span>
-              </label>
-              <label className="create-product__label">
-                <input
-                  className="create-product__field"
-                  placeholder="Введите описание товара"
-                  {...register('description')}
-                />
-                <span className="create-product__error">{errors?.description?.message}</span>
-              </label>
-              <label className="create-product__label">
-                <input
-                  className="create-product__field"
-                  type="number"
-                  placeholder="Введите цену товара"
-                  {...register('price')}
-                />
-                <span className="create-product__error">{errors?.price?.message}</span>
-              </label>
+              {createProductFields.map(({ name, placeholder, type }) => (
+                <label className="create-product__label" key={name}>
+                  <input type={type} className="create-product__field" placeholder={placeholder} {...register(name)} />
+                  <span className="create-product__error">{errors[name]?.message}</span>
+                </label>
+              ))}
             </div>
           </div>
           <button className="create-product__save">Сохранить</button>

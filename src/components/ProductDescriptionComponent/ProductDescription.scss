@@ -13,7 +13,7 @@
   align-self: end;
   a {
     text-decoration: none;
-    color: #000;
+    color: $black;
   }
 }
 
@@ -23,7 +23,7 @@
 
 .description_wrapper {
   width: $width90vw;
-  @include display-flex-column;
+  @extend .display-flex-column;
   align-items: center;
   gap: 60px;
 }
@@ -42,13 +42,14 @@
   @include adaptive-size(width, 600, 100);
   @include adaptive-size(height, 600, 100);
   @include adaptive-size(margin-right, 120, 20);
-  @include adaptive-size(margin-bottom, 100, 10);
+  // @include adaptive-size(margin-bottom, 100, 10);
+  margin-bottom: calc(20px + 80 * ((100vw - 280px) / (1680 - 280)));
   float: left;
   border: solid 1px #eef2d1;
   border-radius: $borderRadius20;
   text-align: center;
   img {
-    @include image-style;
+    @extend .image-style;
     border-radius: $borderRadius20;
   }
 }

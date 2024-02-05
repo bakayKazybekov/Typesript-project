@@ -5,10 +5,9 @@ import { InteractionProps } from '../types';
 import './Interaction.scss';
 
 const Interaction: React.FC<InteractionProps> = ({
+  handleProductAction,
   onSubmitSearch,
   onChangeSearch,
-  filters,
-  onResetSearch,
   showResetButton,
   priceSortingState,
   dateSortingState,
@@ -29,7 +28,7 @@ const Interaction: React.FC<InteractionProps> = ({
             className="fields_reset-button"
             type="reset"
             onClick={() => {
-              onResetSearch();
+              handleProductAction('resetSearch');
               resetField('search');
             }}
           >
@@ -45,9 +44,17 @@ const Interaction: React.FC<InteractionProps> = ({
             <p>Ценам</p>
             <div className="sorting_icon-wrapper">
               {priceSortingState ? (
-                <img alt="Up Arrow" onClick={() => filters('firstCheap')} src={upArrowIcon} />
+                <img
+                  alt="Up Arrow"
+                  onClick={() => handleProductAction('filters', undefined, 'firstCheap')}
+                  src={upArrowIcon}
+                />
               ) : (
-                <img alt="Down Arrow" onClick={() => filters('firstExpensive')} src={downArrowIcon} />
+                <img
+                  alt="Down Arrow"
+                  onClick={() => handleProductAction('filters', undefined, 'firstExpensive')}
+                  src={downArrowIcon}
+                />
               )}
             </div>
           </section>
@@ -55,13 +62,24 @@ const Interaction: React.FC<InteractionProps> = ({
             <p>Дате</p>
             <div className="sorting_icon-wrapper">
               {dateSortingState ? (
-                <img alt="Up Arrow" onClick={() => filters('firstNew')} src={upArrowIcon} />
+                <img
+                  alt="Up Arrow"
+                  onClick={() => handleProductAction('filters', undefined, 'firstNew')}
+                  src={upArrowIcon}
+                />
               ) : (
-                <img alt="Down Arrow" onClick={() => filters('firstOld')} src={downArrowIcon} />
+                <img
+                  alt="Down Arrow"
+                  onClick={() => handleProductAction('filters', undefined, 'firstOld')}
+                  src={downArrowIcon}
+                />
               )}
             </div>
           </section>
-          <button className="wtihout_filters_button" onClick={() => filters('withoutFilter')}>
+          <button
+            className="wtihout_filters_button"
+            onClick={() => handleProductAction('filters', undefined, 'withoutFilter')}
+          >
             Без фильтров
           </button>
         </div>

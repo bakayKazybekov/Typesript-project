@@ -1,12 +1,7 @@
 @import '../../common/';
 
-%display-flex-column {
-  display: flex;
-  flex-direction: column;
-}
-
 .create-product__wrapper {
-  @include display-flex-column;
+  @extend .display-flex-column;
   width: $width95vw;
   margin: 30px auto 30px;
   height: 95vh;
@@ -14,12 +9,12 @@
 }
 
 .create-product__back {
-  @include login-button-styles;
+  @extend .login-component-button-styles;
   align-self: start;
 }
 
 .create-product__container {
-  @include display-flex-column;
+  @extend .display-flex-column;
 }
 
 .create-product__content {
@@ -33,26 +28,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 600px;
-  height: 600px;
+  @include adaptive-size(width, 600, 200);
+  @include adaptive-size(height, 600, 200);
   border-radius: $borderRadius20;
   background-color: $mainColor;
-  @include text-styles(22px, 500);
+  @include adaptive-size(font-size, 22, 10);
   cursor: pointer;
   img {
-    @include image-style;
+    @extend .image-style;
     border-radius: $borderRadius20;
   }
 }
 
 .create-product__form {
-  @include display-flex-column;
+  @extend .display-flex-column;
   align-items: center;
   gap: 30px;
 }
 
 .create-product__label {
-  @include display-flex-column;
+  @extend .display-flex-column;
 }
 
 .create-product__error {
@@ -66,18 +61,19 @@
   flex-direction: column;
   gap: 60px;
   .create-product__field {
-    width: 600px;
+    font-family: $mainFont;
+    @include adaptive-size(width, 600, 200);
     border-radius: 10px;
     border: 1px solid rgba(106, 93, 93, 0.2);
     padding: 10px 20px;
-    color: rgba(0, 0, 0, 0.4);
-    @include text-styles(22px, 500);
+    color: $lightBlack;
+    @include adaptive-size(font-size, 22, 10);
     outline: none;
   }
 }
 
 .create-product__save {
-  @include login-button-styles;
+  @extend .login-component-button-styles;
   align-self: end;
 }
 
@@ -88,15 +84,8 @@
   .create-product__fields {
     gap: 40px;
     .create-product__field {
-      width: 500px;
       padding: 10px 20px;
-      font-size: 20px;
     }
-  }
-  .create-product__add-image {
-    width: 500px;
-    height: 500px;
-    font-size: 20px;
   }
   .create-product__content {
     gap: 12vw;
@@ -107,15 +96,6 @@
   .create-product__wrapper {
     gap: 100px;
   }
-  .create-product__fields {
-    .create-product__field {
-      width: 450px;
-    }
-  }
-  .create-product__add-image {
-    width: 450px;
-    height: 450px;
-  }
 }
 
 @include desktop_small {
@@ -125,15 +105,8 @@
   .create-product__fields {
     gap: 30px;
     .create-product__field {
-      width: 400px;
       padding: 10px 20px;
-      font-size: 16px;
     }
-  }
-  .create-product__add-image {
-    width: 400px;
-    height: 400px;
-    font-size: 16px;
   }
 }
 
@@ -141,15 +114,11 @@
   .create-product__fields {
     gap: 20px;
     .create-product__field {
-      width: 300px;
       padding: 10px 20px;
-      font-size: 13px;
     }
   }
-  .create-product__add-image {
-    width: 300px;
-    height: 300px;
-    font-size: 13px;
+  .create-product__content {
+    justify-content: center;
   }
 }
 
@@ -157,15 +126,8 @@
   .create-product__fields {
     gap: 20px;
     .create-product__field {
-      width: 250px;
       padding: 8px 15px;
-      font-size: 13px;
     }
-  }
-  .create-product__add-image {
-    width: 250px;
-    height: 250px;
-    font-size: 13px;
   }
 }
 
@@ -176,23 +138,13 @@
   .create-product__save {
     align-self: center;
   }
-  .create-product__content {
-    justify-content: center;
-  }
 }
 
 @include mobile_large {
   .create-product__fields {
     gap: 15px;
     .create-product__field {
-      width: 200px;
       border-radius: 8px;
-      font-size: 10px;
     }
-  }
-  .create-product__add-image {
-    width: 200px;
-    height: 200px;
-    font-size: 10px;
   }
 }

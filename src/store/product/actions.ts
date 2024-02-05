@@ -29,9 +29,9 @@ const getProductByIdAction = createAsyncThunk<ProductType, string, { rejectValue
 
 const editProductAction = createAsyncThunk<ProductType, editProductActionArgs, { rejectValue: string }>(
   'product/editProductdAction',
-  async ({ navigate, ...values }, thunkAPI) => {
+  async ({ navigate, id, ...values }, thunkAPI) => {
     try {
-      const { data } = await axiosInstance.put(`product/${values.id}/`, values);
+      const { data } = await axiosInstance.put(`product/${id}/`, values);
       navigate(BASE_ROUTER);
       return data;
     } catch (e) {
@@ -42,9 +42,9 @@ const editProductAction = createAsyncThunk<ProductType, editProductActionArgs, {
 
 const createProductAction = createAsyncThunk<undefined, createProductActionArgs, { rejectValue: string }>(
   'product/createProductAction',
-  async ({ navigate, ...data }, thunkAPI) => {
+  async ({ navigate, ...values }, thunkAPI) => {
     try {
-      await axiosInstance.post('product/', data);
+      await axiosInstance.post('product/', values);
       navigate(BASE_ROUTER);
     } catch (_) {
       return thunkAPI.rejectWithValue('Произошла ошибка при создании товара!');
@@ -57,7 +57,8 @@ const deleteProductAction = createAsyncThunk<undefined, number, { rejectValue: s
   async (id, thunkAPI) => {
     try {
       await axiosInstance.delete(`product/${id}/`);
-    } catch (e) {
+      // dispatch(getProductAction());
+    } catch (_) {
       return thunkAPI.rejectWithValue('Произошла ошибка при удалении товара!');
     }
   },

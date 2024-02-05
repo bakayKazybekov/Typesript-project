@@ -18,89 +18,50 @@ const ShopCartContainer = () => {
   const { shopCart, isLoad, error } = useAppSelector((state) => state.shopCartReducer);
 
   // Confirm modal states
-  const [deleteId, setDeleteId] = useState<number>(0);
-  const [deleteProductTitle, setDeleteProductTitle] = useState<string>('');
-  const [confirmModalIsOpen, setConfirmModalIsOpen] = useState<boolean>(false);
-  const [clearConfirmModalIsOpen, setClearConfirmModalIsOpen] = useState<boolean>(false);
+  const [deleteProduct, setDeleteProduct] = useState<{ title: string; id: number }>({ title: '', id: 0 });
+  const [confirmIsOpen, setConfirmIsOpen] = useState<boolean>(false);
+  const [clearConfirmIsOpen, setClearConfirmIsOpen] = useState<boolean>(false);
 
   const token = localStorage.getItem('token');
   useEffect(() => {
     if (token) dispatch(getShopCartProductsAction());
   }, [dispatch, getShopCartProductsAction, token]);
 
-  const handleShopCartAction = async (action: () => Promise<void>) => {
-    try {
-      await action();
-      dispatch(getShopCartProductsAction());
-    } catch (_) {
-      dispatch(getShopCartProductsAction());
+  const addCart = useCallback(
+    (product: ProductType) => {
+      dispatch(addShopCartProductsAction({ product: product.id, quantity: 1 }))
+        .then(() => dispatch(getShopCartProductsAction()))
+        .catch(() => dispatch(getShopCartProductsAction()));
+    },
+    [dispatch],
+  );
+
+  const deleteFromCart = useCallback(() => {
+    if (deleteProduct.id) {
+      dispatch(deleteShopCartProductsAction(deleteProduct.id))
+        .then(() => dispatch(getShopCartProductsAction()))
+        .catch(() => dispatch(getShopCartProductsAction()));
     }
-  };
+  }, [dispatch, deleteProduct]);
 
-  const addCart = async (product: ProductType) => {
-    try {
-      await dispatch(addShopCartProductsAction({ product: product.id, quantity: 1 }));
-      dispatch(getShopCartProductsAction());
-    } catch (e) {
-      console.error('Ошибка при добавлении в корзину:', e);
-      dispatch(getShopCartProductsAction());
-    }
-  };
-
-  const deleteFromCart = async () => {
-    if (deleteId) {
-      try {
-        await dispatch(deleteShopCartProductsAction(deleteId));
-        dispatch(getShopCartProductsAction());
-      } catch (e) {
-        console.error('Ошибка при удалении из корзины:', e);
-        dispatch(getShopCartProductsAction());
-      }
-    }
-  };
-
-  const clearShopCart = async () => {
-    try {
-      await dispatch(removeAllShopCartProductsAction());
-      dispatch(getShopCartProductsAction());
-    } catch (e) {
-      console.error('Ошибка при очистке корзины:', e);
-      dispatch(getShopCartProductsAction());
-    }
-  };
-  // const addCart = (product: ProductType) => {
-  //   dispatch(addShopCartProductsAction({ product: product.id, quantity: 1 }))
-  //     .then(() => dispatch(getShopCartProductsAction()))
-  //     .catch(() => dispatch(getShopCartProductsAction()));
-  // };
-
-  // const deleteFromCart = () => {
-  //   if (deleteId) {
-  //     dispatch(deleteShopCartProductsAction(deleteId))
-  //       .then(() => dispatch(getShopCartProductsAction()))
-  //       .catch(() => dispatch(getShopCartProductsAction()));
-  //   }
-  // };
-
-  // const clearShopCart = () => {
-  //   dispatch(removeAllShopCartProductsAction())
-  //     .then(() => dispatch(getShopCartProductsAction()))
-  //     .catch(() => dispatch(getShopCartProductsAction()));
-  // };
+  const clearShopCart = useCallback(() => {
+    dispatch(removeAllShopCartProductsAction())
+      .then(() => dispatch(getShopCartProductsAction()))
+      .catch(() => dispatch(getShopCartProductsAction()));
+  }, [dispatch]);
 
   return (
     <ShopCartComponent
       shopCartProducts={shopCart}
       addCart={addCart}
       deleteFromCart={deleteFromCart}
-      setDeleteId={setDeleteId}
-      deleteProductTitle={deleteProductTitle}
-      setDeleteProductTitle={setDeleteProductTitle}
-      confirmModalIsOpen={confirmModalIsOpen}
-      setConfirmModalIsOpen={setConfirmModalIsOpen}
+      deleteProduct={deleteProduct}
+      setDeleteProduct={setDeleteProduct}
+      confirmIsOpen={confirmIsOpen}
+      setConfirmIsOpen={setConfirmIsOpen}
       clearShopCart={clearShopCart}
-      clearConfirmModalIsOpen={clearConfirmModalIsOpen}
-      setClearConfirmModalIsOpen={setClearConfirmModalIsOpen}
+      clearConfirmIsOpen={clearConfirmIsOpen}
+      setClearConfirmIsOpen={setClearConfirmIsOpen}
       isLoad={isLoad}
       error={error}
       token={token}

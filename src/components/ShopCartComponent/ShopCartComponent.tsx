@@ -8,14 +8,13 @@ const ShopCartComponent: React.FC<ShopCartComponentProps> = ({
   shopCartProducts,
   addCart,
   deleteFromCart,
-  setDeleteId,
-  deleteProductTitle,
-  setDeleteProductTitle,
-  confirmModalIsOpen,
-  setConfirmModalIsOpen,
+  deleteProduct,
+  setDeleteProduct,
+  confirmIsOpen,
+  setConfirmIsOpen,
   clearShopCart,
-  clearConfirmModalIsOpen,
-  setClearConfirmModalIsOpen,
+  clearConfirmIsOpen,
+  setClearConfirmIsOpen,
   isLoad,
   error,
   token,
@@ -23,8 +22,8 @@ const ShopCartComponent: React.FC<ShopCartComponentProps> = ({
   return (
     <div className="shop-cart__wrapper">
       <ShopCartHeader
-        clearConfirmModalIsOpen={clearConfirmModalIsOpen}
-        setClearConfirmModalIsOpen={setClearConfirmModalIsOpen}
+        clearConfirmIsOpen={clearConfirmIsOpen}
+        setClearConfirmIsOpen={setClearConfirmIsOpen}
         clearShopCart={clearShopCart}
         productsLength={shopCartProducts.length}
       />
@@ -34,11 +33,10 @@ const ShopCartComponent: React.FC<ShopCartComponentProps> = ({
         error={error}
         addCart={addCart}
         deleteFromCart={deleteFromCart}
-        setDeleteId={setDeleteId}
-        deleteProductTitle={deleteProductTitle}
-        setDeleteProductTitle={setDeleteProductTitle}
-        confirmModalIsOpen={confirmModalIsOpen}
-        setConfirmModalIsOpen={setConfirmModalIsOpen}
+        deleteProduct={deleteProduct}
+        setDeleteProduct={setDeleteProduct}
+        confirmIsOpen={confirmIsOpen}
+        setConfirmIsOpen={setConfirmIsOpen}
         token={token}
       />
     </div>

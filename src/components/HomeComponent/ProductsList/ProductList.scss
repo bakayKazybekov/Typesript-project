@@ -2,9 +2,10 @@
 
 .product-list_wrapper {
   width: $width95vw;
-  margin: 110px auto 40px;
+  margin: 0 auto 40px;
+  @include adaptive-size(margin-top, 110, 10);
+  @include adaptive-size(font-size, 28, 12);
   text-align: center;
-  font-size: 25px;
   display: flex;
   justify-content: center;
 }
@@ -12,16 +13,16 @@
 .product-list {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 40px;
+  @include adaptive-size(gap, 50, 15);
 }
 
 .product-list_product {
-  max-width: 240px;
+  @include adaptive-size(max-width, 240, 100);
   border-radius: $borderRadius20;
   padding: 15px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  @include adaptive-size(gap, 12, 5);
   align-items: center;
 }
 .product-list_product:hover {
@@ -30,68 +31,66 @@
 }
 
 .product_image {
-  width: 220px;
-  height: 220px;
+  @include adaptive-size(width, 220, 80);
+  @include adaptive-size(height, 220, 80);
   cursor: pointer;
   border: solid 1px #eef2d1;
   border-radius: $borderRadius10;
   img {
-    @include image-style;
+    @extend .image-style;
     border-radius: 10px;
   }
 }
 
 .product_edit-button {
-  @include product-action-button;
-  color: rgb(50, 50, 50);
-  background-color: #eef2d1;
+  @extend .product-action-button;
+  color: $lightBlack;
+  background-color: $mainColor;
 }
 .product_edit-button:hover {
-  background-color: #e4e7cf;
+  background-color: $lightMainColor;
 }
 
 .add_cart_button {
-  @include product-action-button;
-  color: #fff;
-  background-color: #767b5f;
+  @extend .product-action-button;
+  color: $white;
+  background-color: $secondColor;
 }
 .add_cart_button:hover {
-  background-color: #888e6f;
+  background-color: $lightSecondColor;
 }
 
 .button_icon {
-  width: 20px;
-  height: 20px;
+  @include adaptive-size(width, 20, 5);
+  @include adaptive-size(height, 20, 5);
   img {
-    @include image-style;
+    @extend .image-style;
   }
 }
 
 .product_delete-button {
-  width: 25px;
-  height: 25px;
+  @include adaptive-size(width, 25, 12);
+  @include adaptive-size(height, 25, 12);
   cursor: pointer;
   img {
-    @include image-style;
+    @extend .image-style;
   }
 }
 
 .product_text {
-  @include text-styles(16px, 500);
+  @include adaptive-size(font-size, 16, 6);
 }
 
 .create_button_container {
   align-self: end;
 }
-
 .create_button {
-  color: #000;
-  text-decoration: none;
+  @include adaptive-size(font-size, 22, 10);
+  background-color: $mainColor;
+  color: $black;
   cursor: pointer;
   border-radius: $borderRadius20;
   padding: 10px 35px;
-  font-size: $fontSize22;
-  background-color: $mainColor;
 }
 
 @include desktop_large {
@@ -99,155 +98,36 @@
     grid-template-columns: repeat(5, 1fr);
   }
 }
-
 @include desktop_medium {
-  .product-list_wrapper {
-    margin: 60px auto;
-    font-size: 24px;
-  }
-  .product-list {
-    gap: 20px 10x;
-  }
   .product-list_product {
-    max-width: 200px;
     padding: 15px 10px;
-    gap: 10px;
-  }
-  .product_image {
-    width: 180px;
-    height: 180px;
-  }
-  .create_button {
-    font-size: 20px;
-  }
-  .product_text {
-    font-size: 13px;
   }
 }
-
 @include desktop_small {
-  .product-list_wrapper {
-    font-size: 22px;
-  }
   .product-list {
     grid-template-columns: repeat(5, 1fr);
   }
-  .product-list_product {
-    max-width: 180px;
-  }
-  .product_image {
-    width: 160px;
-    height: 160px;
-  }
 }
-
 @include laptop_large {
   .product-list {
     grid-template-columns: repeat(4, 1fr);
   }
 }
-
-@include laptop_small {
-  .product-list_wrapper {
-    font-size: 20px;
-  }
+@include tablet_large {
   .product-list {
     grid-template-columns: repeat(3, 1fr);
   }
-  .button_icon {
-    width: 15px;
-    height: 15px;
-  }
 }
-
-@include tablet_large {
+@include mobile_medium {
   .product-list {
     grid-template-columns: repeat(2, 1fr);
   }
-  .product_delete-button {
-    width: 20px;
-    height: 20px;
-  }
   .create_button {
-    padding: 8px 30px;
-    font-size: 16px;
+    padding: 8px 20px;
   }
 }
-
-@include mobile_large {
-  .product-list_wrapper {
-    font-size: 18px;
-    margin-top: 5px;
-  }
-  .product-list_product {
-    max-width: 180px;
-    padding: 15px 10px;
-    gap: 8px;
-  }
-  .product_image {
-    width: 140px;
-    height: 140px;
-  }
-  .create_button {
-    font-size: 14px;
-  }
-  .product_text {
-    font-size: 11px;
-  }
-}
-
-@include mobile_medium {
-  .product-list_product {
-    max-width: 120px;
-    padding: 15px 10px;
-    gap: 10px;
-  }
-  .product_delete-button {
-    width: 15px;
-    height: 15px;
-  }
-  .product_image {
-    width: 100px;
-    height: 100px;
-  }
-  .create_button {
-    font-size: 12px;
-  }
-  .product_text {
-    font-size: 8px;
-  }
-  .button_icon {
-    width: 10px;
-    height: 10px;
-  }
-}
-
 @include mobile_small {
   .product-list_product {
-    max-width: 100px;
-    padding: 15px 10px;
-    gap: 10px;
-  }
-  .product_delete-button {
-    width: 12px;
-    height: 12px;
-  }
-  .product_image {
-    width: 80px;
-    height: 80px;
-  }
-  .create_button {
-    font-size: 10px;
-  }
-  .product-list_product {
     padding: 10px;
-    gap: 5px;
-  }
-  .product_text {
-    font-size: 6px;
-  }
-  .button_icon {
-    width: 8px;
-    height: 8px;
   }
 }

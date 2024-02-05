@@ -6,22 +6,18 @@ import CreateButton from './CreateButton/CreateButton';
 import './Home.scss';
 
 const HomeComponent: React.FC<HomeComponentProps> = ({
+  handleProductAction,
   onSubmitSearch,
   onChangeSearch,
-  filters,
-  onResetSearch,
   showResetButton,
   priceSortingState,
   dateSortingState,
   products,
-  setDeleteId,
-  deleteProductTitle,
-  setDeleteProductTitle,
-  onDelete,
-  confirmModalIsOpen,
-  setConfirmModalIsOpen,
+  deleteProduct,
+  setDeleteProduct,
+  confirmIsOpen,
+  setConfirmIsOpen,
   shopCartAlert,
-  addCart,
   token,
   isLoad,
   error,
@@ -29,24 +25,21 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
   return (
     <div className="home__wrapper">
       <Interaction
+        handleProductAction={handleProductAction}
         onSubmitSearch={onSubmitSearch}
         onChangeSearch={onChangeSearch}
-        filters={filters}
-        onResetSearch={onResetSearch}
         showResetButton={showResetButton}
         priceSortingState={priceSortingState}
         dateSortingState={dateSortingState}
       />
       <ProductsList
+        handleProductAction={handleProductAction}
         products={products}
-        setDeleteId={setDeleteId}
-        deleteProductTitle={deleteProductTitle}
-        setDeleteProductTitle={setDeleteProductTitle}
-        onDelete={onDelete}
-        confirmModalIsOpen={confirmModalIsOpen}
-        setConfirmModalIsOpen={setConfirmModalIsOpen}
+        deleteProduct={deleteProduct}
+        setDeleteProduct={setDeleteProduct}
+        confirmIsOpen={confirmIsOpen}
+        setConfirmIsOpen={setConfirmIsOpen}
         shopCartAlert={shopCartAlert}
-        addCart={addCart}
         token={token}
         isLoad={isLoad}
         error={error}

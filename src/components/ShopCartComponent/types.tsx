@@ -6,18 +6,18 @@ export type ShopCartProductListProps = {
   shopCartProducts: ShopCartProductType[];
   addCart: (product: ProductType) => void;
   deleteFromCart: () => void;
-  setDeleteId: (id: number) => void;
-  deleteProductTitle: string;
-  setDeleteProductTitle: (title: string) => void;
-  confirmModalIsOpen: boolean;
-  setConfirmModalIsOpen: (state: boolean) => void;
+  deleteProduct: { title: string; id: number };
+  setDeleteProduct: (product: { title: string; id: number }) => void;
+  confirmIsOpen: boolean;
+  setConfirmIsOpen: (state: boolean) => void;
   isLoad: boolean;
   error?: string;
   token: string | null;
 };
+
 export type ShopCartHeaderProps = {
-  clearConfirmModalIsOpen: boolean;
-  setClearConfirmModalIsOpen: (state: boolean) => void;
+  clearConfirmIsOpen: boolean;
+  setClearConfirmIsOpen: (state: boolean) => void;
   clearShopCart: () => void;
   productsLength?: number;
 };

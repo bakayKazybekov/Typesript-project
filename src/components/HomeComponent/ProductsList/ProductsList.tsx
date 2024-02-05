@@ -13,77 +13,92 @@ import './ProductList.scss';
 
 const ProductsList: React.FC<ProductsListProps> = ({
   products,
-  onDelete,
-  setDeleteId,
-  deleteProductTitle,
-  setDeleteProductTitle,
-  confirmModalIsOpen,
-  setConfirmModalIsOpen,
+  handleProductAction,
+  deleteProduct,
+  setDeleteProduct,
+  confirmIsOpen,
+  setConfirmIsOpen,
   shopCartAlert,
-  addCart,
   token,
   isLoad,
   error,
 }) => {
   const navigate = useNavigate();
+  if (isLoad) {
+    return (
+      <div className="product-list_wrapper">
+        <ProductSkeleton productsLength={products.length} />
+      </div>
+    );
+  }
+  if (!!error) {
+    return (
+      <div className="product-list_wrapper">
+        <Alert type="error" message={error} />
+      </div>
+    );
+  }
+  if (!token) {
+    return (
+      <div className="product-list_wrapper">
+        <div>Авторизуйтесь!</div>
+      </div>
+    );
+  }
+  if (!products.length) {
+    return (
+      <div className="product-list_wrapper">
+        <div>Ничего не найдено!</div>
+      </div>
+    );
+  }
 
   return (
     <div className="product-list_wrapper">
-      {isLoad ? (
-        <ProductSkeleton productsLength={products.length} />
-      ) : error ? (
-        <Alert type="error" message={error} />
-      ) : !token ? (
-        <div>Авторизуйтесь!</div>
-      ) : !products.length ? (
-        <div>Ничего не найдено!</div>
-      ) : (
-        <div className="product-list">
-          {products.map((product: ProductType) => {
-            const { title, price, image, id } = product;
-            return (
-              <li className="product-list_product" key={id}>
-                <div className="product_image" onClick={() => navigate(`${PRODUCT_DESCRIPTION}/${id}`)}>
-                  <img src={image} alt={title} />
-                </div>
-                <div className="product_delete-button">
-                  <img
-                    src={deleteIcon}
-                    alt="Кнопка удаления"
-                    onClick={() => {
-                      setConfirmModalIsOpen(true);
-                      setDeleteId(id);
-                      setDeleteProductTitle(title);
-                    }}
-                  />
-                </div>
-                <DeleteConfirm
-                  confirmFunction={onDelete}
-                  onClose={() => setConfirmModalIsOpen(false)}
-                  isOpen={confirmModalIsOpen}
-                  text="Вы уверены что хотите удалить данный товар?"
-                  productTitle={deleteProductTitle}
+      <div className="product-list">
+        {products.map((product: ProductType) => {
+          const { title, price, image, id } = product;
+          return (
+            <li className="product-list_product" key={id}>
+              <div className="product_image" onClick={() => navigate(`${PRODUCT_DESCRIPTION}/${id}`)}>
+                <img src={image} alt={title} />
+              </div>
+              <div className="product_delete-button">
+                <img
+                  src={deleteIcon}
+                  alt="Кнопка удаления"
+                  onClick={() => {
+                    setConfirmIsOpen(true);
+                    setDeleteProduct({ title, id });
+                  }}
                 />
-                <div className="product_text">{title}</div>
-                <div className="product_text">{+price - 0} k</div>
-                <div className="product_edit-button" onClick={() => navigate(`${EDIT_PRODUCT}/${id}`)}>
-                  <div className="button_icon">
-                    <img src={editIcon} alt="" />
-                  </div>
-                  Редактировать
+              </div>
+              <DeleteConfirm
+                confirmFunction={() => handleProductAction('delete')}
+                onClose={() => setConfirmIsOpen(false)}
+                isOpen={confirmIsOpen}
+                text="Вы уверены что хотите удалить данный товар?"
+                productTitle={deleteProduct.title}
+              />
+              <div className="product_text">{title}</div>
+              <div className="product_text">{parseInt(price)} k</div>
+              <div className="product_edit-button" onClick={() => navigate(`${EDIT_PRODUCT}/${id}`)}>
+                <div className="button_icon">
+                  <img src={editIcon} alt="" />
                 </div>
-                <div className="add_cart_button" onClick={() => addCart(product)}>
-                  <div className="button_icon">
-                    <img src={shopCartIcon} alt="" />
-                  </div>
-                  Добавить в корзину
+                Редактировать
+              </div>
+              <div className="add_cart_button" onClick={() => handleProductAction('addCart', product)}>
+                <div className="button_icon">
+                  <img src={shopCartIcon} alt="" />
                 </div>
-                <ShopCartAlert shopCartAlert={shopCartAlert} />
-              </li>
-            );
-          })}
-        </div>
-      )}
+                Добавить в корзину
+              </div>
+              <ShopCartAlert shopCartAlert={shopCartAlert} />
+            </li>
+          );
+        })}
+      </div>
     </div>
   );
 };

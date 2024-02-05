@@ -1,6 +1,7 @@
 import './AboutUs.scss';
 
-const AboutUs = () => {
+// ??? types
+const AboutUs: React.FC = () => {
   return (
     <div className="about-us__wrapper">
       <section className="about-us__title">

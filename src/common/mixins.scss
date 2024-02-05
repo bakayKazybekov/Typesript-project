@@ -1,5 +1,5 @@
-@mixin text-styles($fontSize, $fontWeight: 400, $fontFamily: Iowan Old Style, $lineHeight: normal) {
-  font-size: $fontSize;
+@mixin font($fontSize, $fontWeight: 400, $fontFamily: Iowan Old Style, $lineHeight: normal) {
+  font-size: #{$fontSize + px};
   font-weight: $fontWeight;
   font-family: $fontFamily;
   line-height: $lineHeight;

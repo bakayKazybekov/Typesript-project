@@ -1,10 +1,8 @@
-const BASE_ROUTER = '/';
-const ABOUT = '/about';
-const CONTACTS = '/contacts';
-const CREATE_PRODUCT = '/create-product';
-const EDIT_PRODUCT = '/edit-product';
-const SHOP_CART = '/shop-cart';
-const PRODUCT_DESCRIPTION = '/product-description';
-const LOGIN = '/login';
-
-export { BASE_ROUTER, ABOUT, CONTACTS, CREATE_PRODUCT, EDIT_PRODUCT, SHOP_CART, PRODUCT_DESCRIPTION, LOGIN };
+export const BASE_ROUTER = '/';
+export const ABOUT = '/about';
+export const CONTACTS = '/contacts';
+export const CREATE_PRODUCT = '/create-product';
+export const EDIT_PRODUCT = '/edit-product';
+export const SHOP_CART = '/shop-cart';
+export const PRODUCT_DESCRIPTION = '/product-description';
+export const LOGIN = '/login';

@@ -13,7 +13,7 @@ export type ShopCartProductType = {
 };
 
 export type addShopCartProductType = {
-  product: number;
+  product: number | ProductType; // ???
   quantity: number;
 };
 
@@ -21,8 +21,7 @@ export type createProductActionArgs = Omit<ProductType, 'id'> & {
   navigate: (path: string) => void;
 };
 
-export type editProductActionArgs = Omit<ProductType, 'id'> & {
-  navigate: (path: string) => void;
+export type editProductActionArgs = createProductActionArgs & {
   id: string;
 };
 
@@ -50,4 +49,14 @@ export type ProductState = {
   error?: string;
 };
 
-export type LoginState = Pick<ProductState, 'isLoad' | 'error'>;
+export type LoginState = Pick<ProductState, 'isLoad'> & {
+  registerError?: string;
+  authError?: string;
+};
+
+export enum AlertState {
+  Entering = 'entering',
+  Entered = 'entered',
+  Exiting = 'exiting',
+  Exited = 'exited',
+}
