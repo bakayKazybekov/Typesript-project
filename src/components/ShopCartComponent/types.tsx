@@ -4,20 +4,21 @@ export type ShopCartComponentProps = ShopCartProductListProps & ShopCartHeaderPr
 
 export type ShopCartProductListProps = {
   shopCartProducts: ShopCartProductType[];
-  addCart: (product: ProductType) => void;
+  addCart: (shopCart: ShopCartProductType) => void;
   deleteFromCart: () => void;
   deleteProduct: { title: string; id: number };
   setDeleteProduct: (product: { title: string; id: number }) => void;
   confirmIsOpen: boolean;
   setConfirmIsOpen: (state: boolean) => void;
   isLoad: boolean;
-  error?: string;
-  token: string | null;
 };
 
 export type ShopCartHeaderProps = {
   clearConfirmIsOpen: boolean;
+  onCloseError: () => void;
   setClearConfirmIsOpen: (state: boolean) => void;
   clearShopCart: () => void;
   productsLength?: number;
+  token: string | null;
+  error?: string;
 };

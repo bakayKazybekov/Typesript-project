@@ -9,7 +9,7 @@ type LoginArgs = {
 };
 
 const registerAction = createAsyncThunk<undefined, LoginArgs, { rejectValue: string }>(
-  'login/registerAction',
+  'register/registerAction',
   async ({ navigate, ...data }, thunkAPI) => {
     try {
       const response = await axiosInstance.post('register/', data);

@@ -16,12 +16,13 @@ export const loginSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(registerAction.fulfilled, (state) => {
-        state.isLoad = false;
-        state.registerError = '';
-      })
       .addCase(registerAction.pending, (state) => {
         state.isLoad = true;
+      })
+      .addCase(registerAction.fulfilled, (state) => {
+        state.isLoad = false;
+        state.authError = '';
+        state.registerError = '';
       })
       .addCase(registerAction.rejected, (state, action) => {
         state.isLoad = false;
@@ -29,12 +30,13 @@ export const loginSlice = createSlice({
       });
 
     builder
+      .addCase(loginAction.pending, (state) => {
+        state.isLoad = true;
+      })
       .addCase(loginAction.fulfilled, (state) => {
         state.isLoad = false;
         state.authError = '';
-      })
-      .addCase(loginAction.pending, (state) => {
-        state.isLoad = true;
+        state.registerError = '';
       })
       .addCase(loginAction.rejected, (state, action) => {
         state.isLoad = false;

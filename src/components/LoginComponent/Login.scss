@@ -1,10 +1,11 @@
 @import '../../common';
 
 .login__container {
-  font-family: $mainFont;
   width: $width90vw;
+  height: 100vh;
   margin: 0 auto;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   gap: 16px;
 }
@@ -34,7 +35,7 @@
 .login__title {
   text-align: center;
   @include adaptive-size(font-size, 36, 20);
-  @include font(_);
+  @include font(_, 400, $secondFont);
 }
 
 .login__form {
@@ -44,7 +45,7 @@
   gap: 15px;
   margin-top: 75px;
   &__label {
-    font-family: $mainFont;
+    font-family: $secondFont;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -55,8 +56,8 @@
   }
   &__input {
     @include adaptive-size(font-size, 24, 14);
-    @include font(_);
     @include adaptive-size(width, 600, 200);
+    @include font(_, 400, $secondFont);
     padding: 20px 25px;
     border-radius: 20px;
     border: none;
@@ -71,12 +72,12 @@
     gap: 22px;
     div {
       @include adaptive-size(font-size, 20, 12);
-      @include font(_);
+      @include font(_, 400, $secondFont);
     }
   }
   &__button {
     @include adaptive-size(font-size, 24, 14);
-    @include font(_);
+    @include font(_, 400, $secondFont);
     padding: 10px 30px;
     border-radius: $borderRadius10;
     border: $border;
@@ -85,8 +86,22 @@
     cursor: pointer;
   }
   &__error {
+    @include font(_, 400, $secondFont);
     color: rgb(212, 51, 51);
   }
+}
+
+.auth__loading__button {
+  @extend .login__form__button;
+  background-color: $secondColor;
+  padding: 10px 48px;
+  cursor: default;
+}
+
+.register__loading__button {
+  @extend .auth__loading__button;
+  padding: 10px 120px;
+  cursor: default;
 }
 
 @include desktop_small {

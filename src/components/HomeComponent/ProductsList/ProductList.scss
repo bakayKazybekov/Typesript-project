@@ -61,20 +61,12 @@
 }
 
 .button_icon {
-  @include adaptive-size(width, 20, 5);
-  @include adaptive-size(height, 20, 5);
-  img {
-    @extend .image-style;
-  }
+  @include adaptive-size(font-size, 24, 5);
 }
 
-.product_delete-button {
-  @include adaptive-size(width, 25, 12);
-  @include adaptive-size(height, 25, 12);
+.icon-trash {
+  @include adaptive-size(font-size, 28, 12);
   cursor: pointer;
-  img {
-    @extend .image-style;
-  }
 }
 
 .product_text {

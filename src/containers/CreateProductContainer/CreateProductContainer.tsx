@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../hook';
 import { createProductAction, editProductAction, getProductByIdAction } from '../../store/product/actions';
 import { useReducer } from 'react';
 import _ from 'lodash';
-import { isValidUrl } from '../../utils/utils';
+import { isValidImage } from '../../utils/utils';
 import { formReducer, initialValues } from '../../utils/useReducer';
 
 const CreateProductContainer = () => {
@@ -33,7 +33,6 @@ const CreateProductContainer = () => {
 
   useEffect(() => {
     if (productId && product) {
-      console.log('product', product);
       setValues({
         ...product,
         price: `${parseInt(product.price)}`,
@@ -59,8 +58,10 @@ const CreateProductContainer = () => {
 
   const onImage = () => {
     const img = prompt('Вставьте ссылку на фотографию');
-    if (img && isValidUrl(img)) {
+    if (img && isValidImage(img)) {
       setImage(img);
+    } else {
+      setImage('');
     }
   };
 

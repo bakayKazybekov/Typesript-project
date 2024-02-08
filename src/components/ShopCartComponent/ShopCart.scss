@@ -16,9 +16,17 @@
   gap: 20px;
 }
 
+.shop-cart__error {
+  @include adaptive-size(width, 500, 100);
+  align-self: flex-end;
+  .ant-alert-message {
+    @include adaptive-size(font-size, 18, 8);
+  }
+}
+
 .shop__cart__title {
   text-align: center;
-  font-weight: 600;
+  @include font(_, 600);
   @include adaptive-size(font-size, 32, 14);
 }
 
@@ -54,7 +62,7 @@
 }
 
 .product__text {
-  @include adaptive-size(font-size, 16, 8);
+  @include adaptive-size(font-size, 14, 6);
 }
 
 .quantity__action {
@@ -74,7 +82,6 @@
 }
 
 .shop-cart__delete-button {
-  font-family: $mainFont;
   color: $red;
   cursor: pointer;
   @include adaptive-size(font-size, 16, 8);

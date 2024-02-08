@@ -12,6 +12,7 @@
   display: flex;
   gap: 10px;
 }
+
 .search_input {
   @extend .search-style;
   @include adaptive-size(width, 600, 180);
@@ -32,38 +33,27 @@
   gap: 80px;
   @include adaptive-size(gap, 80, 10);
   &_title {
-    @include adaptive-size(font-size, 16, 8);
+    @include adaptive-size(font-size, 16, 6);
   }
-
+  &_button {
+    align-self: center;
+    cursor: pointer;
+  }
+  &_button:hover {
+    color: $green;
+  }
   &_buttons {
     display: flex;
     align-items: center;
     @include adaptive-size(gap, 40, 15);
-    @include adaptive-size(font-size, 16, 6);
-    button {
-      background-color: $white;
-      border: none;
-      cursor: pointer;
-    }
   }
-
-  .wtihout_filters_button {
-    @include adaptive-size(font-size, 16, 6);
-    color: $green;
-  }
-
   &_section {
     display: flex;
     @include adaptive-size(gap, 10, 1);
+    @include adaptive-size(font-size, 16, 6);
   }
-
-  &_icon-wrapper {
-    @include adaptive-size(width, 20, 8);
-    @include adaptive-size(height, 20, 8);
-    img {
-      @extend .image-style;
-      cursor: pointer;
-    }
+  &_active {
+    color: $green;
   }
 }
 

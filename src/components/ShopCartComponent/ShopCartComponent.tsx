@@ -6,38 +6,40 @@ import { ShopCartComponentProps } from './types';
 
 const ShopCartComponent: React.FC<ShopCartComponentProps> = ({
   shopCartProducts,
-  addCart,
+  onCloseError,
   deleteFromCart,
   deleteProduct,
+  addCart,
   setDeleteProduct,
   confirmIsOpen,
   setConfirmIsOpen,
   clearShopCart,
   clearConfirmIsOpen,
   setClearConfirmIsOpen,
-  isLoad,
   error,
   token,
+  isLoad,
 }) => {
   return (
     <div className="shop-cart__wrapper">
       <ShopCartHeader
         clearConfirmIsOpen={clearConfirmIsOpen}
+        onCloseError={onCloseError}
         setClearConfirmIsOpen={setClearConfirmIsOpen}
         clearShopCart={clearShopCart}
         productsLength={shopCartProducts.length}
+        token={token}
+        error={error}
       />
       <ShopCartProductList
         shopCartProducts={shopCartProducts}
-        isLoad={isLoad}
-        error={error}
         addCart={addCart}
         deleteFromCart={deleteFromCart}
         deleteProduct={deleteProduct}
         setDeleteProduct={setDeleteProduct}
         confirmIsOpen={confirmIsOpen}
         setConfirmIsOpen={setConfirmIsOpen}
-        token={token}
+        isLoad={isLoad}
       />
     </div>
   );

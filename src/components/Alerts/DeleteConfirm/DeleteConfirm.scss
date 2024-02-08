@@ -8,9 +8,10 @@
   height: $width100percent;
   overflow: hidden;
   overflow-y: auto;
-  transition: opacity 0.3s;
+  transition: opacity 0.1s;
   z-index: 999;
   &_wrapper {
+    background-color: rgba(0, 0, 0, 0.3);
     position: absolute;
     top: 0;
     left: 0;
@@ -35,7 +36,6 @@
     padding: 40px 20px 20px;
     transform: translateY(-50px);
     transition: opacity 0.3s, transform 0.3s;
-    box-shadow: 0px 0px 8px -5px;
   }
   &_buttons {
     display: flex;

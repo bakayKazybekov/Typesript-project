@@ -31,6 +31,8 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
         showResetButton={showResetButton}
         priceSortingState={priceSortingState}
         dateSortingState={dateSortingState}
+        products={products}
+        error={error}
       />
       <ProductsList
         handleProductAction={handleProductAction}
@@ -42,7 +44,6 @@ const HomeComponent: React.FC<HomeComponentProps> = ({
         shopCartAlert={shopCartAlert}
         token={token}
         isLoad={isLoad}
-        error={error}
       />
       <CreateButton token={token} />
     </div>

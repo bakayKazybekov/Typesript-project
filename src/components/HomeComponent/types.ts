@@ -5,7 +5,7 @@ export type HomeComponentProps = ProductsListProps & InteractionProps;
 
 export type ProductsListProps = {
   handleProductAction: (type: string, product?: ProductType, operator?: string) => void;
-  products: ProductType[];
+  products: ProductType[] | string;
   deleteProduct: { title: string; id: number };
   setDeleteProduct: (product: { title: string; id: number }) => void;
   confirmIsOpen: boolean;
@@ -13,16 +13,23 @@ export type ProductsListProps = {
   shopCartAlert: boolean;
   token: string | null;
   isLoad: boolean;
-  error?: string;
 };
 
-export type InteractionProps = {
-  handleProductAction: (type: string, product?: ProductType, operator?: string) => void;
+export type InteractionProps = SearchProps &
+  SortingProps &
+  Pick<ProductsListProps, 'products'> & {
+    error?: string;
+  };
+
+export type SearchProps = {
   onSubmitSearch: (data: { search: string }) => void;
   onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
   showResetButton: boolean;
+} & Pick<ProductsListProps, 'handleProductAction'>;
+
+export type SortingProps = {
   priceSortingState: boolean;
   dateSortingState: boolean;
-};
+} & Pick<ProductsListProps, 'handleProductAction'>;
 
 export type CreateButtonProps = Pick<ProductsListProps, 'token'>;

@@ -1,38 +1,70 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getProductAction, getProductByIdAction } from './actions';
+import _ from 'lodash';
+import {
+  createProductAction,
+  deleteProductAction,
+  editProductAction,
+  getProductAction,
+  getProductByIdAction,
+} from './actions';
 import { initialState } from './initialState';
+import { pendingAction, rejectedAction } from '../utils';
 
 export const productSlice = createSlice({
   name: 'product',
   initialState,
-  reducers: {},
+  reducers: {
+    deleteProductById: (state, action) => {
+      return {
+        ...state,
+        products: _.filter(state.products, (product) => product.id !== action.payload),
+      };
+    },
+    clearProductsError: (state) => {
+      return {
+        ...state,
+        error: '',
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder
+      .addCase(getProductAction.pending, pendingAction)
       .addCase(getProductAction.fulfilled, (state, action) => {
         state.products = action.payload;
         state.isLoad = false;
         state.error = '';
       })
-      .addCase(getProductAction.rejected, (state, action) => {
-        state.error = action.payload;
-        state.isLoad = false;
-      })
-      .addCase(getProductAction.pending, (state) => {
-        state.isLoad = true;
-      });
-
+      .addCase(getProductAction.rejected, rejectedAction);
     builder
+      .addCase(getProductByIdAction.pending, pendingAction)
       .addCase(getProductByIdAction.fulfilled, (state, action) => {
         state.product = action.payload;
         state.isLoad = false;
         state.error = '';
       })
-      .addCase(getProductByIdAction.rejected, (state, action) => {
-        state.error = action.payload;
+      .addCase(getProductByIdAction.rejected, rejectedAction);
+    builder
+      .addCase(createProductAction.pending, pendingAction)
+      .addCase(createProductAction.fulfilled, (state) => {
         state.isLoad = false;
+        state.error = '';
       })
-      .addCase(getProductByIdAction.pending, (state) => {
-        state.isLoad = true;
-      });
+      .addCase(createProductAction.rejected, rejectedAction);
+    builder
+      .addCase(editProductAction.pending, pendingAction)
+      .addCase(editProductAction.fulfilled, (state) => {
+        state.isLoad = false;
+        state.error = '';
+      })
+      .addCase(editProductAction.rejected, rejectedAction);
+    builder
+      .addCase(deleteProductAction.fulfilled, (state) => {
+        state.isLoad = false;
+        state.error = '';
+      })
+      .addCase(deleteProductAction.rejected, rejectedAction);
   },
 });
+
+export const { deleteProductById, clearProductsError } = productSlice.actions;

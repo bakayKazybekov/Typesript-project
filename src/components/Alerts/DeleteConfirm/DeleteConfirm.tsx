@@ -12,13 +12,13 @@ type DeleteConfirmProps = {
 };
 const DeleteConfirm: React.FC<DeleteConfirmProps> = ({ confirmFunction, onClose, isOpen, text, productTitle }) => {
   const onWrapperClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (event.currentTarget.className === 'modal_wrapper') {
+    if (event.currentTarget.classList.contains('modal_wrapper')) {
       onClose();
     }
   };
 
   return (
-    <Transition in={isOpen} timeout={350} unmountOnExit={true}>
+    <Transition in={isOpen} timeout={150} unmountOnExit={true}>
       {(state: AlertState) => (
         <div className={`modal modal_${state}`}>
           <div className="modal_wrapper" onClick={onWrapperClick}>

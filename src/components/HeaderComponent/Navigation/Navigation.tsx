@@ -22,7 +22,7 @@ const Navigation: React.FC = () => {
     { link: SHOP_CART, name: 'Корзина' },
   ];
 
-  const setActive = ({ isActive }: { isActive: boolean }) => (isActive ? 'active' : '');
+  const setActive = ({ isActive }: { isActive: boolean }) => (isActive ? 'active_nav' : '');
 
   return (
     <>

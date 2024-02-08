@@ -1,4 +1,5 @@
 import { Alert } from 'antd';
+import _ from 'lodash';
 import React from 'react';
 import DeleteConfirm from '../../Alerts/DeleteConfirm/DeleteConfirm';
 import ProductSkeleton from '../../Alerts/ProductSkeleton/ProductSkeleton';
@@ -14,23 +15,14 @@ const ShopCartProductList: React.FC<ShopCartProductListProps> = ({
   confirmIsOpen,
   setConfirmIsOpen,
   isLoad,
-  error,
-  token,
 }) => {
   if (isLoad) {
     return <ProductSkeleton productsLength={shopCartProducts.length} />;
   }
-  if (!token) {
-    return <Alert type="error" message={error} />;
-  }
-  if (!!error) {
-    return <ProductSkeleton productsLength={shopCartProducts.length} />;
-  }
   return (
     <ul className="shop-cart__product-list">
-      {shopCartProducts.map((shopCart) => {
+      {_.map(shopCartProducts, (shopCart) => {
         const { product, quantity } = shopCart;
-
         const { title, price, image, id } = product;
         return (
           <li className="shop-cart__product" key={id}>
@@ -38,11 +30,11 @@ const ShopCartProductList: React.FC<ShopCartProductListProps> = ({
               <img src={image} alt={title} />
             </div>
             <div className="product__text">{title}</div>
-            <div className="product__text">{+price * quantity} k</div>
+            <div className="product__text">{+price * quantity} $</div>
             <div className="quantity__action">
               <button className="quantity__button">-</button>
               <div className="product__text">{quantity}</div>
-              <button className="quantity__button" onClick={() => addCart(product)}>
+              <button className="quantity__button" onClick={() => addCart(shopCart)}>
                 +
               </button>
             </div>
@@ -55,16 +47,16 @@ const ShopCartProductList: React.FC<ShopCartProductListProps> = ({
             >
               Удалить из корзины
             </div>
-            <DeleteConfirm
-              confirmFunction={deleteFromCart}
-              onClose={() => setConfirmIsOpen(false)}
-              isOpen={confirmIsOpen}
-              text="Вы уверены что хотите удалить данный товар из корзины?"
-              productTitle={deleteProduct.title}
-            />
           </li>
         );
       })}
+      <DeleteConfirm
+        confirmFunction={deleteFromCart}
+        onClose={() => setConfirmIsOpen(false)}
+        isOpen={confirmIsOpen}
+        text="Вы уверены что хотите удалить данный товар из корзины?"
+        productTitle={deleteProduct.title}
+      />
     </ul>
   );
 };

@@ -1,4 +1,4 @@
-@mixin font($fontSize, $fontWeight: 400, $fontFamily: Iowan Old Style, $lineHeight: normal) {
+@mixin font($fontSize, $fontWeight: 300, $fontFamily: $mainFont, $lineHeight: normal) {
   font-size: #{$fontSize + px};
   font-weight: $fontWeight;
   font-family: $fontFamily;

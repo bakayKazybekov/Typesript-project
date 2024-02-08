@@ -38,13 +38,9 @@ const CreateProductComponent: React.FC<CreateProductProps> = ({ onSubmit, onImag
       </div>
     );
   }
-  if (error) {
-    return (
-      <div className="create-product__wrapper">
-        <Alert type="error" message={error} />
-      </div>
-    );
-  }
+  // if (error) {
+  //   return <div className="create-product__wrapper"></div>;
+  // }
 
   return (
     <div className="create-product__wrapper">
@@ -64,6 +60,7 @@ const CreateProductComponent: React.FC<CreateProductProps> = ({ onSubmit, onImag
                   <span className="create-product__error">{errors[name]?.message}</span>
                 </label>
               ))}
+              {error && <Alert type="error" message={error} closable />}
             </div>
           </div>
           <button className="create-product__save">Сохранить</button>

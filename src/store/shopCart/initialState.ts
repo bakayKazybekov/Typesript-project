@@ -1,6 +1,6 @@
-import { ProductState, ShopCartProductType } from '../../Types/types';
+import { ShopCartProductType } from '../../Types/types';
 
-type ShopCartState = {
+export type ShopCartState = {
   shopCart: ShopCartProductType[];
   isLoad: boolean;
   error?: string;

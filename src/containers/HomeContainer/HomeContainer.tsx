@@ -1,15 +1,21 @@
 import { deleteProductAction, getProductAction } from '../../store/product/actions';
-import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import HomeComponent from '../../components/HomeComponent/HomeComponent';
 import { ProductType } from '../../Types/types';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import _ from 'lodash';
 import { addShopCartProductsAction } from '../../store/shopCart/actions';
-//
+import { clearProductsError } from '../../store/product/slice';
+import { createBrowserHistory, createMemoryHistory } from 'history';
+import { BASE_ROUTER, CREATE_PRODUCT } from '../../consts/paths';
+
 function HomeContainer() {
   const dispatch = useAppDispatch();
   const { products, isLoad, error } = useAppSelector((state) => state.productReducer);
   const token = localStorage.getItem('token');
+  const isFirstRender = useRef(true);
+  const history = createBrowserHistory();
+  console.log('history', history);
 
   // Filter states
   const [searchProducts, setSearchProducts] = useState<string>('');
@@ -24,16 +30,34 @@ function HomeContainer() {
   const [confirmIsOpen, setConfirmIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    if (token) dispatch(getProductAction());
+    if (token) {
+      dispatch(getProductAction());
+      console.log('get-request');
+    }
   }, [dispatch, token]);
+
+  // useEffect(() => {
+  //   const handleUnload = () => {
+  //     isFirstRender.current = true;
+  //   };
+  //   window.addEventListener('unload', handleUnload);
+  //   return () => {
+  //     window.removeEventListener('unload', handleUnload);
+  //   };
+  // }, []);
 
   const filteredProducts = useMemo(() => {
     let filtered = [...products];
 
     if (searchProducts) {
-      return _.filter(filtered, (product) =>
-        _.startsWith(product.title.toLowerCase(), searchProducts.toLowerCase().trim()),
+      const searchedProducts = _.filter(filtered, (product) =>
+        _.includes(product.title.toLowerCase(), searchProducts.toLowerCase().trim()),
       );
+      if (!searchedProducts.length) {
+        return 'Ничего не найдено!';
+      } else {
+        return searchedProducts;
+      }
     }
     return filtered.sort((a: ProductType, b: ProductType): number => {
       const priceA = parseInt(a.price);
@@ -71,11 +95,9 @@ function HomeContainer() {
 
   const onDelete = useCallback(() => {
     if (deleteProduct.id) {
-      dispatch(deleteProductAction(deleteProduct.id))
-        .then(() => dispatch(getProductAction()))
-        .catch(() => dispatch(getProductAction()));
+      dispatch(deleteProductAction(deleteProduct.id));
     }
-  }, [dispatch, deleteProduct.id]);
+  }, [dispatch, deleteProduct]);
 
   const addCart = (product: ProductType) => {
     dispatch(addShopCartProductsAction({ product: product.id, quantity: 0 }));
@@ -108,6 +130,10 @@ function HomeContainer() {
     }
   };
 
+  const onCloseError = () => {
+    dispatch(clearProductsError());
+  };
+
   const handleProductAction = (type: string, product?: ProductType, operator?: string) => {
     switch (type) {
       case 'delete':
@@ -123,6 +149,9 @@ function HomeContainer() {
         break;
       case 'filters':
         if (operator) filters(operator);
+        break;
+      case 'closeError':
+        onCloseError();
         break;
       default:
         break;

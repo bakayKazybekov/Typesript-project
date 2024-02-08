@@ -1,15 +1,17 @@
-import { useCallback } from 'react';
+import _ from 'lodash';
+import { useCallback, useRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import ShopCartComponent from '../../components/ShopCartComponent/ShopCartComponent';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import {
   addShopCartProductsAction,
-  deleteShopCartProductsAction,
+  deleteShopCartAction,
   getShopCartProductsAction,
-  removeAllShopCartProductsAction,
+  removeAllShopCartAction,
 } from '../../store/shopCart/actions';
-import { ProductType, ShopCartProductType } from '../../Types/types';
+import { cleanShopCartError, setQuantity } from '../../store/shopCart/slice';
+import { ShopCartProductType } from '../../Types/types';
 
 // https://www.npmjs.com/package/redux-persist
 
@@ -18,41 +20,54 @@ const ShopCartContainer = () => {
   const { shopCart, isLoad, error } = useAppSelector((state) => state.shopCartReducer);
 
   // Confirm modal states
+  const initialQuantity = useRef<number | null>(null);
+
   const [deleteProduct, setDeleteProduct] = useState<{ title: string; id: number }>({ title: '', id: 0 });
   const [confirmIsOpen, setConfirmIsOpen] = useState<boolean>(false);
   const [clearConfirmIsOpen, setClearConfirmIsOpen] = useState<boolean>(false);
 
   const token = localStorage.getItem('token');
   useEffect(() => {
-    if (token) dispatch(getShopCartProductsAction());
-  }, [dispatch, getShopCartProductsAction, token]);
+    if (token) {
+      dispatch(getShopCartProductsAction());
+    }
+  }, [dispatch, token]);
+
+  const onClick = ({ quantity, id }: { quantity: number; id: number }) => {
+    dispatch(addShopCartProductsAction({ product: id, quantity }));
+    initialQuantity.current = null;
+  };
+  const debouncedClick = _.debounce(onClick, 500);
 
   const addCart = useCallback(
-    (product: ProductType) => {
-      dispatch(addShopCartProductsAction({ product: product.id, quantity: 1 }))
-        .then(() => dispatch(getShopCartProductsAction()))
-        .catch(() => dispatch(getShopCartProductsAction()));
+    ({ product, quantity }: ShopCartProductType) => {
+      if (initialQuantity.current === null) {
+        initialQuantity.current = quantity;
+      }
+      debouncedClick({ quantity: quantity - initialQuantity.current + 1, id: product.id });
+      dispatch(setQuantity(product.id));
     },
     [dispatch],
   );
 
   const deleteFromCart = useCallback(() => {
     if (deleteProduct.id) {
-      dispatch(deleteShopCartProductsAction(deleteProduct.id))
-        .then(() => dispatch(getShopCartProductsAction()))
-        .catch(() => dispatch(getShopCartProductsAction()));
+      dispatch(deleteShopCartAction(deleteProduct.id));
     }
   }, [dispatch, deleteProduct]);
 
   const clearShopCart = useCallback(() => {
-    dispatch(removeAllShopCartProductsAction())
-      .then(() => dispatch(getShopCartProductsAction()))
-      .catch(() => dispatch(getShopCartProductsAction()));
+    dispatch(removeAllShopCartAction());
   }, [dispatch]);
+
+  const onCloseError = () => {
+    dispatch(cleanShopCartError());
+  };
 
   return (
     <ShopCartComponent
       shopCartProducts={shopCart}
+      onCloseError={onCloseError}
       addCart={addCart}
       deleteFromCart={deleteFromCart}
       deleteProduct={deleteProduct}
@@ -62,8 +77,8 @@ const ShopCartContainer = () => {
       clearShopCart={clearShopCart}
       clearConfirmIsOpen={clearConfirmIsOpen}
       setClearConfirmIsOpen={setClearConfirmIsOpen}
-      isLoad={isLoad}
       error={error}
+      isLoad={isLoad}
       token={token}
     />
   );

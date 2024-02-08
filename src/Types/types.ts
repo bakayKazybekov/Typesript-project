@@ -41,17 +41,10 @@ export type ShopCartProps = {
   onClear: () => void;
 };
 
-// Store
-export type ProductState = {
-  products: ProductType[];
-  product: ProductType;
-  isLoad: boolean;
-  error?: string;
-};
-
-export type LoginState = Pick<ProductState, 'isLoad'> & {
+export type LoginState = {
   registerError?: string;
   authError?: string;
+  isLoad: boolean;
 };
 
 export enum AlertState {

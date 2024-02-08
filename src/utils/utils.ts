@@ -2,12 +2,12 @@ import { AuthFieldsType, createProductFieldsType, RegisterFieldsType } from './t
 
 export const authFields: AuthFieldsType[] = [
   { name: 'username', placeholder: 'Введите логин/email', type: 'text' },
-  { name: 'password', placeholder: 'Введите пароль', type: 'password' },
+  { name: 'password', placeholder: 'Введите пароль', type: 'text' },
 ];
 
 export const registerFields: RegisterFieldsType[] = [
   ...authFields,
-  { name: 'confirmPassword', placeholder: 'Подтвердите пароль', type: 'password' },
+  { name: 'confirmPassword', placeholder: 'Подтвердите пароль', type: 'text' },
 ];
 
 export const createProductFields: createProductFieldsType[] = [
@@ -16,7 +16,7 @@ export const createProductFields: createProductFieldsType[] = [
   { name: 'price', placeholder: 'Введите цену товара', type: 'number' },
 ];
 
-export const isValidUrl = (url: string) => {
-  const urlPattern = /^(https?:\/\/)?([\w.]+)\.([a-z]{2,})\b(\/.*)?$/;
-  return urlPattern.test(url);
+export const isValidImage = (url: string) => {
+  const imagePattern = /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i;
+  return imagePattern.test(url);
 };

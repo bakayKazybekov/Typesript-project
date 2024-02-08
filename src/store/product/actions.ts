@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosInstance } from '../../api';
 import { BASE_ROUTER } from '../../consts/paths';
 import { ProductType, editProductActionArgs, createProductActionArgs } from '../../Types/types';
+import { deleteProductById } from './slice';
 
 const getProductAction = createAsyncThunk<ProductType[], undefined, { rejectValue: string }>(
   'product/getProductAction',
@@ -35,7 +36,7 @@ const editProductAction = createAsyncThunk<ProductType, editProductActionArgs, {
       navigate(BASE_ROUTER);
       return data;
     } catch (e) {
-      return thunkAPI.rejectWithValue('Произошла ошибка при редактировании товаров!');
+      return thunkAPI.rejectWithValue('Произошла ошибка при редактировании товара!');
     }
   },
 );
@@ -57,7 +58,7 @@ const deleteProductAction = createAsyncThunk<undefined, number, { rejectValue: s
   async (id, thunkAPI) => {
     try {
       await axiosInstance.delete(`product/${id}/`);
-      // dispatch(getProductAction());
+      thunkAPI.dispatch(deleteProductById(id));
     } catch (_) {
       return thunkAPI.rejectWithValue('Произошла ошибка при удалении товара!');
     }
