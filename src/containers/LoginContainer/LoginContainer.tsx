@@ -14,19 +14,22 @@ function LoginContainer() {
 
   const [isRegister, setIsRegister] = useState(false);
 
-  const onSubmit = useCallback(
+  const authOnSubmit = useCallback(
     (data: LoginFormValues) => {
-      if (isRegister) {
-        dispatch(
-          registerAction({
-            navigate,
-            username: data.username,
-            password: data.password,
-          }),
-        );
-      } else {
-        dispatch(loginAction({ navigate, ...data }));
-      }
+      dispatch(loginAction({ navigate, ...data }));
+    },
+    [dispatch, navigate],
+  );
+
+  const registerOnSubmit = useCallback(
+    (values: LoginFormValues) => {
+      dispatch(
+        registerAction({
+          navigate,
+          username: values.username,
+          password: values.password,
+        }),
+      );
     },
     [dispatch, navigate, isRegister],
   );
@@ -38,7 +41,7 @@ function LoginContainer() {
   if (isRegister)
     return (
       <Registration
-        onSubmit={onSubmit}
+        onSubmit={registerOnSubmit}
         onCloseError={onCloseError}
         setIsRegister={setIsRegister}
         error={registerError}
@@ -47,7 +50,7 @@ function LoginContainer() {
     );
   return (
     <Authorization
-      onSubmit={onSubmit}
+      onSubmit={authOnSubmit}
       onCloseError={onCloseError}
       setIsRegister={setIsRegister}
       error={authError}

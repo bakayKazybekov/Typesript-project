@@ -48,7 +48,7 @@ const CreateProductComponent: React.FC<CreateProductProps> = ({ onSubmit, onImag
         Отмена
       </button>
       <div className="create-product__container">
-        <form className="create-product__form" onSubmit={handleSubmit(onSubmit)}>
+      <form autoComplete='off' className="create-product__form" onSubmit={handleSubmit(onSubmit)}>
           <div className="create-product__content">
             <div className="create-product__add-image" onClick={onImage}>
               {!image ? <h4>Добавить фотографию</h4> : <img src={image} alt="Картинка товара" />}

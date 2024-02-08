@@ -1,4 +1,5 @@
 import { SubmitHandler } from 'react-hook-form';
+import { LoginFormValues } from '../../Types/types';
 
 type LoginProps = {
   setIsRegister: (state: boolean) => void; //
@@ -21,5 +22,5 @@ export type AuthProps = LoginProps & {
 };
 
 export type RegisterProps = LoginProps & {
-  onSubmit: SubmitHandler<RegisterData>;
+  onSubmit: (values: LoginFormValues) => void;
 };

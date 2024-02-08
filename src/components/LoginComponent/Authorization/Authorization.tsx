@@ -23,7 +23,7 @@ const Authorization: React.FC<AuthProps> = ({ setIsRegister, onCloseError, onSub
     <div className="login__container">
       <div className="login__wrapper">
         <h3 className="login__title">Авторизация</h3>
-        <form className="login__form" onSubmit={handleSubmit(onSubmit)}>
+        <form autoComplete="off" className="login__form" onSubmit={handleSubmit(onSubmit)}>
           {authFields.map(({ name, placeholder, type }) => {
             return (
               <label key={name} className="login__form__label">

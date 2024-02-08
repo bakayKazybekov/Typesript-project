@@ -6,7 +6,7 @@ const Search: React.FC<SearchProps> = ({ handleProductAction, onSubmitSearch, on
   const { register, handleSubmit, resetField } = useForm<{ search: string }>();
 
   return (
-    <form className="interaction_search" onSubmit={handleSubmit(onSubmitSearch)}>
+    <form autoComplete="off" className="interaction_search" onSubmit={handleSubmit(onSubmitSearch)}>
       <input
         className="search_input"
         type="text"
