@@ -18,7 +18,7 @@ const Container: React.FC<{ children?: ReactNode }> = ({ children }) => (
 
 const ProductDescriptionComponent: React.FC<ProductDescriptionProps> = ({ product, isLoad, error }) => {
   const { title, image, description } = product;
-  // if use loaded data
+
   if (isLoad) {
     return (
       <Container>
@@ -26,8 +26,6 @@ const ProductDescriptionComponent: React.FC<ProductDescriptionProps> = ({ produc
       </Container>
     );
   }
-
-  //if the user got an ERRORS
   if (!!error?.length) {
     return (
       <Container>

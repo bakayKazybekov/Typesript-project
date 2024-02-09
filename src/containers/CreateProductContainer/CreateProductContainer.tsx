@@ -3,19 +3,27 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ProductFormValues, ProductType } from '../../Types/types';
 import CreateProductComponent from '../../components/CreateProductComponent/CreateProductComponent';
 import { useAppDispatch, useAppSelector } from '../../hook';
-import { createProductAction, editProductAction, getProductByIdAction } from '../../store/product/actions';
+import {
+  createProductAction,
+  editProductAction,
+  getProductAction,
+  getProductByIdAction,
+} from '../../store/product/actions';
 import { useReducer } from 'react';
 import _ from 'lodash';
 import { isValidImage } from '../../utils/utils';
 import { formReducer, initialValues } from '../../utils/useReducer';
+import { setIsGetProduct } from '../../store/isGetProduct/slice';
 
 const CreateProductContainer = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { product, isLoad, error } = useAppSelector((state) => state.productReducer);
+  const { isGetProduct } = useAppSelector((state) => state.isGetProductReducer);
+  const token = localStorage.getItem('token');
 
   const { productId } = useParams();
-  const [image, setImage] = useState<string>();
+  const [image, setImage] = useState<string>('');
   const [values, valuesDispatch] = useReducer(formReducer, initialValues);
 
   const setValues = (values: ProductType) => {
@@ -28,6 +36,10 @@ const CreateProductContainer = () => {
   useEffect(() => {
     if (productId) {
       dispatch(getProductByIdAction(productId));
+    }
+    if (token && isGetProduct) {
+      dispatch(getProductAction());
+      dispatch(setIsGetProduct(false));
     }
   }, [dispatch, productId]);
 
@@ -47,7 +59,7 @@ const CreateProductContainer = () => {
       price: `${data.price}.00`,
       image,
     };
-    if (_.isEqual(newProduct, product)) {
+    if (_.isEqual(newProduct, product) && productId) {
       alert('Вы ничего не изменили');
     } else if (productId) {
       dispatch(editProductAction({ navigate, ...newProduct, id: productId }));

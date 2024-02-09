@@ -2,7 +2,7 @@ import React from 'react';
 import { HomeComponentProps } from './types';
 import Interaction from './Interaction/Interaction';
 import ProductsList from './ProductsList/ProductsList';
-import CreateButton from './CreateButton/CreateButton';
+import CreateButton from './ProductsList/CreateButton/CreateButton';
 import './Home.scss';
 
 const HomeComponent: React.FC<HomeComponentProps> = ({

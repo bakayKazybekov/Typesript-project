@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import _ from 'lodash';
 import {
   createProductAction,
@@ -14,6 +14,20 @@ export const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
+    editProduct: (state, { payload }) => {
+      const newProducts = _.map(state.products, (product) => (product.id === payload.id ? payload : product));
+      console.log('newProducts', newProducts);
+      return {
+        ...state,
+        products: newProducts,
+      };
+    },
+    createProduct: (state, action) => {
+      return {
+        ...state,
+        products: [...state.products, action.payload],
+      };
+    },
     deleteProductById: (state, action) => {
       return {
         ...state,
@@ -67,4 +81,4 @@ export const productSlice = createSlice({
   },
 });
 
-export const { deleteProductById, clearProductsError } = productSlice.actions;
+export const { deleteProductById, clearProductsError, createProduct, editProduct } = productSlice.actions;

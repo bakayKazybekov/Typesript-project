@@ -4,11 +4,13 @@ import { Alert, Spin } from 'antd';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { BASE_ROUTER } from '../../consts/paths';
+import { BASE_ROUTER, CREATE_PRODUCT } from '../../consts/paths';
 import { ProductFormValues } from '../../Types/types';
 import { createProductFields } from '../../utils/utils';
 import { createProductScheme } from '../../utils/scheme';
 import './CreateProduct.scss';
+import { useAppDispatch } from '../../hook';
+import { setIsGetProduct } from '../../store/isGetProduct/slice';
 
 type CreateProductProps = {
   onSubmit: SubmitHandler<ProductFormValues>;
@@ -21,6 +23,7 @@ type CreateProductProps = {
 
 const CreateProductComponent: React.FC<CreateProductProps> = ({ onSubmit, onImage, image, values, isLoad, error }) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -44,11 +47,17 @@ const CreateProductComponent: React.FC<CreateProductProps> = ({ onSubmit, onImag
 
   return (
     <div className="create-product__wrapper">
-      <button className="create-product__back" onClick={() => navigate(BASE_ROUTER)}>
+      <button
+        className="create-product__back"
+        onClick={() => {
+          navigate(BASE_ROUTER);
+          dispatch(setIsGetProduct(false));
+        }}
+      >
         Отмена
       </button>
       <div className="create-product__container">
-      <form autoComplete='off' className="create-product__form" onSubmit={handleSubmit(onSubmit)}>
+        <form autoComplete="off" className="create-product__form" onSubmit={handleSubmit(onSubmit)}>
           <div className="create-product__content">
             <div className="create-product__add-image" onClick={onImage}>
               {!image ? <h4>Добавить фотографию</h4> : <img src={image} alt="Картинка товара" />}

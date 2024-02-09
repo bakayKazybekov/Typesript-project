@@ -7,7 +7,7 @@ export type ProductState = {
   error?: string;
 };
 
-const product = {
+export const product = {
   title: '',
   description: '',
   price: '',

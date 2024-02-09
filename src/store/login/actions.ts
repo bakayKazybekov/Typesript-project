@@ -15,8 +15,12 @@ const registerAction = createAsyncThunk<undefined, LoginArgs, { rejectValue: str
       const response = await axiosInstance.post('register/', data);
       navigate(BASE_ROUTER);
       localStorage.setItem('token', response.data.token);
-    } catch (e) {
-      return thunkAPI.rejectWithValue('Ошибка при регистрации!');
+    } catch (e: any) {
+      if (e.response.status === 400) {
+        return thunkAPI.rejectWithValue('Пользователь с таким логином уже существует');
+      } else {
+        return thunkAPI.rejectWithValue('Произошла ошибка при регистрации!');
+      }
     }
   },
 );
@@ -28,8 +32,12 @@ const loginAction = createAsyncThunk<undefined, LoginArgs, { rejectValue: string
       const response = await axiosInstance.post('login/', data);
       navigate(BASE_ROUTER);
       localStorage.setItem('token', response.data.token);
-    } catch (e) {
-      return thunkAPI.rejectWithValue('Ошибка при авторизации!');
+    } catch (e: any) {
+      if (e.response.status === 401) {
+        return thunkAPI.rejectWithValue('Неверные данные');
+      } else {
+        return thunkAPI.rejectWithValue('Произошла ошибка при авторизации!');
+      }
     }
   },
 );

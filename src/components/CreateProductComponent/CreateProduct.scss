@@ -53,6 +53,7 @@
 .create-product__error {
   text-align: center;
   color: red;
+  @include adaptive-size(font-size, 22, 10);
 }
 
 .create-product__fields {

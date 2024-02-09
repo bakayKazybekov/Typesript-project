@@ -9,6 +9,8 @@ import ShopCartAlert from '../../Alerts/ShopCartAlert/ShopCartAlert';
 import ProductSkeleton from '../../Alerts/ProductSkeleton/ProductSkeleton';
 import './ProductList.scss';
 import '../../../icons/fontIcons.css';
+import { setIsGetProduct } from '../../../store/isGetProduct/slice';
+import { useAppDispatch } from '../../../hook';
 
 const ProductsList: React.FC<ProductsListProps> = ({
   products,
@@ -22,6 +24,7 @@ const ProductsList: React.FC<ProductsListProps> = ({
   isLoad,
 }) => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   if (isLoad) {
     return (
       <div className="product-list_wrapper">
@@ -59,7 +62,13 @@ const ProductsList: React.FC<ProductsListProps> = ({
             const { title, price, image, id } = product;
             return (
               <li className="product-list_product" key={id}>
-                <div className="product_image" onClick={() => navigate(`${PRODUCT_DESCRIPTION}/${id}`)}>
+                <div
+                  className="product_image"
+                  onClick={() => {
+                    navigate(`${PRODUCT_DESCRIPTION}/${id}`);
+                    dispatch(setIsGetProduct(false));
+                  }}
+                >
                   <img src={image} alt={title} />
                 </div>
                 <div
@@ -71,7 +80,13 @@ const ProductsList: React.FC<ProductsListProps> = ({
                 ></div>
                 <div className="product_text">{title}</div>
                 <div className="product_text">{parseInt(price)} $</div>
-                <div className="product_edit-button" onClick={() => navigate(`${EDIT_PRODUCT}/${id}`)}>
+                <div
+                  className="product_edit-button"
+                  onClick={() => {
+                    navigate(`${EDIT_PRODUCT}/${id}`);
+                    dispatch(setIsGetProduct(false));
+                  }}
+                >
                   <div className="icon-pencil"></div>
                   Редактировать
                 </div>

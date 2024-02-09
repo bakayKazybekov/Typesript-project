@@ -1,21 +1,19 @@
 import { deleteProductAction, getProductAction } from '../../store/product/actions';
-import { ChangeEvent, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import HomeComponent from '../../components/HomeComponent/HomeComponent';
 import { ProductType } from '../../Types/types';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import _ from 'lodash';
 import { addShopCartProductsAction } from '../../store/shopCart/actions';
 import { clearProductsError } from '../../store/product/slice';
-import { createBrowserHistory, createMemoryHistory } from 'history';
-import { BASE_ROUTER, CREATE_PRODUCT } from '../../consts/paths';
+import { setIsGetProduct } from '../../store/isGetProduct/slice';
 
 function HomeContainer() {
   const dispatch = useAppDispatch();
   const { products, isLoad, error } = useAppSelector((state) => state.productReducer);
+
+  const { isGetProduct } = useAppSelector((state) => state.isGetProductReducer);
   const token = localStorage.getItem('token');
-  const isFirstRender = useRef(true);
-  const history = createBrowserHistory();
-  console.log('history', history);
 
   // Filter states
   const [searchProducts, setSearchProducts] = useState<string>('');
@@ -30,21 +28,11 @@ function HomeContainer() {
   const [confirmIsOpen, setConfirmIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    if (token) {
+    if (token && isGetProduct) {
       dispatch(getProductAction());
-      console.log('get-request');
     }
+    dispatch(setIsGetProduct(true));
   }, [dispatch, token]);
-
-  // useEffect(() => {
-  //   const handleUnload = () => {
-  //     isFirstRender.current = true;
-  //   };
-  //   window.addEventListener('unload', handleUnload);
-  //   return () => {
-  //     window.removeEventListener('unload', handleUnload);
-  //   };
-  // }, []);
 
   const filteredProducts = useMemo(() => {
     let filtered = [...products];
@@ -78,6 +66,7 @@ function HomeContainer() {
       }
     });
   }, [products, searchProducts, sortingOpertator]);
+  console.log('products', filteredProducts);
 
   const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length) {
