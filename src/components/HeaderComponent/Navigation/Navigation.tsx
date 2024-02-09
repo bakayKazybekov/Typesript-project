@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Transition } from 'react-transition-group';
 import { ABOUT, BASE_ROUTER, CONTACTS, SHOP_CART } from '../../../consts/paths';
-import { menuButton } from '../../../images';
+import { menuButtonIcon } from '../../../images';
 import '../Header.scss';
 
 enum AlertState {
@@ -22,7 +22,7 @@ const Navigation: React.FC = () => {
     { link: SHOP_CART, name: 'Корзина' },
   ];
 
-  const setActive = ({ isActive }: { isActive: boolean }) => (isActive ? 'active' : '');
+  const setActive = ({ isActive }: { isActive: boolean }) => (isActive ? 'active_nav' : '');
 
   return (
     <>
@@ -38,7 +38,7 @@ const Navigation: React.FC = () => {
       <div>
         <div className="nav-button__wrapper">
           <div className="adaptive-nav__button" onClick={() => setNavIsOpen(!navIsOpen)}>
-            <img src={menuButton} alt="menu-button" />
+            <img src={menuButtonIcon} alt="menu-button" />
           </div>
         </div>
         <Transition in={navIsOpen} timeout={300}>

@@ -1,76 +1,72 @@
 import { deleteProductAction, getProductAction } from '../../store/product/actions';
-import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import HomeComponent from '../../components/HomeComponent/HomeComponent';
-import { ProductType, ShopCartProductType } from '../../Types/types';
+import { ProductType } from '../../Types/types';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import _ from 'lodash';
 import { addShopCartProductsAction } from '../../store/shopCart/actions';
+import { clearProductsError } from '../../store/product/slice';
+import { setIsGetProduct } from '../../store/isGetProduct/slice';
 
 function HomeContainer() {
   const dispatch = useAppDispatch();
   const { products, isLoad, error } = useAppSelector((state) => state.productReducer);
+
+  const { isGetProduct } = useAppSelector((state) => state.isGetProductReducer);
   const token = localStorage.getItem('token');
 
   // Filter states
   const [searchProducts, setSearchProducts] = useState<string>('');
-  const [sortingOpertator, setSortingOperator] = useState('');
+  const [sortingOpertator, setSortingOperator] = useState<string>('');
   const [priceSortingState, setPriceSortingState] = useState<boolean>(false);
   const [dateSortingState, setDateSortingState] = useState<boolean>(false);
   // Shop cart states
   const [showResetButton, setShowResetButton] = useState<boolean>(false);
   const [shopCartAlert, setShopCartAlert] = useState<boolean>(false);
   // Delete Confirm Modal states
-  const [deleteProductTitle, setDeleteProductTitle] = useState<string>('');
-  const [deleteId, setDeleteId] = useState<number>(0);
-  const [confirmModalIsOpen, setConfirmModalIsOpen] = useState<boolean>(false);
+  const [deleteProduct, setDeleteProduct] = useState<{ title: string; id: number }>({ title: '', id: 0 });
+  const [confirmIsOpen, setConfirmIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    if (token) dispatch(getProductAction());
-  }, [dispatch, token]);
-
-  const onDelete = useCallback(async () => {
-    if (deleteId) {
-      try {
-        await dispatch(deleteProductAction(deleteId));
-        dispatch(getProductAction());
-      } catch (e) {
-        dispatch(getProductAction());
-        console.log('e', e);
-      }
+    if (token && isGetProduct) {
+      dispatch(getProductAction());
     }
-  }, [dispatch, deleteId]);
-
-  const addCart = (product: ProductType) => {
-    dispatch(addShopCartProductsAction({ product: product.id, quantity: 0 }));
-    setShopCartAlert(true);
-    setTimeout(() => {
-      setShopCartAlert(false);
-    }, 500);
-  };
+    dispatch(setIsGetProduct(true));
+  }, [dispatch, token]);
 
   const filteredProducts = useMemo(() => {
     let filtered = [...products];
 
     if (searchProducts) {
-      return _.filter(filtered, (product) =>
-        _.startsWith(product.title.toLowerCase(), searchProducts.toLowerCase().trim()),
+      const searchedProducts = _.filter(filtered, (product) =>
+        _.includes(product.title.toLowerCase(), searchProducts.toLowerCase().trim()),
       );
+      if (!searchedProducts.length) {
+        return 'Ничего не найдено!';
+      } else {
+        return searchedProducts;
+      }
     }
     return filtered.sort((a: ProductType, b: ProductType): number => {
+      const priceA = parseInt(a.price);
+      const priceB = parseInt(b.price);
+      const dateA = Math.round(a.id);
+      const dateB = Math.round(b.id);
       switch (sortingOpertator) {
         case 'firstCheap':
-          return +a.price - +b.price;
+          return priceA - priceB;
         case 'firstExpensive':
-          return +b.price - +a.price;
+          return priceB - priceA;
         case 'firstNew':
-          return +a.id - +b.id;
+          return dateA - dateB;
         case 'firstOld':
-          return +b.id - +a.id;
+          return dateB - dateA;
         default:
           return 0;
       }
     });
   }, [products, searchProducts, sortingOpertator]);
+  console.log('products', filteredProducts);
 
   const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length) {
@@ -86,6 +82,18 @@ function HomeContainer() {
     if (!data.search) setShowResetButton(false);
   };
 
+  const onDelete = useCallback(() => {
+    if (deleteProduct.id) {
+      dispatch(deleteProductAction(deleteProduct.id));
+    }
+  }, [dispatch, deleteProduct]);
+
+  const addCart = (product: ProductType) => {
+    dispatch(addShopCartProductsAction({ product: product.id, quantity: 0 }));
+    setShopCartAlert(true);
+    _.debounce(() => setShopCartAlert(false), 500)();
+  };
+
   const onResetSearch = () => {
     setSearchProducts('');
     setShowResetButton(false);
@@ -93,36 +101,66 @@ function HomeContainer() {
 
   const filters = (operator: string) => {
     setSortingOperator(operator);
-    if (operator === 'firstCheap' || operator === 'firstExpensive') {
-      setPriceSortingState(!priceSortingState);
-      setDateSortingState(false);
-    } else if (operator === 'firstNew' || operator === 'firstOld') {
-      setDateSortingState(!dateSortingState);
-      setPriceSortingState(false);
-    } else if (operator === 'withoutFilter') {
-      setPriceSortingState(false);
-      setDateSortingState(false);
+    switch (operator) {
+      case 'firstExpensive':
+      case 'firstCheap':
+        setPriceSortingState(!priceSortingState);
+        setDateSortingState(false);
+        break;
+      case 'firstOld':
+      case 'firstNew':
+        setDateSortingState(!dateSortingState);
+        setPriceSortingState(false);
+        break;
+      default:
+        setPriceSortingState(false);
+        setDateSortingState(false);
+        break;
+    }
+  };
+
+  const onCloseError = () => {
+    dispatch(clearProductsError());
+  };
+
+  const handleProductAction = (type: string, product?: ProductType, operator?: string) => {
+    switch (type) {
+      case 'delete':
+        onDelete();
+        break;
+      case 'addCart':
+        if (product) {
+          addCart(product);
+        }
+        break;
+      case 'resetSearch':
+        onResetSearch();
+        break;
+      case 'filters':
+        if (operator) filters(operator);
+        break;
+      case 'closeError':
+        onCloseError();
+        break;
+      default:
+        break;
     }
   };
 
   return (
     <HomeComponent
+      handleProductAction={handleProductAction}
       onSubmitSearch={onSubmitSearch}
       onChangeSearch={onChangeSearch}
-      filters={filters}
-      onResetSearch={onResetSearch}
       showResetButton={showResetButton}
       priceSortingState={priceSortingState}
       dateSortingState={dateSortingState}
       products={filteredProducts}
-      onDelete={onDelete}
-      setDeleteId={setDeleteId}
-      deleteProductTitle={deleteProductTitle}
-      setDeleteProductTitle={setDeleteProductTitle}
-      confirmModalIsOpen={confirmModalIsOpen}
-      setConfirmModalIsOpen={setConfirmModalIsOpen}
+      deleteProduct={deleteProduct}
+      setDeleteProduct={setDeleteProduct}
+      confirmIsOpen={confirmIsOpen}
+      setConfirmIsOpen={setConfirmIsOpen}
       shopCartAlert={shopCartAlert}
-      addCart={addCart}
       token={token}
       isLoad={isLoad}
       error={error}

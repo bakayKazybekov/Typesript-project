@@ -8,105 +8,73 @@
   height: $width100percent;
   overflow: hidden;
   overflow-y: auto;
-  transition: opacity 0.3s;
+  transition: opacity 0.1s;
   z-index: 999;
-}
-.modal_wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: $width100percent;
-  min-height: 100%;
-}
-.modal_content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 30px;
-  font-size: $fontSize22;
-  width: $width100percent;
-  max-width: 700px;
-  border-radius: $borderRadius20;
-  background-color: #fff;
-  padding: 40px 20px 20px 20px;
-  transform: translateY(-50px);
-  transition: opacity 0.3s, transform 0.3s;
-  box-shadow: 0px 0px 8px -5px;
-}
-
-.modal_buttons {
-  display: flex;
-  gap: 80px;
-}
-
-.modal_close_button {
-  @include delete-button;
-  background-color: $mainColor;
-  color: #000;
-}
-
-.modal_confirm_button {
-  @include delete-button;
-  background-color: $secondColor;
-  color: #fff;
-}
-
-// open
-.modal_entering,
-.modal_entered {
-  opacity: 1;
-}
-.modal_entering .modal_content,
-.modal_entered .modal_content {
-  transform: translateY(0);
-}
-
-// close
-.modal_exiting,
-.modal_exited {
-  opacity: 0;
-}
-.modal_exiting .modal_content,
-.modal_exited .modal_content {
-  transform: translateY(-50%);
-}
-
-@include laptop_medium {
-  .modal_content {
-    gap: 30px;
-    font-size: 18px;
+  &_wrapper {
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: $width100percent;
-    max-width: 500px;
+    min-height: 100%;
   }
-  .modal_buttons {
-    gap: 50px;
-  }
-}
-@include tablet_large {
-  .modal_content {
-    gap: 20px;
-    font-size: 15px;
+  &_content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    @include adaptive-size(gap, 30, 15);
     width: $width100percent;
-    max-width: 350px;
+    @include adaptive-size(font-size, 22, 10);
+    @include adaptive-size(max-width, 700, 250);
+    border-radius: $borderRadius20;
+    background-color: $white;
+    padding: 40px 20px 20px;
+    transform: translateY(-50px);
+    transition: opacity 0.3s, transform 0.3s;
   }
-  .modal_buttons {
-    gap: 40px;
+  &_buttons {
+    display: flex;
+    @include adaptive-size(gap, 80, 30);
+  }
+  &_close_button {
+    @extend .confirm-button;
+    background-color: $mainColor;
+    color: $black;
+  }
+  &_confirm_button {
+    @extend .confirm-button;
+    background-color: $secondColor;
+    color: $white;
+  }
+
+  // open
+  &_entering,
+  &_entered {
+    opacity: 1;
+  }
+  &_entering &_content,
+  &_entered &_content {
+    transform: translateY(0);
+  }
+
+  // close
+  &_exiting,
+  &_exited {
+    opacity: 0;
+  }
+  &_exiting &_content,
+  &_exited &_content {
+    transform: translateY(-50%);
   }
 }
+
 @include mobile_large {
   .modal_content {
-    gap: 20px;
     padding: 30px 10px 20px;
-    font-size: 10px;
-    width: $width100percent;
-    max-width: 250px;
-  }
-  .modal_buttons {
-    gap: 30px;
   }
 }

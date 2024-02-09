@@ -1,15 +1,17 @@
-import { useCallback } from 'react';
+import _ from 'lodash';
+import { useCallback, useRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import ShopCartComponent from '../../components/ShopCartComponent/ShopCartComponent';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import {
   addShopCartProductsAction,
-  deleteShopCartProductsAction,
+  deleteShopCartAction,
   getShopCartProductsAction,
-  removeAllShopCartProductsAction,
+  removeAllShopCartAction,
 } from '../../store/shopCart/actions';
-import { ProductType, ShopCartProductType } from '../../Types/types';
+import { cleanShopCartError, setQuantity } from '../../store/shopCart/slice';
+import { ShopCartProductType } from '../../Types/types';
 
 // https://www.npmjs.com/package/redux-persist
 
@@ -18,91 +20,65 @@ const ShopCartContainer = () => {
   const { shopCart, isLoad, error } = useAppSelector((state) => state.shopCartReducer);
 
   // Confirm modal states
-  const [deleteId, setDeleteId] = useState<number>(0);
-  const [deleteProductTitle, setDeleteProductTitle] = useState<string>('');
-  const [confirmModalIsOpen, setConfirmModalIsOpen] = useState<boolean>(false);
-  const [clearConfirmModalIsOpen, setClearConfirmModalIsOpen] = useState<boolean>(false);
+  const initialQuantity = useRef<number | null>(null);
+
+  const [deleteProduct, setDeleteProduct] = useState<{ title: string; id: number }>({ title: '', id: 0 });
+  const [confirmIsOpen, setConfirmIsOpen] = useState<boolean>(false);
+  const [clearConfirmIsOpen, setClearConfirmIsOpen] = useState<boolean>(false);
 
   const token = localStorage.getItem('token');
   useEffect(() => {
-    if (token) dispatch(getShopCartProductsAction());
-  }, [dispatch, getShopCartProductsAction, token]);
-
-  const handleShopCartAction = async (action: () => Promise<void>) => {
-    try {
-      await action();
-      dispatch(getShopCartProductsAction());
-    } catch (_) {
+    if (token) {
       dispatch(getShopCartProductsAction());
     }
-  };
+  }, [dispatch, token]);
 
-  const addCart = async (product: ProductType) => {
-    try {
-      await dispatch(addShopCartProductsAction({ product: product.id, quantity: 1 }));
-      dispatch(getShopCartProductsAction());
-    } catch (e) {
-      console.error('Ошибка при добавлении в корзину:', e);
-      dispatch(getShopCartProductsAction());
-    }
+  const onClick = ({ quantity, id }: { quantity: number; id: number }) => {
+    dispatch(addShopCartProductsAction({ product: id, quantity }));
+    initialQuantity.current = null;
   };
+  const debouncedClick = _.debounce(onClick, 500);
 
-  const deleteFromCart = async () => {
-    if (deleteId) {
-      try {
-        await dispatch(deleteShopCartProductsAction(deleteId));
-        dispatch(getShopCartProductsAction());
-      } catch (e) {
-        console.error('Ошибка при удалении из корзины:', e);
-        dispatch(getShopCartProductsAction());
+  const addCart = useCallback(
+    ({ product, quantity }: ShopCartProductType) => {
+      if (initialQuantity.current === null) {
+        initialQuantity.current = quantity;
       }
+      debouncedClick({ quantity: quantity - initialQuantity.current + 1, id: product.id });
+      dispatch(setQuantity(product.id));
+    },
+    [dispatch],
+  );
+
+  const deleteFromCart = useCallback(() => {
+    if (deleteProduct.id) {
+      dispatch(deleteShopCartAction(deleteProduct.id));
     }
+  }, [dispatch, deleteProduct]);
+
+  const clearShopCart = useCallback(() => {
+    dispatch(removeAllShopCartAction());
+  }, [dispatch]);
+
+  const onCloseError = () => {
+    dispatch(cleanShopCartError());
   };
-
-  const clearShopCart = async () => {
-    try {
-      await dispatch(removeAllShopCartProductsAction());
-      dispatch(getShopCartProductsAction());
-    } catch (e) {
-      console.error('Ошибка при очистке корзины:', e);
-      dispatch(getShopCartProductsAction());
-    }
-  };
-  // const addCart = (product: ProductType) => {
-  //   dispatch(addShopCartProductsAction({ product: product.id, quantity: 1 }))
-  //     .then(() => dispatch(getShopCartProductsAction()))
-  //     .catch(() => dispatch(getShopCartProductsAction()));
-  // };
-
-  // const deleteFromCart = () => {
-  //   if (deleteId) {
-  //     dispatch(deleteShopCartProductsAction(deleteId))
-  //       .then(() => dispatch(getShopCartProductsAction()))
-  //       .catch(() => dispatch(getShopCartProductsAction()));
-  //   }
-  // };
-
-  // const clearShopCart = () => {
-  //   dispatch(removeAllShopCartProductsAction())
-  //     .then(() => dispatch(getShopCartProductsAction()))
-  //     .catch(() => dispatch(getShopCartProductsAction()));
-  // };
 
   return (
     <ShopCartComponent
       shopCartProducts={shopCart}
+      onCloseError={onCloseError}
       addCart={addCart}
       deleteFromCart={deleteFromCart}
-      setDeleteId={setDeleteId}
-      deleteProductTitle={deleteProductTitle}
-      setDeleteProductTitle={setDeleteProductTitle}
-      confirmModalIsOpen={confirmModalIsOpen}
-      setConfirmModalIsOpen={setConfirmModalIsOpen}
+      deleteProduct={deleteProduct}
+      setDeleteProduct={setDeleteProduct}
+      confirmIsOpen={confirmIsOpen}
+      setConfirmIsOpen={setConfirmIsOpen}
       clearShopCart={clearShopCart}
-      clearConfirmModalIsOpen={clearConfirmModalIsOpen}
-      setClearConfirmModalIsOpen={setClearConfirmModalIsOpen}
-      isLoad={isLoad}
+      clearConfirmIsOpen={clearConfirmIsOpen}
+      setClearConfirmIsOpen={setClearConfirmIsOpen}
       error={error}
+      isLoad={isLoad}
       token={token}
     />
   );

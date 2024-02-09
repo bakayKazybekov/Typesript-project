@@ -2,37 +2,47 @@ import { createSlice } from '@reduxjs/toolkit';
 import { loginAction, registerAction } from './actions';
 import { initialState } from './initialState';
 
-const loginSlice = createSlice({
+export const loginSlice = createSlice({
   name: 'login',
   initialState,
-  reducers: {},
+  reducers: {
+    cleanErrorAction: (state) => {
+      return {
+        ...state,
+        authError: '',
+        registerError: '',
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(registerAction.fulfilled, (state) => {
-        state.isLoad = false;
-        state.error = '';
-      })
       .addCase(registerAction.pending, (state) => {
         state.isLoad = true;
       })
+      .addCase(registerAction.fulfilled, (state) => {
+        state.isLoad = false;
+        state.authError = '';
+        state.registerError = '';
+      })
       .addCase(registerAction.rejected, (state, action) => {
         state.isLoad = false;
-        state.error = action.payload;
+        state.registerError = action.payload;
       });
 
     builder
-      .addCase(loginAction.fulfilled, (state) => {
-        state.isLoad = false;
-        state.error = '';
-      })
       .addCase(loginAction.pending, (state) => {
         state.isLoad = true;
       })
+      .addCase(loginAction.fulfilled, (state) => {
+        state.isLoad = false;
+        state.authError = '';
+        state.registerError = '';
+      })
       .addCase(loginAction.rejected, (state, action) => {
         state.isLoad = false;
-        state.error = action.payload;
+        state.authError = action.payload;
       });
   },
 });
 
-export { loginSlice };
+export const { cleanErrorAction } = loginSlice.actions;

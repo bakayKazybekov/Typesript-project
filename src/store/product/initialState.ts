@@ -1,15 +1,22 @@
-import { ProductState } from "../../Types/types";
+import { ProductType } from '../../Types/types';
 
-const product = {
+export type ProductState = {
+  products: ProductType[];
+  product: ProductType;
+  isLoad: boolean;
+  error?: string;
+};
+
+export const product = {
   title: '',
   description: '',
   price: '',
-  id: 0
-}
+  id: 0,
+};
 
 export const initialState: ProductState = {
   products: [],
   product: product,
   isLoad: false,
   error: '',
-}
+};

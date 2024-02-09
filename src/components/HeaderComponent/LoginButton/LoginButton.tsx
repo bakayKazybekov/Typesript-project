@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { LOGIN } from '../../../consts/paths';
-import { avatar } from '../../../images';
+import { avatarIcon } from '../../../images';
 import '../Header.scss';
 
 const LoginButton: React.FC = () => {
@@ -18,7 +18,7 @@ const LoginButton: React.FC = () => {
   if (token) {
     return (
       <div className="logout__wrapper">
-        <img className="avatar__image" src={avatar} alt="avatar" />
+        <img className="avatar__image" src={avatarIcon} alt="avatar" />
         <button className="logout__button" onClick={onLogout}>
           ВЫЙТИ
         </button>

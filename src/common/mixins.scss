@@ -1,6 +1,14 @@
-@mixin text-styles($fontSize, $fontWeight: 400, $fontFamily: Iowan Old Style, $lineHeight: normal) {
-  font-size: $fontSize;
+@mixin font($fontSize, $fontWeight: 300, $fontFamily: $mainFont, $lineHeight: normal) {
+  font-size: #{$fontSize + px};
   font-weight: $fontWeight;
   font-family: $fontFamily;
   line-height: $lineHeight;
+}
+
+$maxWidth: 1680;
+$minWidth: 280;
+@mixin adaptive-size($elem, $maxSize, $minSize) {
+  $sizeDifference: $maxSize - $minSize;
+  $widthDifference: $maxWidth - $minWidth;
+  #{$elem}: calc(#{$minSize + px} + $sizeDifference * ((100vw - #{$minWidth + px}) / ($widthDifference)));
 }

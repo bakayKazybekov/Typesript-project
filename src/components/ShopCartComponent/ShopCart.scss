@@ -3,30 +3,31 @@
 .shop-cart__wrapper {
   width: $width95vw;
   margin: 85px auto 50px;
-  @include display-flex-column;
+  @extend .display-flex-column;
   align-items: center;
   gap: 50px;
   text-align: center;
-  font-size: 25px;
+  @include adaptive-size(font-size, 25, 11);
 }
 
 .shop-cart__header {
   width: $width100percent;
-  @include display-flex-column;
+  @extend .display-flex-column;
   gap: 20px;
+}
+
+.shop-cart__error {
+  @include adaptive-size(width, 500, 100);
+  align-self: flex-end;
+  .ant-alert-message {
+    @include adaptive-size(font-size, 18, 8);
+  }
 }
 
 .shop__cart__title {
   text-align: center;
-  @include text-styles(32px, 600);
-}
-
-.shop-cart__clear-button {
-  align-self: end;
-  background: inherit;
-  border: none;
-  color: #f41e1e;
-  cursor: pointer;
+  @include font(_, 600);
+  @include adaptive-size(font-size, 32, 14);
 }
 
 .shop-cart__product-list {
@@ -37,7 +38,7 @@
 
 .shop-cart__product {
   width: 220px;
-  @include display-flex-column;
+  @extend .display-flex-column;
   gap: 20px;
   align-items: center;
   border-radius: 20px;
@@ -61,7 +62,7 @@
 }
 
 .product__text {
-  @include text-styles(16px, 500);
+  @include adaptive-size(font-size, 14, 6);
 }
 
 .quantity__action {
@@ -71,8 +72,8 @@
 }
 
 .quantity__button {
-  color: #fff;
-  font-size: 25px;
+  color: $white;
+  @include adaptive-size(font-size, 25, 14);
   cursor: pointer;
   padding: 3px 10px;
   background-color: $secondColor;
@@ -81,9 +82,16 @@
 }
 
 .shop-cart__delete-button {
-  color: #f41e1e;
-  font-size: 16px;
+  color: $red;
   cursor: pointer;
+  @include adaptive-size(font-size, 16, 8);
+}
+
+.shop-cart__clear-button {
+  align-self: end;
+  background: inherit;
+  border: none;
+  @extend .shop-cart__delete-button;
 }
 
 @include desktop_large {
@@ -101,21 +109,9 @@
     width: 160px;
     height: 160px;
   }
-  .shop-cart__wrapper {
-    font-size: 18px;
-  }
-  .shop__cart__title {
-    font-size: 28px;
-  }
-  .product__text {
-    font-size: 13px;
-  }
 }
 
 @include laptop_large {
-  .shop-cart__wrapper {
-    font-size: 18px;
-  }
   .shop-cart__product-list {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -134,59 +130,37 @@
     width: 130px;
     height: 130px;
   }
-  .shop__cart__title {
-    font-size: 24px;
-  }
-  .product__text {
-    font-size: 11px;
-  }
   .quantity__action {
     gap: 15px;
   }
   .quantity__button {
-    font-size: 20px;
     padding: 2px 8px;
     border-radius: 8px;
-  }
-  .shop-cart__delete-button {
-    font-size: 12px;
   }
 }
 
 @include laptop_small {
   .shop-cart__wrapper {
-    font-size: 16px;
     gap: 30px;
   }
   .shop-cart__product-list {
     grid-template-columns: repeat(3, 1fr);
-  }
-  .shop-cart__delete-button {
-    font-size: 12px;
-  }
-  .shop-cart__clear-button {
-    font-size: 12px;
   }
 }
 
 @include tablet_medium {
   .shop-cart__wrapper {
     margin-top: 35px;
-    font-size: 14px;
     gap: 20px;
   }
   .shop-cart__product-list {
     grid-template-columns: repeat(2, 1fr);
     gap: 40px;
   }
-  .shop__cart__title {
-    font-size: 17px;
-  }
 }
 
 @include mobile_medium {
   .shop-cart__wrapper {
-    font-size: 11px;
     gap: 0;
   }
   .shop-cart__product {
@@ -198,27 +172,11 @@
     width: 80px;
     height: 80px;
   }
-  .product__text {
-    font-size: 8px;
-  }
-  .shop__cart__title {
-    font-size: 14px;
-  }
-  .shop-cart__delete-button {
-    font-size: 8px;
-  }
-  .shop-cart__clear-button {
-    font-size: 8px;
-  }
   .quantity__action {
     gap: 10px;
   }
   .quantity__button {
-    font-size: 16px;
     padding: 1px 5px;
     border-radius: 5px;
-  }
-  .shop-cart__delete-button {
-    font-size: 8px;
   }
 }

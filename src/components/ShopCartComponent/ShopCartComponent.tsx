@@ -6,40 +6,40 @@ import { ShopCartComponentProps } from './types';
 
 const ShopCartComponent: React.FC<ShopCartComponentProps> = ({
   shopCartProducts,
-  addCart,
+  onCloseError,
   deleteFromCart,
-  setDeleteId,
-  deleteProductTitle,
-  setDeleteProductTitle,
-  confirmModalIsOpen,
-  setConfirmModalIsOpen,
+  deleteProduct,
+  addCart,
+  setDeleteProduct,
+  confirmIsOpen,
+  setConfirmIsOpen,
   clearShopCart,
-  clearConfirmModalIsOpen,
-  setClearConfirmModalIsOpen,
-  isLoad,
+  clearConfirmIsOpen,
+  setClearConfirmIsOpen,
   error,
   token,
+  isLoad,
 }) => {
   return (
     <div className="shop-cart__wrapper">
       <ShopCartHeader
-        clearConfirmModalIsOpen={clearConfirmModalIsOpen}
-        setClearConfirmModalIsOpen={setClearConfirmModalIsOpen}
+        clearConfirmIsOpen={clearConfirmIsOpen}
+        onCloseError={onCloseError}
+        setClearConfirmIsOpen={setClearConfirmIsOpen}
         clearShopCart={clearShopCart}
         productsLength={shopCartProducts.length}
+        token={token}
+        error={error}
       />
       <ShopCartProductList
         shopCartProducts={shopCartProducts}
-        isLoad={isLoad}
-        error={error}
         addCart={addCart}
         deleteFromCart={deleteFromCart}
-        setDeleteId={setDeleteId}
-        deleteProductTitle={deleteProductTitle}
-        setDeleteProductTitle={setDeleteProductTitle}
-        confirmModalIsOpen={confirmModalIsOpen}
-        setConfirmModalIsOpen={setConfirmModalIsOpen}
-        token={token}
+        deleteProduct={deleteProduct}
+        setDeleteProduct={setDeleteProduct}
+        confirmIsOpen={confirmIsOpen}
+        setConfirmIsOpen={setConfirmIsOpen}
+        isLoad={isLoad}
       />
     </div>
   );

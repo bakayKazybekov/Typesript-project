@@ -1,5 +1,12 @@
 $mainColor: #eef2d1;
+$lightMainColor: #e4e7cf;
 $secondColor: #595d41;
+$lightSecondColor: #767b5f;
+$white: #fff;
+$black: #000;
+$red: #f41e1e;
+$green: #1e9245;
+$lightBlack: rgb(50, 50, 50);
 
 $borderRadius10: 10px;
 $borderRadius20: 20px;
@@ -10,7 +17,8 @@ $fontSize24: 24px;
 $fontWeight400: 400;
 $fontWeight500: 500;
 
-$mainFont: Iowan Old Style;
+$mainFont: 'Inter', 'sans-serif';
+$secondFont: Iowan Old Style;
 $border: 1px solid rgba(0, 0, 0, 0.3);
 
 $width100percent: 100%;

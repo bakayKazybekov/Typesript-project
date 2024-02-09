@@ -4,28 +4,32 @@ import { ProductType } from '../../Types/types';
 export type HomeComponentProps = ProductsListProps & InteractionProps;
 
 export type ProductsListProps = {
-  products: ProductType[];
-  onDelete: () => void;
-  setDeleteId: (id: number) => void;
-  deleteProductTitle: string;
-  setDeleteProductTitle: (title: string) => void;
-  confirmModalIsOpen: boolean;
-  setConfirmModalIsOpen: (state: boolean) => void;
+  handleProductAction: (type: string, product?: ProductType, operator?: string) => void;
+  products: ProductType[] | string;
+  deleteProduct: { title: string; id: number };
+  setDeleteProduct: (product: { title: string; id: number }) => void;
+  confirmIsOpen: boolean;
+  setConfirmIsOpen: (state: boolean) => void;
   shopCartAlert: boolean;
-  addCart: (product: ProductType) => void;
   token: string | null;
   isLoad: boolean;
-  error?: string;
 };
 
-export type InteractionProps = {
+export type InteractionProps = SearchProps &
+  SortingProps &
+  Pick<ProductsListProps, 'products'> & {
+    error?: string;
+  };
+
+export type SearchProps = {
   onSubmitSearch: (data: { search: string }) => void;
   onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
-  filters: (operator: string) => void;
-  onResetSearch: () => void;
   showResetButton: boolean;
+} & Pick<ProductsListProps, 'handleProductAction'>;
+
+export type SortingProps = {
   priceSortingState: boolean;
   dateSortingState: boolean;
-};
+} & Pick<ProductsListProps, 'handleProductAction'>;
 
 export type CreateButtonProps = Pick<ProductsListProps, 'token'>;

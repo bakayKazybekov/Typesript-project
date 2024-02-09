@@ -22,13 +22,12 @@
 }
 
 .logout__button {
-  @include login-button-style;
+  @extend .login-button-style;
 }
 
 .login__button {
-  @include login-button-style;
-  color: #000;
-  text-decoration: none;
+  @extend .login-button-style;
+  color: $black;
 }
 
 // Navigation styles
@@ -46,14 +45,15 @@
   display: flex;
   justify-content: center;
   gap: 45px;
-  @include text-styles(20px, 600);
+  @include adaptive-size(font-size, 20, 12);
+  @include font(_, 600);
   a {
     text-decoration: none;
   }
 }
 
-.active {
-  color: #1e9245;
+.active_nav {
+  color: $green;
 }
 
 // Adaptive navigation
@@ -72,7 +72,7 @@
   z-index: 0;
   padding: 20px;
   gap: 8px;
-  font-size: 12px;
+  @include font(12);
   display: none;
   transform: translateY(-150%);
   transition: transform 0.2s;
@@ -109,7 +109,7 @@
   height: 40px;
   cursor: pointer;
   img {
-    @include image-style;
+    @extend .image-style;
   }
 }
 
@@ -121,7 +121,6 @@
   .navigate {
     border-radius: 15px;
     gap: 40px;
-    font-size: 18px;
   }
   .logout__wrapper {
     gap: 20px;
@@ -129,12 +128,6 @@
   .avatar__image {
     width: 45px;
     height: 45px;
-  }
-  .logout__button {
-    @include login-button-style;
-  }
-  .login__button {
-    @include login-button-style;
   }
 }
 
@@ -145,7 +138,6 @@
   .navigate {
     border-radius: 15px;
     gap: 35px;
-    font-size: 16px;
   }
   .logout__wrapper {
     margin-top: 15px;
@@ -156,12 +148,6 @@
   .avatar__image {
     width: 35px;
     height: 35px;
-  }
-  .logout__button {
-    @include login-button-style;
-  }
-  .login__button {
-    @include login-button-style;
   }
 }
 
@@ -181,12 +167,6 @@
     width: 25px;
     height: 25px;
   }
-  .logout__button {
-    @include login-button-style;
-  }
-  .login__button {
-    @include login-button-style;
-  }
 }
 
 @include tablet_medium {
@@ -200,7 +180,6 @@
     border-radius: 0;
     gap: 0;
     justify-content: space-around;
-    font-size: 12px;
   }
 }
 

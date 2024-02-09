@@ -22,7 +22,7 @@
   height: 100px;
   cursor: pointer;
   img {
-    @include image-style;
+    @extend .image-style;
   }
 }
 
