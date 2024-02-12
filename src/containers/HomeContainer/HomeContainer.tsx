@@ -67,7 +67,6 @@ function HomeContainer() {
       }
     });
   }, [products, searchProducts, sortingOpertator]);
-  console.log('products', filteredProducts);
 
   const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length) {

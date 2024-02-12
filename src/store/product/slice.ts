@@ -16,7 +16,6 @@ export const productSlice = createSlice({
   reducers: {
     editProduct: (state, { payload }) => {
       const newProducts = _.map(state.products, (product) => (product.id === payload.id ? payload : product));
-      console.log('newProducts', newProducts);
       return {
         ...state,
         products: newProducts,

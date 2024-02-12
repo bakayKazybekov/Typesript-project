@@ -42,9 +42,6 @@ const CreateProductComponent: React.FC<CreateProductProps> = ({ onSubmit, onImag
       </div>
     );
   }
-  // if (error) {
-  //   return <div className="create-product__wrapper"></div>;
-  // }
 
   return (
     <div className="create-product__wrapper">
