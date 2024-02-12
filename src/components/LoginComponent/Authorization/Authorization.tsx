@@ -7,6 +7,7 @@ import '../Login.scss';
 import { Alert, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import { authFields } from '../../../utils/utils';
+import _ from 'lodash';
 
 const Authorization: React.FC<AuthProps> = ({ setIsRegister, onCloseError, onSubmit, isLoad, error }) => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Authorization: React.FC<AuthProps> = ({ setIsRegister, onCloseError, onSub
       <div className="login__wrapper">
         <h3 className="login__title">Авторизация</h3>
         <form autoComplete="off" className="login__form" onSubmit={handleSubmit(onSubmit)}>
-          {authFields.map(({ name, placeholder, type }) => {
+          {_.map(authFields, ({ name, placeholder, type }) => {
             return (
               <label key={name} className="login__form__label">
                 <input type={type} className="login__form__input" placeholder={placeholder} {...register(name)} />

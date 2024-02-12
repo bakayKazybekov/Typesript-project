@@ -11,6 +11,7 @@ import { createProductScheme } from '../../utils/scheme';
 import './CreateProduct.scss';
 import { useAppDispatch } from '../../hook';
 import { setIsGetProduct } from '../../store/isGetProduct/slice';
+import _ from 'lodash';
 
 type CreateProductProps = {
   onSubmit: SubmitHandler<ProductFormValues>;
@@ -63,7 +64,7 @@ const CreateProductComponent: React.FC<CreateProductProps> = ({ onSubmit, onImag
               {!image ? <h4>Добавить фотографию</h4> : <img src={image} alt="Картинка товара" />}
             </div>
             <div className="create-product__fields">
-              {createProductFields.map(({ name, placeholder, type }) => (
+              {_.map(createProductFields, ({ name, placeholder, type }) => (
                 <label className="create-product__label" key={name}>
                   <input type={type} className="create-product__field" placeholder={placeholder} {...register(name)} />
                   <span className="create-product__error">{errors[name]?.message}</span>

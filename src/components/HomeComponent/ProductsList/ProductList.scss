@@ -13,11 +13,11 @@
 .product-list {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  @include adaptive-size(gap, 50, 15);
+  @include adaptive-size(gap, 50, 20);
 }
 
 .product-list_product {
-  @include adaptive-size(max-width, 240, 100);
+  @include adaptive-size(max-width, 240, 140);
   border-radius: $borderRadius20;
   padding: 15px;
   display: flex;
@@ -31,8 +31,8 @@
 }
 
 .product_image {
-  @include adaptive-size(width, 220, 80);
-  @include adaptive-size(height, 220, 80);
+  @include adaptive-size(width, 220, 100);
+  @include adaptive-size(height, 220, 100);
   cursor: pointer;
   border: solid 1px #eef2d1;
   border-radius: $borderRadius10;
@@ -70,7 +70,7 @@
 }
 
 .product_text {
-  @include adaptive-size(font-size, 16, 6);
+  @include adaptive-size(font-size, 16, 8);
 }
 
 .create_button_container {
@@ -110,10 +110,12 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
-@include mobile_medium {
+@include mobile_large {
   .product-list {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+@include mobile_medium {
   .create_button {
     padding: 8px 20px;
   }

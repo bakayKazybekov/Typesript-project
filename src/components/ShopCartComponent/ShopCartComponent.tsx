@@ -21,7 +21,7 @@ const ShopCartComponent: React.FC<ShopCartComponentProps> = ({
   isLoad,
 }) => {
   return (
-    <div className="shop-cart__wrapper">
+    <div className="shop-cart">
       <ShopCartHeader
         clearConfirmIsOpen={clearConfirmIsOpen}
         onCloseError={onCloseError}

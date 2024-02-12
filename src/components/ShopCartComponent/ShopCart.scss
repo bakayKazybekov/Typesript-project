@@ -1,6 +1,6 @@
 @import '../../common';
 
-.shop-cart__wrapper {
+.shop-cart {
   width: $width95vw;
   margin: 85px auto 50px;
   @extend .display-flex-column;
@@ -8,51 +8,45 @@
   gap: 50px;
   text-align: center;
   @include adaptive-size(font-size, 25, 11);
-}
-
-.shop-cart__header {
-  width: $width100percent;
-  @extend .display-flex-column;
-  gap: 20px;
-}
-
-.shop-cart__error {
-  @include adaptive-size(width, 500, 100);
-  align-self: flex-end;
-  .ant-alert-message {
-    @include adaptive-size(font-size, 18, 8);
+  &__header {
+    width: $width100percent;
+    @extend .display-flex-column;
+    gap: 20px;
+  }
+  &__error {
+    @include adaptive-size(width, 500, 100);
+    align-self: flex-end;
+    .ant-alert-message {
+      @include adaptive-size(font-size, 18, 8);
+    }
+  }
+  &__title {
+    text-align: center;
+    @include font(_, 600);
+    @include adaptive-size(font-size, 32, 14);
+  }
+  &__product-list {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 85px 50px;
+  }
+  &__product {
+    width: 220px;
+    @extend .display-flex-column;
+    gap: 20px;
+    align-items: center;
+    border-radius: 20px;
+    padding: 10px;
+  }
+  &__product:hover {
+    box-shadow: 0px 0px 10px -5px;
   }
 }
-
-.shop__cart__title {
-  text-align: center;
-  @include font(_, 600);
-  @include adaptive-size(font-size, 32, 14);
-}
-
-.shop-cart__product-list {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 85px 50px;
-}
-
-.shop-cart__product {
-  width: 220px;
-  @extend .display-flex-column;
-  gap: 20px;
-  align-items: center;
-  border-radius: 20px;
-  padding: 10px;
-}
-.shop-cart__product:hover {
-  box-shadow: 0px 0px 10px -5px;
-}
-
 .product__image {
   width: 200px;
   height: 200px;
   border: solid 1px #eef2d1;
-  border-radius: $borderRadius20;
+  @include adaptive-size(border-radius, 20, 10);
   img {
     width: $width100percent;
     height: 100%;
@@ -62,7 +56,7 @@
 }
 
 .product__text {
-  @include adaptive-size(font-size, 14, 6);
+  @include adaptive-size(font-size, 16, 8);
 }
 
 .quantity__action {
@@ -84,7 +78,7 @@
 .shop-cart__delete-button {
   color: $red;
   cursor: pointer;
-  @include adaptive-size(font-size, 16, 8);
+  @include adaptive-size(font-size, 16, 9);
 }
 
 .shop-cart__clear-button {

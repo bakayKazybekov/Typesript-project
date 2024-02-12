@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { instagramIcon, tikTokIcon, telegramIcon } from '../../images';
 import './Contacts.scss';
 
@@ -11,7 +12,7 @@ const Contacts = () => {
   return (
     <div className="contacts__wrapper">
       <section className="contacts__links">
-        {contactsLinks.map(({ imageSrc, imageAlt, linkHref }) => (
+        {_.map(contactsLinks, ({ imageSrc, imageAlt, linkHref }) => (
           <a key={imageAlt} className="link__wrapper" target="_blank" href={linkHref}>
             <img src={imageSrc} alt={imageAlt} />
           </a>

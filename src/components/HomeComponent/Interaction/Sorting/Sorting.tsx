@@ -15,12 +15,12 @@ const Sorting: React.FC<SortingProps> = ({ handleProductAction, priceSortingStat
           {priceSortingState ? (
             <div
               onClick={() => handleProductAction('filters', undefined, 'firstCheap')}
-              className={`sorting_button icon-arrow-up ${priceActive}`}
+              className={`sorting_button icon-arrow-down ${priceActive}`}
             ></div>
           ) : (
             <div
               onClick={() => handleProductAction('filters', undefined, 'firstExpensive')}
-              className={`sorting_button icon-arrow-down ${priceActive}`}
+              className={`sorting_button icon-arrow-up ${priceActive}`}
             ></div>
           )}
         </section>
@@ -29,12 +29,12 @@ const Sorting: React.FC<SortingProps> = ({ handleProductAction, priceSortingStat
           {dateSortingState ? (
             <div
               onClick={() => handleProductAction('filters', undefined, 'firstNew')}
-              className={`sorting_button icon-arrow-up ${dateActive}`}
+              className={`sorting_button icon-arrow-down ${dateActive}`}
             ></div>
           ) : (
             <div
               onClick={() => handleProductAction('filters', undefined, 'firstOld')}
-              className={`sorting_button icon-arrow-down ${dateActive}`}
+              className={`sorting_button icon-arrow-up ${dateActive}`}
             ></div>
           )}
         </section>

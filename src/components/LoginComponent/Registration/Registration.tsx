@@ -6,11 +6,13 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { registerFields } from '../../../utils/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import _ from 'lodash';
 
 const Registration: React.FC<RegisterProps> = ({ setIsRegister, onSubmit, onCloseError, isLoad, error }) => {
   const {
     register,
     handleSubmit,
+    clearErrors,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(registerScheme),
@@ -22,7 +24,7 @@ const Registration: React.FC<RegisterProps> = ({ setIsRegister, onSubmit, onClos
       <div className="login__wrapper">
         <h3 className="login__title">Регистрация</h3>
         <form autoComplete="off" className="login__form" onSubmit={handleSubmit(onSubmit)}>
-          {registerFields.map(({ name, placeholder, type }) => {
+          {_.map(registerFields, ({ name, placeholder, type }) => {
             return (
               <label key={name} className="login__form__label">
                 <input type={type} className="login__form__input" placeholder={placeholder} {...register(name)} />

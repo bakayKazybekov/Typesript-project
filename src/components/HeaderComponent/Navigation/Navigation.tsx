@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Transition } from 'react-transition-group';
 import { ABOUT, BASE_ROUTER, CONTACTS, SHOP_CART } from '../../../consts/paths';
 import { menuButtonIcon } from '../../../images';
+import _ from 'lodash';
 import '../Header.scss';
 
 enum AlertState {
@@ -28,7 +29,7 @@ const Navigation: React.FC = () => {
     <>
       <header className="nav__wrapper">
         <nav className="navigate">
-          {links.map(({ link, name }) => (
+          {_.map(links, ({ link, name }) => (
             <NavLink key={name} className={setActive} to={link}>
               {name}
             </NavLink>
@@ -45,7 +46,7 @@ const Navigation: React.FC = () => {
           {(state: AlertState) => (
             <header className={`adaptive-nav__wrapper menu__wrapper__${state}`}>
               <nav className={`adaptive-navigate menu__${state}`}>
-                {links.map(({ link, name }) => (
+                {_.map(links, ({ link, name }) => (
                   <NavLink key={name} className={setActive} to={link} onClick={() => setNavIsOpen(false)}>
                     {name}
                   </NavLink>

@@ -11,6 +11,7 @@ import './ProductList.scss';
 import '../../../icons/fontIcons.css';
 import { setIsGetProduct } from '../../../store/isGetProduct/slice';
 import { useAppDispatch } from '../../../hook';
+import _ from 'lodash';
 
 const ProductsList: React.FC<ProductsListProps> = ({
   products,
@@ -58,7 +59,7 @@ const ProductsList: React.FC<ProductsListProps> = ({
     <div className="product-list_wrapper">
       <ul className="product-list">
         {Array.isArray(products) &&
-          products.map((product: ProductType) => {
+          _.map(products, (product: ProductType) => {
             const { title, price, image, id } = product;
             return (
               <li className="product-list_product" key={id}>
