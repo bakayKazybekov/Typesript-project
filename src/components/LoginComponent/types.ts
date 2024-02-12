@@ -2,7 +2,7 @@ import { SubmitHandler } from 'react-hook-form';
 import { LoginFormValues } from '../../Types/types';
 
 type LoginProps = {
-  setIsRegister: (state: boolean) => void; //
+  setIsRegister: (state: boolean) => void;
   onCloseError: () => void;
   isLoad: boolean;
   error?: string;

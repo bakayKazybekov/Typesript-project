@@ -13,7 +13,6 @@ function LoginContainer() {
   const { isLoad, authError, registerError } = useAppSelector((state) => state.loginReducer);
 
   const [isRegister, setIsRegister] = useState<boolean>(false);
-  console.log('isRegister', isRegister);
 
   const onSubmit = useCallback(
     (data: LoginFormValues) => {
