@@ -32,6 +32,7 @@ function HomeContainer() {
       dispatch(getProductAction());
     }
     dispatch(setIsGetProduct(true));
+    dispatch(clearProductsError());
   }, [dispatch, token]);
 
   const filteredProducts = useMemo(() => {

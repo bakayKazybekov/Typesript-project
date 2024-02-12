@@ -17,6 +17,7 @@ const Authorization: React.FC<AuthProps> = ({ setIsRegister, onCloseError, onSub
     formState: { errors },
   } = useForm({
     resolver: yupResolver(authorizationScheme),
+    reValidateMode: 'onSubmit',
   });
 
   return (

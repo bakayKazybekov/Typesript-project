@@ -22,7 +22,7 @@ const CreateProductContainer = () => {
   const { isGetProduct } = useAppSelector((state) => state.isGetProductReducer);
   const token = localStorage.getItem('token');
 
-  const { productId } = useParams();
+  const { productId } = useParams<string>();
   const [image, setImage] = useState<string>('');
   const [values, valuesDispatch] = useReducer(formReducer, initialValues);
 
